@@ -1,0 +1,199 @@
+version: '3.1'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- affirm
+- ask_for_bill
+- ask_for_menu
+- ask_for_pizza_price
+- ask_info_toppings
+- ask_stock_topping
+- ask_for_drink
+- bot_challenge
+- buy_pizza
+- change_topping
+- deny
+- goodbye
+- greet
+- inform_about_id
+- inform_about_password
+- inform_about_pizza
+- inform_about_topping
+- inform_about_drink
+- request_pizza_form
+- stock_data
+- stop
+entities:
+- id
+- password
+- pizza_type
+- pizza_size
+- pizza_topping
+- pizza_ingredient
+- drink
+- is_logged
+slots:
+  pizza_type:
+    type: any
+    #influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: pizza_type
+      intent: inform_about_pizza
+      #conditions:
+      #- active_loop: simple_pizza_form
+      #  requested_slot: pizza_type
+  pizza_size:
+    type: any
+    #influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: pizza_size
+      intent: inform_about_pizza
+      #conditions:
+      #- active_loop: simple_pizza_form
+      #  requested_slot: pizza_size
+  pizza_topping:
+    type: any
+    #influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: pizza_topping
+      intent:
+        - inform_about_topping
+        - inform_about_pizza
+      not_intent:
+        - change_topping
+        - ask_stock_topping
+  drink:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: drink
+      intent:
+        - inform_about_drink
+  id:
+    type: any
+    #influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: id
+      conditions:
+      - active_loop: login_form
+        requested_slot: id
+  password:
+    type: any
+    #influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: password
+      conditions:
+      - active_loop: login_form
+        requested_slot: password
+  is_logged: 
+    type: bool
+    initial_value: false
+    influence_conversation: true
+    mappings:
+    - type: custom
+    
+forms:
+  simple_pizza_form:
+    required_slots:
+    - pizza_type
+    - pizza_size
+  login_form:
+    required_slots:
+    - id
+    - password
+  
+responses:
+  utter_greet:
+  - text: Hey! How can I help you?
+  - text: Hello! Do you need something?
+  - text: Hi! What do you need?
+  - text: Hello there! What can I do for you?
+  utter_next_time:
+  - text: See you next time!
+  - text: See you soon!
+  utter_goodbye:
+  - text: Bye
+  utter_confirm:
+  - text: Ok perfect.
+  - text: Okay.
+  - text: Ok, get it!
+  - text: Perfect.
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_submit:
+  - text: The information has been saved!
+  utter_order:
+  - text: Would you like to order?
+  - text: Is there any pizza you're interested in?
+  utter_pizza_slots:
+  - text: Your order is a {pizza_size} {pizza_type}.
+  utter_ask_continue:
+  - text: Are you sure you want to stop the form?
+  utter_stop_form:
+  - text: Ok, perfect. Them I delete your order. What else can I do for you?
+  utter_ask_pizza_size:
+  - text: What size would you like your pizza to be?
+  utter_ask_pizza_type:
+  - text: What kind of pizza would you like to order?
+  - text: What kind of pizza would you like to buy?
+  utter_ask_topping:
+  - text: Do you want to add some toppings to your pizza? (MAX 1)
+  - text: Do you want some toppings? (Max 1)
+  utter_ask_drink:
+  - text: Would you like something to drink?
+  - text: Do you want any drink?
+  utter_ask_stock_information:
+  - text: What information about stock do you need?
+  utter_change_topping:
+  - text: Do you want to change your topping?
+  - text: Do you want to change the topping you told me?
+  utter_ask_id:
+  - text: Login required! Can I have your ID?
+  - text: Login required! Can you enter your ID?
+  - text: Login required! Enter your ID.
+  utter_ask_password:
+  - text: Last thing, can I have your password?
+  - text: Last thing, can you enter your password?
+  - text: Enter your password.
+  utter_confirm_order:
+  - text: Perfect! Your order has been processed.
+  - text: Nice! Your order has been sent.
+  - text: Perfect, order received!
+  - text: Perfect, order sent!
+  utter_other_service:
+  - text: Ok. Do you need anything else?
+  - text: Ok. Do you want anything else?
+  - text: Perfect. Do you need anything else?
+  - text: Perfect. Do you want anything else?
+actions:
+- action_ask_topping
+- action_change_topping
+- action_check_topping
+- action_check_drink
+- action_info_toppings
+- action_info_drinks
+- action_login_slots
+- query_topping_quantity
+- action_tell_bill
+- action_tell_menu
+- action_tell_price
+- utter_ask_continue
+- utter_ask_topping
+- utter_ask_drink
+- utter_change_topping
+- utter_confirm
+- utter_confirm_order
+- utter_goodbye
+- utter_greet
+- utter_iamabot
+- utter_other_service
+- utter_pizza_slots
+- utter_submit
+- validate_login_form
+- validate_simple_pizza_form

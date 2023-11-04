@@ -1,0 +1,253 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    - Sorry, are you a bot or a person?
+- intent: buy_pizza
+  examples: |
+    - i'd like to buy a pizza
+    - i want a pizza
+    - can i buy a pizza
+    - i'm interested in a pizza
+    - i want to buy a pizza
+    - i want to order a pizza
+    - i'd like to order a pizza
+    - can i order a pizza
+    - I want to buy a pizza
+    - I want to order a pizza
+    - I'd like to order a pizza
+- intent: inform_about_pizza
+  examples: |
+    - i'd like a [large](pizza_size) pizza
+    - i want to order a [medium](pizza_size) [salami](pizza_type) pizza
+    - i'd like a [large](pizza_size) [margherita](pizza_type) with some [ham](pizza_topping)
+    - i want to order a [medium](pizza_size) [salami](pizza_type) with [ham](pizza_topping)
+    - [baby](pizza_size) pizza
+    - [baby](pizza_size)
+    - [large](pizza_size)
+    - [large](pizza_size) pizza
+    - [margherita](pizza_type)
+    - [marinara](pizza_type) pizza
+    - [medium](pizza_size)
+    - i want a [veggie] pizza
+    - give me a [large](pizza_size) [margherita](pizza_type)
+    - [medium](pizza_size) pizza
+    - [salami](pizza_type)
+    - [veggie](pizza_type)
+    - [m](pizza_size)
+    - [l](pizza_size)
+    - [m](pizza_size) pizza
+    - [l](pizza_size) pizza
+- intent: inform_about_topping
+  examples: |
+    - i'd like to add [mushrooms](pizza_topping) to my pizza
+    - i'd like to add [mozzarella](pizza_topping) to my pizza
+    - i'd like to add [ham](pizza_topping) to my pizza
+    - i'd like to add [spicy salami](pizza_topping) to my pizza
+    - i'd like to add [olives](pizza_topping) to my pizza
+    - i'd like to add [grilled vegetables](pizza_topping) to my pizza
+    - i'd like to add [vegetables](pizza_topping) to my pizza
+    - i'd like to add [salami](pizza_topping) to my pizza
+    - Yes. I'd like to add some [ham](pizza_topping)
+    - Yes. I'd like to add some [mushrooms](pizza_topping)
+    - Yes. I'd like to add some [mozzarella](pizza_topping)
+    - Yes. I'd like to add some [spicy salami](pizza_topping)
+    - Yes. I'd like to add some [olives](pizza_topping)
+    - Yes. I'd like to add some [grilled vegetables](pizza_topping)
+    - Yes. I'd like to add some [vegetables](pizza_topping)
+    - Yes. I'd like to add some [salami](pizza_topping)
+    - yeah. Some [olives](pizza_topping)
+    - yeah. Some [ham](pizza_topping)
+    - yeah. Some [spicy salami](pizza_topping)
+    - yeah. Some [grilled vegetables](pizza_topping)
+    - yeah. Some [mushrooms](pizza_topping)
+    - yeah. Some [mozzarella](pizza_topping)
+    - yeah. Some [salami](pizza_topping)
+    - yeah. Some [vegetables](pizza_topping)
+    - yes. [ham](pizza_topping)
+    - yes. [olives](pizza_topping)
+    - yes. [mozzarella](pizza_topping)
+    - yes. [mushrooms](pizza_topping)
+    - yes. [grilled vegetables](pizza_topping)
+    - yes. [spicy salami](pizza_topping)
+    - yes. [vegetables](pizza_topping)
+    - yes. [salami](pizza_topping)
+    - [ham](pizza_topping)
+    - [mushrooms](pizza_topping)
+    - [spicy salami](pizza_topping)
+    - [salami](pizza_topping)
+    - [olives](pizza_topping)
+    - [grilled vegetables](pizza_topping)
+    - [vegetables](pizza_topping)
+    - [mozzarella](pizza_topping)
+- intent: change_topping
+  examples: |
+    - i've change my mind, i would like to add some [ham](pizza_topping)
+    - i've change my mind, i would like to add some [olives](pizza_topping)
+    - i've change my mind, i would like to add some [mozzarella](pizza_topping)
+    - i've change my mind, i would like to add some [mushrooms](pizza_topping)
+    - i've change my mind, i would like to add some [grilled vegetables](pizza_topping)
+    - i've change my mind, i would like to add some [spicy salami](pizza_topping)
+    - i've change my mind, i would like to add some [vegetables](pizza_topping)
+    - i've change my mind, i would like to add some [salami](pizza_topping)
+    - i'd like to add some [ham](pizza_topping) instead
+    - i'd like to add some [olives](pizza_topping) instead
+    - i'd like to add some [mozzarella](pizza_topping) instead
+    - i'd like to add some [mushrooms](pizza_topping) instead
+    - i'd like to add some [grilled vegetables](pizza_topping) instead
+    - i'd like to add some [spicy salami](pizza_topping) instead
+    - i'd like to add some [vegetables](pizza_topping) instead
+    - i'd like to add some [salami](pizza_topping) instead
+    - i'd like to add some [ham](pizza_topping) instead of [olives](pizza_topping)
+    - i'd like to add some [olives](pizza_topping) instead of [mozzarella](pizza_topping)
+    - i'd like to add some [mozzarella](pizza_topping) instead of [mushrooms](pizza_topping)
+    - i'd like to add some [mushrooms](pizza_topping) instead of [grilled vegetables](pizza_topping)
+    - i'd like to add some [grilled vegetables](pizza_topping) instead of [spicy salami](pizza_topping)
+    - i'd like to add some [salami](pizza_topping) instead of [vegetables](pizza_topping)
+    - i'd like to add some [vegetables](pizza_topping) instead of [salami](pizza_topping)
+    - i'd like to add some [spicy salami](pizza_topping) instead of [ham](pizza_topping)
+    - i would like to replace the [ham](pizza_topping) with some [olives](pizza_topping)
+    - i would like to replace the [ham](pizza_topping) with some [mozzarella](pizza_topping)
+    - i would like to replace the [ham](pizza_topping) with some [mushrooms](pizza_topping)
+    - i would like to replace the [ham](pizza_topping) with some [grilled vegetables](pizza_topping)
+    - i would like to replace the [ham](pizza_topping) with some [spicy salami](pizza_topping)
+    - i would like to replace the [ham](pizza_topping) with some [vegetables](pizza_topping)
+    - i would like to replace the [ham](pizza_topping) with some [salami](pizza_topping)
+- intent: inform_about_drink
+  examples: |
+    - yes, i'd like a [coke](drink)
+    - yeah, a [coke](drink)
+    - one [still water](drink)
+    - one [sparkling water](drink)
+- intent: ask_for_drink
+  examples: |
+    - do you serve any drinks?
+    - do you have drinks?
+    - may i know what drinks you offer?
+- intent: ask_for_pizza_price
+  examples: |
+    - how much does it cost?
+    - how much is the cost?
+    - may I know its price?
+    - how much does a [margherita](pizza_type) cost?
+    - how much is the cost of a [margherita](pizza_type)?
+    - may I know the cost of a [margherita](pizza_type)?
+    - how much does a [marinara](pizza_type) cost?
+    - how much is the cost of a [marinara](pizza_type)?
+    - may I know the cost of a [marinara](pizza_type)?
+    - how much does a [salami](pizza_type) cost?
+    - how much is the cost of a [salami](pizza_type)?
+    - may I know the cost of a [salami](pizza_type)?
+    - how much does a [veggie](pizza_type) cost?
+    - how much is the cost of a [veggie](pizza_type)?
+    - may I know the cost of a [veggie](pizza_type)?
+    - test
+- intent: ask_for_menu
+  examples: |
+    - what is your menu?
+    - may I know your menu?
+    - menu
+    - menu?
+    - your menu?
+- intent: ask_info_toppings
+  examples: |
+    - what toppings do you have?
+    - what topping can i choose?
+    - which toppings can i choose from?
+    - i don't know which topping to choose
+    - what can i add to the pizza?
+- intent: ask_for_bill
+  examples: |
+    - may i know the bill?
+    - may i know my final bill?
+    - can i know the bill?
+    - could you tell me the final bill?
+    - bill?
+    - the bill?
+    - so, how much do i have to pay for the order?
+    - how much do i have to pay?
+    - how much is everything?
+- intent: stop
+  examples: |
+    - sorry, i have changed my mind
+    - i've changed my mind
+    - i don't want pizza anymore
+    - i don't want it anymore
+    - sorry, i've changed my mind. I don't want pizza anymore
+    - sorry. I don't want pizza anymore
+- intent: stock_data
+  examples: |
+    - i would like to see the warehouse data
+    - i'd like to see the warehouse data
+    - i would like to see the stock data
+    - stock data
+    - stock
+- intent: inform_about_id
+  examples: |
+    - [edoardo.maines@studenti.unitn.it](id)
+    - [test_id](id)
+    - here is my id: [edoardo.maines@gmail.it](id)
+    - here is my id: [test_id](id)
+- intent: inform_about_password
+  examples: |
+    - [1234](password)
+    - here is my password: [1234](password)
+- intent: ask_stock_topping
+  examples: |
+    - [ham](pizza_topping)
+    - [pizza dough](pizza_ingredient)
+    - about [pizza dough](pizza_ingredient)
+    - how many pieces of [ham](pizza_topping) are left?
+    - how many pieces of [mozzarella](pizza_topping) are in stock?
+    - how many pieces of [pizza dough](pizza_ingredient) are left?
+    - how many pieces of [pizza dough](pizza_ingredient) are in stock?
+    - how much [tomato sauce](pizza_ingredient) is left?
+    - how much [tomato sauce](pizza_ingredient) is in stock?

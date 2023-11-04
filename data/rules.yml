@@ -1,0 +1,305 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+  
+#- rule: Confirm after a NO answer from the user
+#  condition:
+#  - active_loop: null
+#  steps:
+#  - intent: deny
+#  - action: utter_confirm
+#  wait_for_user_input: false
+
+- rule: Activate Pizza Form
+  steps:
+  - intent: buy_pizza
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  
+- rule: Submit Pizza Form
+  condition:
+  - active_loop: simple_pizza_form
+  steps:
+  - action: simple_pizza_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_submit
+  - action: utter_pizza_slots
+  - action: action_ask_topping
+  wait_for_user_input: false 
+  ##- action: utter_ask_topping
+  
+#- rule: Submit Pizza Slots
+#  condition:
+#  - active_loop: null
+#  steps:
+#  - intent: inform_about_pizza
+#  - slot_was_set:
+#    - requested_slot: null
+#  - action: utter_submit
+#  - action: utter_pizza_slots
+  ##- action: utter_ask_topping
+#  - action: action_ask_topping
+  
+- rule: Interruption in Pizza Form
+  condition:
+  - active_loop: simple_pizza_form
+  steps:
+  #the case of an intent "bot_challenge"
+  - intent: bot_challenge
+  - action: utter_iamabot
+  #return to form
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+
+- rule: Activate Login Form
+  steps:
+  - intent: stock_data
+  - action: login_form
+  - active_loop: login_form
+
+- rule: Submit Login Form
+  condition:
+  - active_loop: login_form
+  - slot_was_set:
+    - is_logged: true
+  steps:
+  - action: login_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_submit
+  - action: action_login_slots
+  - action: utter_ask_stock_information
+
+- rule: Logged Employee ask for stock data
+  condition:
+  - slot_was_set:
+    - is_logged: true
+  steps:
+  - intent: ask_stock_topping
+  - action: query_topping_quantity
+  
+- rule: Unlogged Employee ask for stock data
+  condition:
+  - slot_was_set:
+    - is_logged: false
+  steps:
+  - intent: ask_stock_topping
+  - action: login_form
+  - active_loop: login_form
+
+- rule: User ask for the menu (interruption of form)
+  condition:
+  - active_loop: simple_pizza_form
+  steps:
+  - intent: ask_for_menu
+  - action: action_tell_menu
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+
+- rule: User ask for the menu (no interruption of form)
+  condition:
+  - active_loop: null
+  steps:
+  - intent: ask_for_menu
+  - action: action_tell_menu
+  - action: utter_order
+
+- rule: User ask infos about toppings (interruption of form)
+  condition:
+  - active_loop: simple_pizza_form
+  steps:
+  - intent: ask_info_toppings
+  - action: action_info_toppings
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+
+- rule: User ask infos about toppings (no interruption of form)
+  condition:
+  - active_loop: null
+  steps:
+  - intent: ask_info_toppings
+  - action: action_info_toppings
+  ##- action: utter_ask_topping
+  - action: action_ask_topping
+  
+  
+- rule: User has changed mind and then stops Pizza Form
+  condition:
+  - active_loop: simple_pizza_form
+  steps:
+  - intent: stop
+  - action: utter_ask_continue
+
+- rule: User wants to order after asking for the menu
+  condition:
+  - active_loop: null
+  steps:
+  - action: action_tell_menu
+  - action: utter_order
+  - intent: affirm
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  
+- rule: User asks for the price of a pizza (no interruption of form)
+  condition:
+  - active_loop: null
+  steps:
+  - intent: ask_for_pizza_price
+  - action: action_tell_price
+  
+#- rule: User ask for the price of a pizza (interruption of form)
+#  condition:
+#  - active_loop: simple_pizza_form
+#  steps:
+#  - intent: ask_for_pizza_price
+#  - action: action_tell_price
+#  - action: simple_pizza_form
+#  - active_loop: simple_pizza_form
+
+- rule: User asks for the final bill
+  condition:
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: pizza_type
+    - requested_slot: pizza_size
+  steps:
+  - intent: ask_for_bill
+  - action: action_tell_bill
+  
+#- rule: Inform about the final bill
+#  condition:
+#  - active_loop: null
+#  - slot_was_set:
+#    - requested_slot: pizza_type
+#    - requested_slot: pizza_size
+#  steps:
+#  - action: utter_other_service
+#  - intent: deny
+#  - action: utter_confirm
+#  - action: action_tell_bill
+- rule: User asks info about drinks
+  steps:
+  - intent: ask_for_drink
+  - action: action_info_drinks
+  wait_for_user_input: false
+  
+  
+  
+  
+- rule: User wants a drink
+  steps:
+  - action: utter_ask_drink
+  - intent: inform_about_drink
+  - action: action_check_drink
+  wait_for_user_input: false
+ 
+- rule: User adds a topping
+  condition:
+  - active_loop: null
+  steps:
+  - action: utter_ask_topping
+  - intent: inform_about_topping
+  - action: action_check_topping
+  wait_for_user_input: false
+
+- rule: change the topping
+  condition:
+  - slot_was_set:
+    - requested_slot: pizza_topping
+  steps:
+  - action: action_check_topping
+  - action: utter_other_service
+  - intent: change_topping
+  - action: action_change_topping
+  wait_for_user_input: false
+#- rule: User order a pizza without topping
+#  condition:
+#  - active_loop: null
+#  - slot_was_set:
+#    - requested_slot: pizza_type
+#    - requested_slot: pizza_size
+#  steps:
+#  - action: utter_ask_topping
+#  - intent: deny
+#  - action: action_check_topping
+
+#- rule: User wants to change the topping
+#  condition:
+#  - slot_was_set:
+#    - requested_slot: pizza_topping
+#  steps:
+#  - intent: change_topping
+#  - action: action_change_topping
+#  wait_for_user_input: false
+
+#- rule: User say NO to change again the topping
+#  steps:
+#  - intent: deny
+#  - action: utter_confirm
+#  - action: utter_other_service
+
+#- rule: Ask to the user if wants to change the topping
+#  condition:
+#  - slot_was_set:
+#    - requested_slot: pizza_topping
+#  steps:
+#  - action: utter_change_topping
+#  - intent: change_topping
+#  - action: action_change_topping
+#  wait_for_user_input: false
+  
+#- rule: User wants to add a topping
+#  condition:
+#  - active_loop: simple_pizza_form
+#  steps:
+#  - action: simple_pizza_form
+#  - slot_was_set:
+#    - requested_slot: pizza_topping
+#  - intent: inform_about_topping
+  
+#- rule: User has changed mind and then restarts Pizza Form
+#  condition:
+#  - active_loop: simple_pizza_form
+#  steps:
+#  - intent: stop
+#  - action: utter_ask_continue
+#  - intent: affirm
+#  - action: simple_pizza_form
+#  - active_loop: simple_pizza_form
+
+#- rule: Ask if the user wants to stop the form (answer=YES)
+#  steps:
+#  - action: utter_ask_continue
+#  - intent: affirm
+#  - action: action_deactivate_loop
+#  - active_loop: null
+#  - action: utter_other_service
+
+#- rule: Ask if the user wants to stop the form (answer=NO)
+#  steps:
+#  - action: utter_ask_continue
+#  - intent: deny
+#  - action: simple_pizza_form
+#  - active_loop: simple_pizza_form
+
+  
+  
+  
+  
+  
+  
+  
+  
