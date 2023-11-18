@@ -36,8 +36,8 @@ ALLOWED_DRIKS = [
 	"still water",
 	"sparkling water",
 	"fanta",
-	"lemon ice tea",
-	"peach ice tea"
+	"lemon iced tea",
+	"peach iced tea"
 ]
 
 PIZZA_INGREDIENTS = {
@@ -67,8 +67,8 @@ MENU = {
 	"still water": 1.5,
 	"sparkling water": 1.5,
 	"fanta": 2,
-	"lemon ice tea": 2,
-	"peach ice tea": 2
+	"lemon iced tea": 2,
+	"peach iced tea": 2
 }
 
 def create_connection(db_file):
@@ -182,7 +182,12 @@ class ValidateSimplePizzaForm(FormValidationAction):
 		if slot_value == "large" or slot_value == "l":
 			update_by_slot(conn=conn, table="ingredients", slot_name="pizza_ingredients", slot_value="pizza dough", action="SUB", q=2)
 		type = tracker.get_slot("pizza_type")
-		dispatcher.utter_message(text=f"OK! You want to have a {slot_value} {type}.")
+		topping = tracker.get_slot("pizza_topping")
+		if topping == None:
+			dispatcher.utter_message(text=f"OK! You want to have a {slot_value} {type}.")
+		else:
+			dispatcher.utter_message(text=f"OK! You want to have a {slot_value} {type} with {topping}.")
+		
 		return {"pizza_size": slot_value}
 
 
@@ -280,16 +285,17 @@ class ActionCheckTopping(Action):
 		conn = create_connection("pizzeria.db")
 
 		pizza = tracker.slots.get("pizza_type")
+		size = tracker.slots.get("pizza_size")
 		topping = next(tracker.get_latest_entity_values("pizza_topping"), None)
 
 		if topping == None:
-			dispatcher.utter_message(text=f"OK! I won't add anything to your {pizza}.")
+			dispatcher.utter_message(text=f"OK! I won't add anything to your {size} {pizza}.")
 		else:
 			if topping.lower() not in ALLOWED_PIZZA_TOPPINGS:
 				dispatcher.utter_message(text=f"I'm sorry! We don't have toppings of this kind. You can add {'/'.join(ALLOWED_PIZZA_TOPPINGS)}.")
 				return[FollowupAction(name='utter_ask_topping')]
 			else:
-				dispatcher.utter_message(text=f"OK! I'll add some {topping} to your {pizza}.")
+				dispatcher.utter_message(text=f"OK! I'll add some {topping} to your {size} {pizza}.")
 				update_by_slot(conn=conn, table="toppings", slot_name="pizza_toppings", slot_value=topping, action="SUB", q=1)
 		return[]
 

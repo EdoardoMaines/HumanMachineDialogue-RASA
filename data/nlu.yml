@@ -167,6 +167,10 @@ nlu:
     - yeah, a [coke](drink)
     - one [still water](drink)
     - one [sparkling water](drink)
+    - yeah, a [peach iced tea](drink)
+    - one [lemon iced tea](drink)
+    - i'd like a [coke](drink)
+    - i'd like to order a [still water](drink)
 - intent: ask_for_drink
   examples: |
     - do you serve any drinks?

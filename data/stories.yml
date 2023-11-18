@@ -22,16 +22,6 @@ stories:
   - action: action_ask_topping
   - checkpoint: user_orders_pizza
 
-#- story: User orders a pizza (no via form)
-#  steps:
-#  - intent: greet
-#  - action: utter_greet
-#  - intent: inform_about_pizza
-#  - action: utter_submit
-#  - action: utter_pizza_slots
-  ##- action: utter_ask_topping
-#  - action: action_ask_topping
-
 - story: Employee logins
   steps:
   - intent: greet
@@ -105,7 +95,6 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: utter_pizza_slots
-  ##- action: utter_ask_topping
   - action: action_ask_topping
   
   
@@ -132,7 +121,6 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: utter_pizza_slots
-  ##- action: utter_ask_topping
   - action: action_ask_topping
 
 
@@ -159,7 +147,6 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: utter_pizza_slots
-  ##- action: utter_ask_topping
   - action: action_ask_topping
 
 
@@ -191,10 +178,8 @@ stories:
   steps:
   - checkpoint: user_orders_pizza
   - action: utter_ask_topping
-  ##- action: action_ask_topping
   - intent: ask_info_toppings
   - action: action_info_toppings
-  ##- action: utter_ask_topping
   - action: action_ask_topping
 
 
@@ -203,7 +188,6 @@ stories:
   steps:
   - checkpoint: user_orders_pizza
   - action: utter_ask_topping
-  ##- action: action_ask_topping
   - intent: deny
   - slot_was_set:
     - pizza_topping: null
@@ -215,36 +199,54 @@ stories:
   - intent: goodbye
   - action: utter_goodbye
   
-- story: User orders a pizza WITHOUT topping and orders a drink (NO asking for the final bill)
+#- story: User orders a pizza WITHOUT topping and orders a drink (NO asking for the final bill)
+#  steps:
+#  - checkpoint: user_orders_pizza
+#  - action: utter_ask_topping
+#  - intent: deny
+#  - action: action_check_topping
+#  - action: utter_other_service
+#  - intent: inform_about_drink
+#  - action: action_check_drink
+#  - action: utter_other_service
+#  - intent: deny
+#  - action: action_tell_bill
+#  - intent: goodbye
+#  - action: utter_goodbye
+
+- story: User orders a pizza WITH topping and orders a drink (NO asking for the final bill)
   steps:
   - checkpoint: user_orders_pizza
   - action: utter_ask_topping
-  ##- action: action_ask_topping
-  - intent: deny
-  - slot_was_set:
-    - pizza_topping: null
+  - or:
+    - intent: inform_about_topping
+    - intent: deny
   - action: action_check_topping
   - action: utter_other_service
   - intent: inform_about_drink
   - action: action_check_drink
+  - action: utter_other_service
+  - intent: deny
   - action: utter_confirm
   - action: action_tell_bill
   - intent: goodbye
   - action: utter_goodbye
 
+
 - story: User orders a pizza WITH topping and asks for the final bill
   steps:
   - checkpoint: user_orders_pizza
   - action: utter_ask_topping
-  ##- action: action_ask_topping
   - or:
     - intent: inform_about_topping
     - intent: deny
-  #- intent: inform_about_topping
   - action: action_check_topping
   - action: utter_other_service
   - intent: ask_for_bill
   - action: action_tell_bill
+  - action: utter_other_service
+  - intent: deny
+  - action: utter_confirm
   - intent: goodbye
   - action: utter_goodbye
   
@@ -252,13 +254,9 @@ stories:
   steps:
   - checkpoint: user_orders_pizza
   - action: utter_ask_topping
-  ##- action: action_ask_topping
   - or:
     - intent: inform_about_topping
     - intent: deny
-  #- intent: deny
-  #- slot_was_set:
-  #  - pizza_topping: null
   - action: action_check_topping
   - action: utter_other_service
   - intent: deny
@@ -281,7 +279,7 @@ stories:
   - action: utter_other_service
   - intent: ask_for_drink
   - action: action_info_drinks
-  
+
 
 
 - story: User asks for the final bill
@@ -295,41 +293,28 @@ stories:
   steps:
   - checkpoint: user_orders_pizza
   - action: utter_ask_topping
-  ##- action: action_ask_topping
   - or:
     - intent: inform_about_topping
     - intent: deny
-  #- intent: inform_about_topping
   - action: action_check_topping
   - action: utter_other_service
-  #- intent: ask_for_bill
-  #- action: action_tell_bill
-  #- intent: goodbye
-  #- action: utter_goodbye
 
 - story: User orders a pizza WITHOUT topping #after asking the menu
   steps:
   - checkpoint: user_orders_pizza
   - action: utter_ask_topping
-  ##- action: action_ask_topping
   - intent: deny
   - slot_was_set:
     - pizza_topping: null
   - action: action_check_topping
   - action: utter_other_service
-  #- intent: ask_for_bill
-  #- action: action_tell_bill
-  #- intent: goodbye
-  #- action: utter_goodbye
   
 - story: User wants to change the topping
   steps:
   - action: utter_ask_topping
-  ##- action: action_ask_topping
   - or:
     - intent: inform_about_topping
     - intent: deny
-  #- intent: inform_about_topping
   - action: action_check_topping
   - action: utter_other_service
   - intent: change_topping
@@ -343,14 +328,6 @@ stories:
   
 - story: User wants to change the topping, fails and the system ask if wants to change
   steps:
-#  - action: utter_ask_topping
-#  - intent: inform_about_topping
-#  - action: action_check_topping
-#  - action: utter_other_service
-#  - intent: change_topping
-#  - action: action_change_topping
-#  - action: utter_change_topping
-#  - intent: change_topping
   - action: action_change_topping
   - action: utter_other_service
   - intent: deny
@@ -358,19 +335,3 @@ stories:
   - action: action_tell_bill
   - intent: goodbye
   - action: utter_goodbye
-  
-#- story: User wants to change the topping, fails and then doesn't want to change
-#  steps:
-#  - action: action_check_topping
-#  - action: utter_other_service
-#  - intent: change_topping
-#  - action: action_change_topping
-#  - action: utter_change_topping
-#  - intent: deny
-#  - action: utter_confirm
-#  - action: utter_other_service
-#  - intent: deny
-#  - action: utter_confirm
-#  - action: action_tell_bill
-#  - intent: goodbye
-#  - action: utter_goodbye

@@ -178,7 +178,7 @@ rules:
   steps:
   - intent: ask_for_bill
   - action: action_tell_bill
-  
+  wait_for_user_input: false
 #- rule: Inform about the final bill
 #  condition:
 #  - active_loop: null
