@@ -36,9 +36,85 @@ rules:
     - requested_slot: null
   - action: utter_submit
   - action: utter_pizza_slots
+  
+- rule: Activate Delivery Form
+  condition:
+  - slot_was_set:
+    - modality: "delivery"
+  steps:
+  #- action: action_check_modality
+  - action: delivery_form
+  - active_loop: delivery_form
+  
+- rule: Submit Delivery Form
+  condition:
+  - active_loop: delivery_form
+  steps:
+  - action: delivery_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_submit
+  - action: action_recap_delivery
+
+- rule: user confirms the delivery
+  steps:
+  - action: action_recap_delivery
+  - intent: affirm
+  - action: utter_confirm
+  - action: action_calc_delivery_time
+  
+- rule: user changes the delivery
+  steps:
+  - action: action_recap_delivery
+  - intent: change_delivery
+  - action: action_change_delivery
+  wait_for_user_input: false
+
+- rule: user changes the delivery (second version)
+  steps:
+  - action: action_recap_delivery
+  - intent: deny
+  - action: utter_ask_type_change
+
+- rule: user confirms the pizza
+  steps:
+  - action: utter_pizza_slots
+  - intent: affirm
   - action: action_ask_topping
-  wait_for_user_input: false 
-  ##- action: utter_ask_topping
+  wait_for_user_input: false
+
+- rule: user confirm pick time
+  steps:
+  - action: action_tell_pick_time
+  - intent: affirm
+  - action: utter_confirm
+
+- rule: user changes pick time
+  steps:
+  - action: action_tell_pick_time
+  - intent: ask_specific_time
+  - action: action_check_pick_time
+  
+- rule: user changes pick time (second version)
+  steps:
+  - action: action_tell_pick_time
+  - intent: deny
+  - action: utter_ask_type_change
+
+- rule: user changes the pizza
+  steps:
+  - action: utter_pizza_slots
+  - intent: change_pizza
+  - action: action_change_pizza
+  - action: action_ask_topping
+  wait_for_user_input: false
+
+- rule: user changes the pizza (second version)
+  steps:
+  - action: utter_pizza_slots
+  - intent: deny
+  - action: utter_ask_type_change
   
 #- rule: Submit Pizza Slots
 #  condition:
@@ -160,15 +236,6 @@ rules:
   - intent: ask_for_pizza_price
   - action: action_tell_price
   
-#- rule: User ask for the price of a pizza (interruption of form)
-#  condition:
-#  - active_loop: simple_pizza_form
-#  steps:
-#  - intent: ask_for_pizza_price
-#  - action: action_tell_price
-#  - action: simple_pizza_form
-#  - active_loop: simple_pizza_form
-
 - rule: User asks for the final bill
   condition:
   - active_loop: null
@@ -179,33 +246,38 @@ rules:
   - intent: ask_for_bill
   - action: action_tell_bill
   wait_for_user_input: false
-#- rule: Inform about the final bill
-#  condition:
-#  - active_loop: null
-#  - slot_was_set:
-#    - requested_slot: pizza_type
-#    - requested_slot: pizza_size
-#  steps:
-#  - action: utter_other_service
-#  - intent: deny
-#  - action: utter_confirm
-#  - action: action_tell_bill
+
 - rule: User asks info about drinks
   steps:
   - intent: ask_for_drink
   - action: action_info_drinks
   wait_for_user_input: false
   
-  
-  
-  
 - rule: User wants a drink
   steps:
   - action: utter_ask_drink
   - intent: inform_about_drink
   - action: action_check_drink
+  
+- rule: User confirm the drink
+  steps:
+  - action: action_check_drink
+  - intent: affirm
   wait_for_user_input: false
- 
+
+- rule: User changes the drink
+  steps:
+  - action: action_check_drink
+  - intent: change_drink
+  - action: action_change_drink
+  wait_for_user_input: false
+  
+- rule: User changes the drink (second version)
+  steps:
+  - action: action_check_drink
+  - intent: deny
+  - action: utter_ask_type_change
+  
 - rule: User adds a topping
   condition:
   - active_loop: null
@@ -213,28 +285,73 @@ rules:
   - action: utter_ask_topping
   - intent: inform_about_topping
   - action: action_check_topping
-  wait_for_user_input: false
+  #wait_for_user_input: false
 
-- rule: change the topping
+- rule: User doesn't want to change the topping
+  condition:
+  - slot_was_set:
+    - requested_slot: pizza_topping
+  steps:
+   - action: action_check_topping
+  #- intent: change_topping
+   - intent: affirm
+  #- action: action_change_topping
+   - action: utter_other_service
+  #wait_for_user_input: false
+
+- rule: User wants to change the topping
   condition:
   - slot_was_set:
     - requested_slot: pizza_topping
   steps:
   - action: action_check_topping
-  - action: utter_other_service
   - intent: change_topping
   - action: action_change_topping
   wait_for_user_input: false
-#- rule: User order a pizza without topping
-#  condition:
-#  - active_loop: null
-#  - slot_was_set:
-#    - requested_slot: pizza_type
-#    - requested_slot: pizza_size
-#  steps:
-#  - action: utter_ask_topping
-#  - intent: deny
-#  - action: action_check_topping
+  
+- rule: User wants to change the topping (second version)
+  condition:
+  - slot_was_set:
+    - requested_slot: pizza_topping
+  steps:
+  - action: action_check_topping
+  - intent: deny
+  - action: utter_ask_type_change
+
+- rule: Change the topping
+  steps:
+  - action: utter_ask_type_change
+  - intent: change_topping
+  - action: action_change_topping
+  wait_for_user_input: false 
+  
+- rule: Recap of the order (bill not already said)
+  condition:
+  - slot_was_set:
+    - bill_said: false
+  steps:
+  - action: action_recap_order
+  - intent: affirm
+  - action: action_tell_bill
+  wait_for_user_input: false
+  
+- rule: Recap of the order (bill already said)
+  condition:
+  - slot_was_set:
+    - bill_said: true
+  steps:
+  - action: action_recap_order
+  - intent: affirm
+  - action: utter_confirm
+  wait_for_user_input: false
+  
+- rule: User order a pizza without topping
+  steps:
+  - action: action_tell_bill
+  - action: utter_ask_modality
+  - intent: inform_about_modality
+  - action: action_check_modality
+  wait_for_user_input: false
 
 #- rule: User wants to change the topping
 #  condition:

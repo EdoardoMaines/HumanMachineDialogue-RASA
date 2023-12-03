@@ -44,6 +44,7 @@ nlu:
     - don't like that
     - no way
     - not really
+    - nope
 - intent: bot_challenge
   examples: |
     - are you a bot?
@@ -86,6 +87,31 @@ nlu:
     - [l](pizza_size)
     - [m](pizza_size) pizza
     - [l](pizza_size) pizza
+    - i'd like to order a [large](pizza_size) [margherita](pizza_type)
+- intent: change_pizza
+  examples: |
+    - i've changed my mind, i would like to order a [margherita](pizza_type) instead
+    - i've changed my mind, i would like to order a [veggie](pizza_type) instead
+    - i've changed my mind, i would like to order a [marinara](pizza_type) instead
+    - i've changed my mind, i would like to order a [large](pizza_size) [marinara](pizza_type) instead
+    - i've changed my mind, i would like to order a [medium](pizza_size) [veggie](pizza_type) instead
+    - i'd like to change my order and get a [margherita](pizza_type) instead
+    - i'd like to change my order and get a [veggie](pizza_type) instead
+    - i'd like to change my order and get a [marinara](pizza_type) instead
+    - i'd like to change my order and get a [salami](pizza_type) instead
+    - i'd like to change my order and get a [large](pizza_size) [marinara](pizza_type) instead
+    - i'd like to change my order and get a [medium](pizza_size) [salami](pizza_type) instead
+    - i'd like to get a [margherita](pizza_type) instead of the [marinara](pizza_type)
+    - i'd like to get a [salami](pizza_type) instead of the [margherita](pizza_type)
+    - i'd like to get a [veggie](pizza_type) instead of the [salami](pizza_type)
+    - i'd like to get a [marinara](pizza_type) instead of the [veggie](pizza_type)
+    - i'd like to get a [baby](pizza_size) [veggie](pizza_type) instead of the [medium](pizza_size) [salami](pizza_type)
+    - i'd like to get a [large](pizza_size) [marinara](pizza_type) instead of the [large](pizza_size) [veggie](pizza_type)
+    - i would like to replace the [margherita](pizza_type) with a [veggie](pizza_type)
+    - i would like to replace the [salami](pizza_type) with a [salami](pizza_type)
+    - i would like to replace the [marinara](pizza_type) with a [margherita](pizza_type)
+    - i would like to replace the [large](pizza_size) [salami](pizza_type) with a [medium](pizza_size) [salami](pizza_type)
+    - i would like to replace the [baby](pizza_size) [marinara](pizza_type) with a [baby](pizza_size) [margherita](pizza_type)
 - intent: inform_about_topping
   examples: |
     - i'd like to add [mushrooms](pizza_topping) to my pizza
@@ -128,16 +154,17 @@ nlu:
     - [grilled vegetables](pizza_topping)
     - [vegetables](pizza_topping)
     - [mozzarella](pizza_topping)
+    - yes, some [olives](pizza_topping)
 - intent: change_topping
   examples: |
-    - i've change my mind, i would like to add some [ham](pizza_topping)
-    - i've change my mind, i would like to add some [olives](pizza_topping)
-    - i've change my mind, i would like to add some [mozzarella](pizza_topping)
-    - i've change my mind, i would like to add some [mushrooms](pizza_topping)
-    - i've change my mind, i would like to add some [grilled vegetables](pizza_topping)
-    - i've change my mind, i would like to add some [spicy salami](pizza_topping)
-    - i've change my mind, i would like to add some [vegetables](pizza_topping)
-    - i've change my mind, i would like to add some [salami](pizza_topping)
+    - i've changed my mind, i would like to add some [ham](pizza_topping)
+    - i've changed my mind, i would like to add some [olives](pizza_topping)
+    - i've changed my mind, i would like to add some [mozzarella](pizza_topping)
+    - i've changed my mind, i would like to add some [mushrooms](pizza_topping)
+    - i've changed my mind, i would like to add some [grilled vegetables](pizza_topping)
+    - i've changed my mind, i would like to add some [spicy salami](pizza_topping)
+    - i've changed my mind, i would like to add some [vegetables](pizza_topping)
+    - i've changed my mind, i would like to add some [salami](pizza_topping)
     - i'd like to add some [ham](pizza_topping) instead
     - i'd like to add some [olives](pizza_topping) instead
     - i'd like to add some [mozzarella](pizza_topping) instead
@@ -171,6 +198,20 @@ nlu:
     - one [lemon iced tea](drink)
     - i'd like a [coke](drink)
     - i'd like to order a [still water](drink)
+- intent: change_drink
+  examples: |
+    - i've changed my mind, i would like to order a [coke](drink) instead
+    - i've changed my mind, i would like to order a [still water](drink) instead
+    - i've changed my mind, i would like to order a [lemon iced tea](drink) instead
+    - i'd like to change my order and get a [coke](drink) instead
+    - i'd like to change my order and get a [peach iced tea](drink) instead
+    - i'd like to change my order and get a [sparkling water](drink) instead
+    - i'd like to get a [coke](drink) instead of the [lemon iced tea](drink)
+    - i'd like to get a [fanta](drink) instead of the [still water](drink)
+    - i'd like to get a [peach iced tea](drink) instead of the [sparkling water](drink)
+    - i would like to replace the [fanta](drink) with a [peach iced tea](drink)
+    - i would like to replace the [coke](drink) with a [coke](drink)
+    - i would like to replace the [still water](drink) with a [sparkling water](drink)
 - intent: ask_for_drink
   examples: |
     - do you serve any drinks?
@@ -193,7 +234,6 @@ nlu:
     - how much does a [veggie](pizza_type) cost?
     - how much is the cost of a [veggie](pizza_type)?
     - may I know the cost of a [veggie](pizza_type)?
-    - test
 - intent: ask_for_menu
   examples: |
     - what is your menu?
@@ -242,8 +282,8 @@ nlu:
     - here is my id: [test_id](id)
 - intent: inform_about_password
   examples: |
-    - [1234](password)
-    - here is my password: [1234](password)
+    - [ciao](password)
+    - here is my password: [ciao](password)
 - intent: ask_stock_topping
   examples: |
     - [ham](pizza_topping)
@@ -255,3 +295,58 @@ nlu:
     - how many pieces of [pizza dough](pizza_ingredient) are in stock?
     - how much [tomato sauce](pizza_ingredient) is left?
     - how much [tomato sauce](pizza_ingredient) is in stock?
+- intent: delete_order
+  examples: |
+    - i'd like to calcel my order
+    - i want to cancel my order
+    - i've change my mind. I want to delete my order.
+- intent: inform_about_modality
+  examples: |
+    - [take-away](modality)
+    - [take away](modality)
+    - [delivery](modality)
+- intent: inform_about_address
+  examples: |
+    - [5](number_address) [Battisti street](address).
+    - [Da Vinci square](address).
+    - [120 B](number_address) [Perini street](address).
+- intent: inform_about_nr_address
+  examples: |
+    - [99](number_address).
+    - [49](number_address).
+    - [35 A](number_address).
+    - [23](number_address).
+    - [100B](number_address).
+    - [3 A](number_address).
+- intent: inform_about_doorbell
+  examples: |
+    - [Black](doorbell)
+    - [first floor](doorbell).
+    - [Maines, second floor](doorbell).
+    - [White](doorbell)
+    - [second floor](doorbell).
+    - [Rossi, first floor](doorbell).
+    - [first floor, Rossi](doorbell).
+    - [third floor, Smith](doorbell).
+- intent: inform_about_phone
+  examples: |
+    - [+391234567891](phone).
+    - [+390000000000](phone).
+    - [+391234567891](phone).
+    - [+391705927381](phone).
+    - [+393028212489](phone).
+    - [+391234567891](phone).
+- intent: change_delivery
+  examples: |
+    - i'd like to modify the delivery information.
+    - i was wrong! i'd like to change the information provided.
+    - i made a mistake in providing the address. i'd like to change it.
+    - i made a mistake in providing the number of the address. i'd like to change it.
+    - i made a mistake in providing my phone number. i'd like to change it.
+    - i made a mistake in providing my doorbell. i'd like to change it.
+- intent: ask_specific_time
+  examples: |
+    - it would be possible to bring forward the pick-up time to [20:30](complete_time)?
+    - if i arrive by [21:45](complete_time), will the order be ready?
+    - if i arrive in [10](min_time) minutes, would i find the order ready?
+    - is it possible to bring forward by [7](min_time) minutes?
