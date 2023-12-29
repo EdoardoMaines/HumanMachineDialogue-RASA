@@ -9,6 +9,13 @@ intents:
 - ask_for_pizza_price
 - ask_info_toppings
 - ask_stock_topping
+- stock_data
+- order_ingredient:
+    use_entities:
+      - ingredient_quantity
+      - pizza_topping
+      - pizza_ingredient
+- ask_ingredients_to_order
 - ask_for_drink
 - bot_challenge
 - buy_pizza
@@ -16,6 +23,7 @@ intents:
 - change_topping
 - change_drink
 - change_delivery
+- remove_from_order
 - deny
 - goodbye
 - greet
@@ -49,7 +57,6 @@ intents:
       - complete_time
       - min_time
 - request_pizza_form
-- stock_data
 - stop
 - delete_order
 entities:
@@ -59,6 +66,7 @@ entities:
 - pizza_size
 - pizza_topping
 - pizza_ingredient
+- ingredient_quantity
 - modality
 - drink
 - address
@@ -93,6 +101,25 @@ slots:
       not_intent:
         - change_topping
         - ask_stock_topping
+        - order_ingredient
+#  pizza_ingredient:
+#    type: any
+#    mappings:
+#    - type: from_entity
+#      entity: pizza_ingredient
+#      intent:
+#        - order_ingredient
+#      not_intent:
+#        - ask_stock_topping
+#  ingredient_quantity:
+#    type: any
+#    mappings:
+#    - type: from_entity
+#      entity: ingredient_quantity
+#      intent:
+#        - order_ingredient
+      #not_intent:
+      #  - ask_stock_topping
   drink:
     type: any
     mappings:
@@ -243,8 +270,6 @@ responses:
   utter_order:
   - text: Would you like to order?
   - text: Is there any pizza you're interested in?
-  utter_pizza_slots:
-  - text: Your order is a {pizza_size} {pizza_type}. Is it correct?.
   utter_ask_continue:
   - text: Are you sure you want to stop the form?
   utter_stop_form:
@@ -262,9 +287,16 @@ responses:
   - text: Do you want any drink?
   utter_ask_stock_information:
   - text: What information about stock do you need?
-  utter_change_topping:
-  - text: Do you want to change your topping?
-  - text: Do you want to change the topping you told me?
+  utter_ask_ingredient_order:
+  - text: Do you want to place an order to replenish stock?
+  utter_ask_ingredients:
+  - text: What ingredients would you like to order?
+  utter_ask_service:
+  - text: What do you need?
+  - text: Do you need anything?
+  utter_ask_type_change:
+  - text: Ok no problem! What would you like to change?
+  - text: I'm sorry, what change would you like to make?
   utter_ask_id:
   - text: Login required! Can I have your ID?
   - text: Login required! Can you enter your ID?
@@ -297,9 +329,6 @@ responses:
   utter_ask_doorbell:
   - text: Last thing! I need some information like your doorbell name or floor, just in case. Thanks.
   - text: Last thing! Can you provide your doorbell name or floor? Just in case. Thanks.
-  utter_ask_type_change:
-  - text: Ok no problem! What would you like to change?
-  - text: I'm sorry, what change would you like to make?
 actions:
 - action_ask_topping
 - action_change_topping
@@ -308,7 +337,14 @@ actions:
 - action_info_toppings
 - action_info_drinks
 - action_login_slots
+- utter_ask_ingredient_order
+- utter_ask_ingredients
+- action_order_ingredient
+- action_say_ingredient_below_threshold
+- action_order_ingredients_below_threshold
+- utter_ask_service
 - query_topping_quantity
+- utter_ask_stock_information
 - action_tell_bill
 - action_tell_menu
 - action_tell_price
@@ -321,8 +357,9 @@ actions:
 - utter_ask_number_address
 - utter_ask_phone
 - utter_ask_doorbell
-- utter_change_topping
 - utter_ask_type_change
+- action_ask_type_change
+- action_remove_from_order
 - action_check_modality
 - utter_confirm
 - utter_confirm_order
@@ -334,7 +371,7 @@ actions:
 - utter_greet
 - utter_iamabot
 - utter_other_service
-- utter_pizza_slots
+- action_pizza_slots
 - action_recap_delivery
 - action_calc_delivery_time
 - action_check_pick_time

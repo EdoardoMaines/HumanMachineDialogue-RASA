@@ -45,6 +45,7 @@ nlu:
     - no way
     - not really
     - nope
+    - no thanks
 - intent: bot_challenge
   examples: |
     - are you a bot?
@@ -87,6 +88,7 @@ nlu:
     - [l](pizza_size)
     - [m](pizza_size) pizza
     - [l](pizza_size) pizza
+    - i'd like to order a [large](pizza_size) [margherita](pizza_type)
     - i'd like to order a [large](pizza_size) [margherita](pizza_type)
 - intent: change_pizza
   examples: |
@@ -155,6 +157,8 @@ nlu:
     - [vegetables](pizza_topping)
     - [mozzarella](pizza_topping)
     - yes, some [olives](pizza_topping)
+    - yes, some [ham](pizza_topping)
+    - no. i'd like to remove the [ham](pizza_topping) and add some [olives](pizza_topping)
 - intent: change_topping
   examples: |
     - i've changed my mind, i would like to add some [ham](pizza_topping)
@@ -181,13 +185,16 @@ nlu:
     - i'd like to add some [salami](pizza_topping) instead of [vegetables](pizza_topping)
     - i'd like to add some [vegetables](pizza_topping) instead of [salami](pizza_topping)
     - i'd like to add some [spicy salami](pizza_topping) instead of [ham](pizza_topping)
-    - i would like to replace the [ham](pizza_topping) with some [olives](pizza_topping)
-    - i would like to replace the [ham](pizza_topping) with some [mozzarella](pizza_topping)
+    - no, i would like to replace the [ham](pizza_topping) with some [olives](pizza_topping)
+    - no, i would like to replace the [ham](pizza_topping) with some [mozzarella](pizza_topping)
     - i would like to replace the [ham](pizza_topping) with some [mushrooms](pizza_topping)
     - i would like to replace the [ham](pizza_topping) with some [grilled vegetables](pizza_topping)
     - i would like to replace the [ham](pizza_topping) with some [spicy salami](pizza_topping)
     - i would like to replace the [ham](pizza_topping) with some [vegetables](pizza_topping)
     - i would like to replace the [ham](pizza_topping) with some [salami](pizza_topping)
+    - no. i'd like to remveo the [ham](pizza_topping) with some [olives](pizza_topping)
+    - no. i'd like to remveo the [olives](pizza_topping) with some [spicy salami](pizza_topping)
+    - no. i'd like to remveo the [mozzarella](pizza_topping) with some [grilled vegetables](pizza_topping)
 - intent: inform_about_drink
   examples: |
     - yes, i'd like a [coke](drink)
@@ -198,6 +205,7 @@ nlu:
     - one [lemon iced tea](drink)
     - i'd like a [coke](drink)
     - i'd like to order a [still water](drink)
+    - i'd love a [coke](drink)
 - intent: change_drink
   examples: |
     - i've changed my mind, i would like to order a [coke](drink) instead
@@ -209,6 +217,9 @@ nlu:
     - i'd like to get a [coke](drink) instead of the [lemon iced tea](drink)
     - i'd like to get a [fanta](drink) instead of the [still water](drink)
     - i'd like to get a [peach iced tea](drink) instead of the [sparkling water](drink)
+    - i'd like to get a [coke](drink) instead
+    - i'd like to get a [fanta](drink) instead
+    - i'd like to get a [peach iced tea](drink) instead
     - i would like to replace the [fanta](drink) with a [peach iced tea](drink)
     - i would like to replace the [coke](drink) with a [coke](drink)
     - i would like to replace the [still water](drink) with a [sparkling water](drink)
@@ -295,11 +306,33 @@ nlu:
     - how many pieces of [pizza dough](pizza_ingredient) are in stock?
     - how much [tomato sauce](pizza_ingredient) is left?
     - how much [tomato sauce](pizza_ingredient) is in stock?
+- intent: order_ingredient
+  examples: |
+    - let's order [10](ingredient_quantity) pieces of [pizza dough](pizza_ingredient)
+    - let's order [25](ingredient_quantity) of [ham](pizza_topping)
+    - let's order some [ham](pizza_topping)
+    - i need new pieces of [olives](pizza_topping)
+    - i need new pieces of [tomato sauce](pizza_ingredient)
+    - i need [8](ingredient_quantity) pieces of [olives](pizza_topping)
+- intent: ask_ingredients_to_order
+  examples: |
+    - which ingredients need an order?
+    - are there ingredients that need to be ordered?
+    - are there ingredients below the stock threshold and must they be ordered?
+    - which ingredients are below the stock threshold?
 - intent: delete_order
   examples: |
     - i'd like to calcel my order
     - i want to cancel my order
     - i've change my mind. I want to delete my order.
+- intent: remove_from_order
+  examples: |
+    - i'd like to remove the [ham](pizza_topping) from the pizza
+    - i want to remove the [olives](pizza_topping)
+    - i'd like to remove the [coke](drink) from my order
+    - i want to remove the [fanta](drink)
+    - i dont't want the [grilled vegetables](pizza_topping) on my pizza anymore
+    - i dont't want the [sparkling water](drink) anymore
 - intent: inform_about_modality
   examples: |
     - [take-away](modality)
@@ -332,10 +365,8 @@ nlu:
   examples: |
     - [+391234567891](phone).
     - [+390000000000](phone).
-    - [+391234567891](phone).
     - [+391705927381](phone).
     - [+393028212489](phone).
-    - [+391234567891](phone).
 - intent: change_delivery
   examples: |
     - i'd like to modify the delivery information.
