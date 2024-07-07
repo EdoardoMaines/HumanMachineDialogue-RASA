@@ -2,90 +2,546 @@
 #### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
 
 stories:
-- story: happy path 1
-  steps:
-  - user: |
-      hello there!
-    intent: greet
-  - action: utter_greet
-  - user: |
-      amazing
-    intent: mood_great
-  - action: utter_happy
+#- story: happy path 1
+#  steps:
+#  - user: |
+#      hello there!
+#    intent: greet
+#  - action: utter_greet
+#  - user: |
+#      amazing
+#    intent: mood_great
+#  - action: utter_happy
 
-- story: happy path 2
-  steps:
-  - user: |
-      hello there!
-    intent: greet
-  - action: utter_greet
-  - user: |
-      amazing
-    intent: mood_great
-  - action: utter_happy
-  - user: |
-      bye-bye!
-    intent: goodbye
-  - action: utter_goodbye
+#- story: sad path 1
+#  steps:
+#  - user: |
+#      hello
+#    intent: greet
+#  - action: utter_greet
+#  - user: |
+#      not good
+#    intent: mood_unhappy
+#  - action: utter_cheer_up
+#  - action: utter_did_that_help
+#  - user: |
+#      yes
+#    intent: affirm
+#  - action: utter_happy
 
-- story: sad path 1
+#- story: say goodbye
+#  steps:
+#  - user: |
+#      bye-bye!
+#    intent: goodbye
+#  - action: utter_goodbye
+
+#- story: bot challenge
+#  steps:
+#  - user: |
+#      are you a bot?
+#    intent: bot_challenge
+#  - action: utter_iamabot
+
+#  entities:
+  #    - phone: "+391234567890"
+#  entities:
+#      - pizza_type: "margherita"
+#      - pizza_size: "large"
+#      - pizza_topping: "ham"
+#      - ingredient: "[ham]"
+- story: order a pizza using form (specify all slot)
   steps:
   - user: |
       hello
     intent: greet
+  - action: utter_info_about_pizzeria
   - action: utter_greet
   - user: |
-      not good
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      yes
-    intent: affirm
-  - action: utter_happy
-
-- story: sad path 2
-  steps:
-  - user: |
-      hello
-    intent: greet
-  - action: utter_greet
-  - user: |
-      not good
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - user: |
-      not really
-    intent: deny
-  - action: utter_goodbye
-
-- story: sad path 3
+      i'd like a [large]{"entity": "pizza_size"} [margherita]{"entity": "pizza_type"} with some [ham]{"entity": "pizza_topping"}
+    intent: inform_about_pizza
+  - slot_was_set:
+      - pizza_type: "margherita"
+      - pizza_size: "large"
+      - pizza_topping: "ham"
+      - ingredient: "[ham]"
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  
+- story: order a pizza using form (specify all slot after bot asking)
   steps:
   - user: |
       hi
     intent: greet
+  - action: utter_info_about_pizzeria
   - action: utter_greet
   - user: |
-      very terrible
-    intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
+      i'd like to buy a pizza
+    intent: buy_pizza
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - user: |
+      i'd like a [large]{"entity": "pizza_size"} [margherita]{"entity": "pizza_type"}
+    intent: inform_about_pizza
+  - slot_was_set:
+      - pizza_type: "margherita"
+      - pizza_size: "large"
+  - action: simple_pizza_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  
+- story: order a pizza using form (one slot at the time)
+  steps:
+  - user: |
+      hello
+    intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - user: |
+      i'd like to buy a pizza
+    intent: buy_pizza
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - user: |
+      [margherita]{"entity": "pizza_type"}
+    intent: inform_about_pizza
+  - slot_was_set:
+      - pizza_type: margherita
+  - action: simple_pizza_form
+  - user: |
+      [baby]{"entity": "pizza_size"}
+    intent: inform_about_pizza
+  - slot_was_set:
+      - pizza_size: baby
+  - action: simple_pizza_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  
+- story:  User interrupts asking info about menu, orders a pizza and changes it
+  steps:
+  - user: |
+      hello
+    intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - user: |
+      i'd like to buy a pizza
+    intent: buy_pizza
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - user: |
+      may I know your menu?
+    intent: ask_for_menu
+  - action: action_tell_menu
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - user: |
+      i'd like a [large]{"entity": "pizza_size"} [marinara]{"entity": "pizza_type"}
+    intent: inform_about_pizza
+  - slot_was_set:
+      - pizza_type: "marinara"
+      - pizza_size: "large"
+  - action: simple_pizza_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  - user: |
+      i've changed my mind, i would like to order a [margherita]{"entity": "pizza_type"} instead
+    intent: change_pizza
+  - action: action_change_pizza
+  - slot_was_set:
+    - pizza_type: "margherita"
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping
+  
+- story: User asks infos about available toppings
+  steps:
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping
+  - user: |
+      what toppings do you have?
+    intent: ask_info_toppings
+  - action: action_info_toppings
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping
+  
+- story: User orders a pizza without topping and chooses delivery modality
+  steps:
+  - user: |
+      hello
+    intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - user: |
+      i'd like a [medium]{"entity": "pizza_size"} [salami]{"entity": "pizza_type"}
+    intent: inform_about_pizza
+  - slot_was_set:
+    - pizza_type: "salami"
+    - pizza_size: "medium"
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  - user: |
+      yes
+    intent: affirm
+  - action: utter_confirm
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping
   - user: |
       no
     intent: deny
-  - action: utter_goodbye
-
-- story: say goodbye
-  steps:
+  - action: utter_confirm
+  - action: action_check_topping
   - user: |
-      bye-bye!
+      yes
+    intent: affirm
+  - action: utter_confirm
+  - action: utter_other_service
+  - user: |
+      no
+    intent: deny
+  - action: utter_confirm
+  - action: action_recap_order
+  - user: |
+      yes
+    intent: affirm
+  - action: utter_confirm
+  - action: action_tell_bill
+  - action: utter_ask_modality
+  - user: |
+      [delivery]{"entity": "modality"}
+    intent: inform_about_modality
+  - slot_was_set:
+    - modality: delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - user: |
+      [Da Vinci Square]{"entity": "address"}
+    intent: inform_about_address
+  - slot_was_set:
+    - address: "Da Vinci Square"
+  - action: delivery_form
+  - user: |
+      [7]{"entity": "number_address"}
+    intent: inform_about_nr_address
+  - slot_was_set:
+    - number_address: "7"
+  - action: delivery_form
+  - user: |
+      [+391234567891]{"entity": "phone"}
+    intent: inform_about_phone
+  - slot_was_set:
+    - phone: "+391234567891"
+  - action: delivery_form
+  - user: |
+      [Maines, second floor]{"entity": "doorbell"}
+    intent: inform_about_doorbell
+  - slot_was_set:
+    - doorbell:
+      - Maines
+      - second floor
+  - action: delivery_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_recap_delivery
+  - user: |
+      yes
+    intent: affirm
+  - action: utter_confirm
+  - action: action_calc_delivery_time
+  - action: utter_next_time
+  - user: |
+      bye
     intent: goodbye
   - action: utter_goodbye
-
-- story: bot challenge
+  
+- story: User orders a pizza, changes it (user driven), then orders a drink and removes it
   steps:
   - user: |
-      are you a bot?
-    intent: bot_challenge
-  - action: utter_iamabot
+      hi
+    intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - user: |
+      i'd like to buy a pizza
+    intent: buy_pizza
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - user: |
+      i'd like a [large]{"entity": "pizza_size"} [margherita]{"entity": "pizza_type"}
+    intent: inform_about_pizza
+  - slot_was_set:
+    - pizza_type: "margherita"
+    - pizza_size: "large"
+  - action: simple_pizza_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  - user: |
+      i'd like to change my order and get a [veggie]{"entity": "pizza_type"} instead
+    intent: change_pizza
+  - action: action_change_pizza
+  - slot_was_set:
+    - pizza_type: "veggie"
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping
+  - user: |
+      Yes. I'd like to add some [ham]{"entity": "pizza_topping"}
+    intent: inform_about_topping
+  - slot_was_set:
+      - pizza_topping: "ham"
+      - ingredient: "[ham]"
+  - action: action_check_topping
+  - user: |
+      yes
+    intent: affirm
+  - action: utter_confirm
+  - action: utter_other_service
+  - user: |
+      yeah, a [coke]{"entity": "drink"}
+    intent: inform_about_drink
+  - slot_was_set:
+    - drink: "coke"
+  - action: action_check_drink
+  - user: |
+      i changed my mind, remove [coke]{"entity": "drink"}
+    intent: remove_from_order
+  - action: action_remove_from_order
+  - slot_was_set:
+    - drink: null
+  - action: utter_ask_drink
+  - user: |
+      no thanks
+    intent: deny
+  - action: utter_confirm
+  - action: utter_other_service
+  - user: |
+      no
+    intent: deny
+  - action: utter_confirm
+  - action: action_recap_order
+  - user: |
+      yes
+    intent: affirm
+  - action: utter_confirm
+  - action: action_tell_bill
+  - action: utter_ask_modality
+  - user: |
+      [takeaway]{"entity": "modality",  "value": "take-away"}
+    intent: inform_about_modality
+  - slot_was_set:
+    - modality: take-away
+  - action: action_tell_pick_time
+  - user: |
+      if i arrive in [10 minutes]{"entity": "min_time"}, would the order be ready?
+    intent: ask_specific_time
+  - slot_was_set:
+    - modality: "10"
+  - action: action_check_pick_time
+  - action: utter_next_time
+  - user: |
+      bye
+    intent: goodbye
+  - action: utter_goodbye
+      
+- story: User orders a pizza, changes it (bot driven), then orders a drink and changes it too (bot driven)
+  steps:
+  - user: |
+      hello
+    intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - user: |
+      i'd like a [medium]{"entity": "pizza_size"} [veggie]{"entity": "pizza_type"}
+    intent: inform_about_pizza
+  - slot_was_set:
+      - pizza_type: "veggie"
+      - pizza_size: "medium"
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  - user: |
+      no thanks
+    intent: deny
+  - action: utter_confirm
+  - action: action_ask_type_change
+  - user: |
+      - i'd like to get a [marinara]{"entity": "pizza_type"} instead of the [margherita]{"entity": "pizza_type"}
+    intent: change_pizza
+  - action: action_change_pizza
+  - slot_was_set:
+    - pizza_type: "marinara"
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping
+  - user: |
+      i'd like to add [olives]{"entity": "pizza_topping"} to my pizza
+    intent: inform_about_topping
+  - slot_was_set:
+      - pizza_topping: "olives"
+      - ingredient: "[olives]"
+  - action: action_check_topping
+  - user: |
+      yes
+    intent: affirm
+  - action: utter_confirm
+  - action: utter_other_service
+  - user: |
+       i'd like to order a [still water]{"entity": "drink"}
+    intent: inform_about_drink
+  - slot_was_set:
+      - drink: "still water"
+  - action: action_check_drink
+  - user: |
+      no
+    intent: deny
+  - action: utter_confirm
+  - action: action_ask_type_change
+  - user: |
+      i'd like to get a [peach iced tea]{"entity": "drink"} instead of the [still water]{"entity": "drink"}
+    intent: change_drink
+  - action: action_change_drink
+  - slot_was_set:
+    - drink: "peach iced tea"
+  - action: utter_other_service
+  - user: |
+      nope
+    intent: deny 
+  - action: utter_confirm
+  - action: action_recap_order
+  - user: |
+      yes
+    intent: affirm
+  - action: utter_confirm
+  - action: action_tell_bill
+  - action: utter_ask_modality
+ 
+
+- story: Employee logins
+  steps:
+  - user: |
+      hello
+    intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - user: |
+      i would like to see the warehouse data
+    intent: stock_data
+  - action: login_form
+  - active_loop: login_form
+  - user: |
+      [test_id]{"entity": "id"}
+    intent: inform_about_id
+  - slot_was_set:
+      - id: "test_id"
+  - action: login_form
+  - user: |
+      here is my password: [ciao_99]{"entity": "password"}
+    intent: inform_about_password
+  - slot_was_set:
+      - password: "ciao_99"
+  - action: login_form
+  - active_loop: null
+  - slot_was_set:
+    - is_logged: true
+  - action: utter_submit
+  - action: action_login_slots
+  - action: utter_ask_service
+  - user: |
+      how many pieces of [mozzarella]{"entity": "pizza_topping"} are in stock?
+    intent: ask_stock_topping
+  - slot_was_set:
+      - ingredient: "[mozzarella]"
+  - action: query_topping_quantity
+  - action: utter_ask_service
+  - user: |
+      let's order some [mozzarella]{"entity": "pizza_topping"}
+    intent: order_ingredient
+  - action: action_order_ingredient
+  - slot_was_set:
+    - ingredient: "[mozzarella]"
+  - user: |
+      no
+    intent: deny
+  - action: utter_confirm
+  - action: action_check_order_ingredient
+  - slot_was_set:
+    - ingredient: null
+    - ingredient_quantity: null
+  - action: utter_ask_order
+  - user: |
+      yes
+    intent: affirm
+  - action: utter_confirm
+  - action: utter_ask_ingredients
+  - user: |
+      let's order [10 pieces]{"entity": "ingredient_quantity"} of [pizza dough]{"entity": "ingredient"}
+    intent: order_ingredient
+    entities:
+    - ingredient_quantity: 10 pieces
+    - ingredient: pizza dough
+  - action: action_order_ingredient
+  - slot_was_set:
+    - ingredient: "[pizza dough]"
+    - ingredient_quantity: "10"
+  - user: |
+      yes
+    intent: affirm
+  - action: utter_confirm
+  - action: action_check_order_ingredient
+  - slot_was_set:
+    - ingredient: null
+    - ingredient_quantity: null
+  - action: utter_ask_service
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      

@@ -16,7 +16,7 @@ from rasa_sdk import Tracker, FormValidationAction, Action
 from rasa_sdk.events import EventType
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
-from rasa_sdk.events import SlotSet, FollowupAction
+from rasa_sdk.events import SlotSet, FollowupAction, AllSlotsReset
 
 
 
@@ -105,6 +105,7 @@ def select_by_slot(conn, table, slot_name, slot_value):
 
     if len(list(rows)) < 1:
         print("There are no resources matching your query!")
+		
     
     for row in rows:
         return[row[0]]
@@ -119,6 +120,7 @@ def select_by_id(conn, slot_name, slot_value):
     rows = cur.fetchall()
     if len(list(rows)) < 1:
         print("There are no resources matching your query!")
+        return None
     else:
         for row in rows: 
             return[row]
@@ -165,6 +167,16 @@ def tranform_in_string(list):
 	element_before_last = ', '.join(list[:-1])
 	result = f"{element_before_last} and {list[-1]}"
 	return result
+
+class ActionResetAllSlots(Action):
+
+    def name(self) -> Text:
+        return "action_reset_all_slots"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        return [AllSlotsReset()]
 
 class ValidateSimplePizzaForm(FormValidationAction):
 	def name(self) -> Text:
@@ -261,10 +273,13 @@ class ActionCheckModality(Action):
 		modality = tracker.slots.get("modality")
 
 		if modality.lower() == "take-away" or modality.lower() == "take away":
+			#return[SlotSet("modality", "take-away"), FollowupAction(name='action_tell_pick_time')]
 			return[FollowupAction(name='action_tell_pick_time')]
+
 		
 		if modality.lower() == "delivery":
 			dispatcher.utter_message(text=f"Nice. I need some information!")
+			#return[SlotSet("modality", "delivery"), FollowupAction(name='delivery_form')]
 			return[FollowupAction(name='delivery_form')]
 
 
@@ -432,16 +447,40 @@ class ActionCheckPickTime(Action):
 			tracker: Tracker,
 			domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 		
+		extracted_minutes = []
+		asked_minutes = None
+
+		extracted_infos = tracker.latest_message['entities']
+		print(extracted_infos)
+
+		for i in extracted_infos:
+			if i['entity'] == "min_time":
+				extracted_minutes.append(i['value'])
+
+		# ingredient_quantity is a string composed by the number needed and the word "pieces" divided by a space
+		# let's use split method in order to extract only the number
+		if len(extracted_minutes) != 0:
+			divided = extracted_minutes[0].split()
+			
+
+			if divided[0] == "minutes":
+				asked_minutes = divided[1]
+			if divided[1] == "minutes":
+				asked_minutes = divided[0]
+
+
+
 		#time in minutes
 		exact_time = tracker.slots.get("complete_time")
-		asked_minutes = tracker.slots.get("min_time")
+		#asked_minutes = tracker.slots.get("min_time")
 
 		#times saved by the system
 		order_time = tracker.slots.get("order_time")
 		ready_time = tracker.slots.get("ready_time")
-
-		order_time = datetime.strptime(order_time, "%H:%M")
-		ready_time = datetime.strptime(ready_time, "%H:%M")
+		
+		if order_time != None and ready_time != None:
+			order_time = datetime.strptime(order_time, "%H:%M")
+			ready_time = datetime.strptime(ready_time, "%H:%M")
 
 		if exact_time != None:
 			exact_time = datetime.strptime(exact_time, "%H:%M")
@@ -480,7 +519,7 @@ class ActionCheckPickTime(Action):
 				dispatcher.utter_message(text=f"Yeah, no problem! The order will be ready by {asked_time}.")
 
 			
-		return []
+		return [SlotSet("min_time", asked_minutes)]
 
 
 class ValidateLoginForm(FormValidationAction):
@@ -501,7 +540,7 @@ class ValidateLoginForm(FormValidationAction):
 		#get id e password in order to check if is correct [0][0] = id, [0][1] = password, [0][2] = user_name
 		get_query_result = select_by_id(conn, slot_name, slot_value)
 
-		if slot_value.lower() != get_query_result[0][0]:
+		if get_query_result==None or slot_value.lower() != get_query_result[0][0]:
 			dispatcher.utter_message(text="Incorrect ID!")
 			return {"id": None}
 
@@ -522,7 +561,7 @@ class ValidateLoginForm(FormValidationAction):
 		#get id e password in order to check if is correct [0][0] = id, [0][1] = password, [0][2] = user_name
 		get_query_result = select_by_id(conn, slot_name, slot_value)
 		print("CIAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO ", get_query_result)
-		if slot_value.lower() != get_query_result[0][1]:
+		if get_query_result==None or slot_value.lower() != get_query_result[0][1]:
 			dispatcher.utter_message(text="Incorrect password!")
 			return {"password": None}
 
@@ -685,13 +724,12 @@ class ActionCheckTopping(Action):
 		last_intent = tracker.latest_message['intent'].get('name')
 		#if last_intent == 'inform_about_topping':
 		if topping == None:
-			dispatcher.utter_message(text=f"OK! I won't add anything to your {size} {pizza}.")
-			return[FollowupAction(name='utter_other_service')]
+			dispatcher.utter_message(text=f"OK! I won't add anything to your {size} {pizza}. Is it correct?")
 		else:
 			if last_intent == 'inform_about_topping':
 				if topping.lower() not in ALLOWED_PIZZA_TOPPINGS:
 					dispatcher.utter_message(text=f"I'm sorry! We don't have toppings of this kind. You can add {'/'.join(ALLOWED_PIZZA_TOPPINGS)}.")
-					return[FollowupAction(name='utter_ask_topping')]
+					return[SlotSet("pizza_topping", None), FollowupAction(name='utter_ask_topping')]
 				else:
 					dispatcher.utter_message(text=f"OK! I'll add some {topping} to your {size} {pizza}. Is it correct?")
 					update_by_slot(conn=conn, table="toppings", slot_name="pizza_toppings", slot_value=topping, action="SUB", q=1)
@@ -713,15 +751,16 @@ class ActionCheckDrink(Action):
 
 		drink = tracker.slots.get("drink")
 
-		if drink == None:
-			dispatcher.utter_message(text=f"OK, no drinks, marked!")
+		#if drink == None:
+		#	dispatcher.utter_message(text=f"OK, no drinks! Is it correct?")
+		#else:
+
+		if drink.lower() not in ALLOWED_DRIKS:
+			dispatcher.utter_message(text=f"I'm sorry! We don't serve this drink. We have: {'/'.join(ALLOWED_DRIKS)}.")
+			return[SlotSet("drink", None), FollowupAction(name='utter_ask_drink')]
 		else:
-			if drink.lower() not in ALLOWED_DRIKS:
-				dispatcher.utter_message(text=f"I'm sorry! We don't serve this drink. We have: {'/'.join(ALLOWED_DRIKS)}.")
-				return[FollowupAction(name='utter_ask_drink')]
-			else:
-				dispatcher.utter_message(text=f"OK! I'll add a {drink} to your order. Is it correct?")
-				update_by_slot(conn=conn, table="drinks", slot_name="drink", slot_value=drink, action="SUB", q=1)
+			dispatcher.utter_message(text=f"OK! I'll add a {drink} to your order. Is it correct?")
+			update_by_slot(conn=conn, table="drinks", slot_name="drink", slot_value=drink, action="SUB", q=1)
 		return[]
 
 class ActionChangeDrink(Action):
@@ -801,7 +840,7 @@ class ActionChangeTopping(Action):
 		else:
 			if new_topping.lower() not in ALLOWED_PIZZA_TOPPINGS:
 				dispatcher.utter_message(text=f"I'm sorry! We don't have toppings of this kind. You can add {'/'.join(ALLOWED_PIZZA_TOPPINGS)}.")
-				return[FollowupAction(name='utter_change_topping')]
+				return[SlotSet("pizza_topping", None), FollowupAction(name='utter_ask_topping')]
 			else:
 				dispatcher.utter_message(text=f"OK! I replaced the {old_topping} with some {new_topping}.")
 				update_by_slot(conn=conn, table="toppings", slot_name="pizza_toppings", slot_value=old_topping, action="SUM", q=1)
@@ -833,35 +872,38 @@ class ActionAskTypeChange(Action):
 				drink = True
 				print(drink)
 
+		count = 0
 		for event in reversed(tracker.events):
 			if event.get("name") not in ['action_listen', None]:
-				last_action = event.get("name")
-				print(last_action)
-				if last_action == "action_check_topping":
-					dispatcher.utter_message(text=f"Ok. What do you want to change about the toppings?")
-					return[]
-				if last_action == "action_check_drink":
-					dispatcher.utter_message(text=f"Ok. What do you want to change about the drinks?")
-					return[]
-				if last_action == "utter_pizza_slots":
-					dispatcher.utter_message(text=f"Ok. What do you want to change about the pizza?")
-					return[]
-				if last_action == "action_check_modality":
-					dispatcher.utter_message(text=f"Ok. What do you want to change about the modality?")
-					return[]
-				if last_action == "action_recap_order":
-					dispatcher.utter_message(text=f"Ok. What do you want to change about your order?")
-					return[]
-				if topping == True:
-					dispatcher.utter_message(text=f"Ok. What do you want to change about the toppings?")
-					return[]
-				if drink == True:
-					dispatcher.utter_message(text=f"Ok. What do you want to change about the drinks?")
-					return[]
-				# a more general message for the case in which the system has few information
-				dispatcher.utter_message(text=f"Ok. What do you want to change about your order?")
-				# in order to get only the last event (aka action) we're going to use break
-				break
+				count += 1
+				if count == 2:
+					last_action = event.get("name")
+					print(last_action)
+					if last_action == "action_check_topping":
+						dispatcher.utter_message(text=f"What do you want to change about the toppings?")
+						return[]
+					if last_action == "action_check_drink":
+						dispatcher.utter_message(text=f"What do you want to change about the drinks?")
+						return[]
+					if last_action == "action_pizza_slots":
+						dispatcher.utter_message(text=f"What do you want to change about the pizza?")
+						return[]
+					if last_action == "action_check_modality":
+						dispatcher.utter_message(text=f"What do you want to change about the modality?")
+						return[]
+					if last_action == "action_recap_order":
+						dispatcher.utter_message(text=f"What do you want to change about your order?")
+						return[]
+					if topping == True:
+						dispatcher.utter_message(text=f"What do you want to change about the toppings?")
+						return[]
+					if drink == True:
+						dispatcher.utter_message(text=f"What do you want to change about the drinks?")
+						return[]
+					# a more general message for the case in which the system has few information
+					dispatcher.utter_message(text=f"What do you want to change about your order?")
+					# in order to get only the last event (aka action) we're going to use break
+					break
 		return[]
 
 class ActionRemoveFromOrder(Action):
@@ -883,12 +925,6 @@ class ActionRemoveFromOrder(Action):
 		new_entity = None
 		last_action = None
 		extracted_infos = tracker.latest_message['entities']
-
-		# for event in reversed(tracker.events):
-		# 	if event.get("name") not in ['action_listen', None]:
-		# 		last_action = event.get("name")
-		# 		print(last_action)
-		# 		break
 			
 
 		# if the user in the intent doesn't specify any entity, the system will ask to specify one, to avoid errors
@@ -944,6 +980,32 @@ class ActionTellMenu(Action):
 
 		return []
 
+class ActionInfoPizza(Action):
+
+	def name(self) -> Text:
+		return "action_info_pizza"
+
+	def run(self, dispatcher: CollectingDispatcher,
+			tracker: Tracker,
+			domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+		
+		dispatcher.utter_message(text=f"Here are our available pizzas. We serve {'/'.join(ALLOWED_PIZZA_TYPES)}.")
+
+		return []
+
+class ActionInfoPizzaSize(Action):
+
+	def name(self) -> Text:
+		return "action_info_pizza_size"
+
+	def run(self, dispatcher: CollectingDispatcher,
+			tracker: Tracker,
+			domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+		
+		dispatcher.utter_message(text=f"Here are our available pizza's sizes: baby/medium(m)/large(l).")
+
+		return []
+
 class ActionInfoTopping(Action):
 
 	def name(self) -> Text:
@@ -952,10 +1014,13 @@ class ActionInfoTopping(Action):
 	def run(self, dispatcher: CollectingDispatcher,
 			tracker: Tracker,
 			domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+		
 		pizza_type = tracker.slots.get("pizza_type")
 		pizza_size = tracker.slots.get("pizza_size")
+
 		if pizza_type == None or pizza_size == None:
 			dispatcher.utter_message(text="Before you can add a topping you must have chosen the type and the size of the pizza")
+
 		dispatcher.utter_message(text=f"Here are the available toppings: {'/'.join(ALLOWED_PIZZA_TOPPINGS)}.")
 
 		return []
@@ -1044,7 +1109,7 @@ class QueryToppingQuantity(Action):
 			slot_name = "pizza_toppings"
 			get_query_result = select_by_slot(conn, "toppings", slot_name, slot_value)
 		else:
-			slot_name = "pizza_ingredients"
+			slot_name = "ingredient"
 			get_query_result = select_by_slot(conn, "ingredients", slot_name, slot_value)
 		
 		#print("GET_QUERY_RESULT: ", get_query_result)
@@ -1052,7 +1117,7 @@ class QueryToppingQuantity(Action):
 		#print("slot_value: ", slot_value)
 
 
-		dispatcher.utter_message(text=f"Hi! There are {get_query_result[0]} pieces of {slot_value} left!")
+		dispatcher.utter_message(text=f"Here you go! There are {get_query_result[0]} pieces of {slot_value} left!")
 
 		return []
 	
@@ -1102,7 +1167,7 @@ class ActionDeleteOrder(Action):
 		dispatcher.utter_message(text=f"Your order has been succesfully deleted!")
 
 		#Let's restart the order process
-		return [SlotSet("pizza_type", None), SlotSet("pizza_size", None), SlotSet("pizza_topping", None), SlotSet("drink", None), FollowupAction(name='simple_pizza_form')]
+		return [SlotSet("pizza_type", None), SlotSet("pizza_size", None), SlotSet("pizza_topping", None), SlotSet("drink", None)]
 		#return ["pizza_type": None, "pizza_size": None, "pizza_topping": None, "drink": None, FollowupAction(name='simple_pizza_form')]
 
 
@@ -1125,17 +1190,19 @@ class ActionRecapOrder(Action):
 		
 		#order: pizza, topping and drink
 		if pizza != None and size != None and topping != None and drink != None:
-			dispatcher.utter_message(text=f"You have ordered a {size} {pizza} with {topping}. You have also ordered a {drink}. Is it correct?")
+			dispatcher.utter_message(text=f"Let's recap your order: you have ordered a {size} {pizza} with {topping}. You have also ordered a {drink}. Is it correct?")
 		#order: pizza and topping
 		if pizza != None and size != None and topping != None and drink == None:
-			dispatcher.utter_message(text=f"You have ordered a {size} {pizza} with {topping}. Is it correct?")
+			dispatcher.utter_message(text=f"Let's recap your order: you have ordered a {size} {pizza} with {topping}. Is it correct?")
 		#order: pizza and drink
 		if pizza != None and size != None and topping == None and drink != None:
-			dispatcher.utter_message(text=f"You have ordered a {size} {pizza}. You have also ordered a {drink}. Is it correct?")
+			dispatcher.utter_message(text=f"Let's recap your order: you have ordered a {size} {pizza}. You have also ordered a {drink}. Is it correct?")
 		#order: pizza
 		if pizza != None and size != None and topping == None and drink == None:
-			dispatcher.utter_message(text=f"You have ordered a {size} {pizza}. Is it correct?")
-
+			dispatcher.utter_message(text=f"Let's recap your order: you have ordered a {size} {pizza}. Is it correct?")
+		#order: nothing -> end conversation
+		if pizza == None and size == None and topping == None and drink == None:
+			return[FollowupAction(name='utter_next_time')]
 		return []
 
 class ActionOrderIngredient(Action):
@@ -1149,7 +1216,7 @@ class ActionOrderIngredient(Action):
 
 		
 		#Possibile implementazione con il database: creare una table per tutti gli ordini confermati (+ con il passare del tempo l'ordine viene segnato come completato)
-		conn = create_connection("pizzeria.db")
+		#conn = create_connection("pizzeria.db")
 
 		quantity = []
 		ordered_ingredients = []
@@ -1157,42 +1224,113 @@ class ActionOrderIngredient(Action):
 		extracted_infos = tracker.latest_message['entities']
 
 		for i in extracted_infos:
-			print(i)
 			if i['entity'] == "pizza_topping":
 				if i not in ordered_ingredients:
 					ordered_ingredients.append(i['value'])
-			if i['entity'] == "pizza_ingredient":
+			if i['entity'] == "ingredient":
 				if i not in ordered_ingredients:
 					ordered_ingredients.append(i['value'])
 			if i['entity'] == "ingredient_quantity":
 				quantity.append(i['value'])
 
+		# ingredient_quantity is a string composed by the number needed and the word "pieces" divided by a space
+		# let's use split method in order to extract only the number
+		if len(quantity) != 0:
+			divided = quantity[0].split()
+			quantity_value = None
 
-		if len(quantity) > 1:
-			dispatcher.utter_message(text=f"Too much information was provided regarding the quantities to order. It is possible to provide more ingredients but, if the order is placed all together, the quantity must be the same.")
-			return[FollowupAction(name='utter_ask_ingredient')]
+			if divided[0] == "pieces":
+				quantity_value = divided[1]
+			if divided[1] == "pieces":
+				quantity_value = divided[0]
+		
+
+		# if len(quantity) > 1:
+		# 	dispatcher.utter_message(text=f"Too much information was provided regarding the quantities to order. It is possible to provide more ingredients but, if the order is placed all together, the quantity must be the same.")
+		# 	return[FollowupAction(name='utter_ask_ingredient')]
 		if len(ordered_ingredients) == 0:
 			dispatcher.utter_message(text=f"No information was provided regarding the ingredients to order!")
-			return[FollowupAction(name='utter_ask_ingredient')]
+			return[SlotSet("ingredient", None), SlotSet("ingredient_quantity", None), FollowupAction(name='utter_ask_ingredient')]
 		else:
 			ingredients = tranform_in_string(ordered_ingredients)
 			if len(quantity) != 0:
-				dispatcher.utter_message(text=f"Perfect, I will place the order for {quantity[0]} pieces of {ingredients} immediately")
-				for i in ordered_ingredients:
-					if i in ALLOWED_PIZZA_TOPPINGS:
-						update_by_slot(conn=conn, table="toppings", slot_name="pizza_toppings", slot_value=i, action="SUM", q=int(quantity[0]))
-					if i in INGREDIENTS:
-						update_by_slot(conn=conn, table="ingredients", slot_name="pizza_ingredients", slot_value=i, action="SUM", q=int(quantity[0]))
-						return[]
+				dispatcher.utter_message(text=f"Perfect, I will place the order for {quantity_value} pieces of {ingredients} immediately. Is it correct?")
+				return[SlotSet("ingredient", ordered_ingredients), SlotSet("ingredient_quantity", quantity_value)]
+				# for i in ordered_ingredients:
+				# 	if i in ALLOWED_PIZZA_TOPPINGS:
+				# 		update_by_slot(conn=conn, table="toppings", slot_name="pizza_toppings", slot_value=i, action="SUM", q=int(quantity[0]))
+				# 	if i in INGREDIENTS:
+				# 		update_by_slot(conn=conn, table="ingredients", slot_name="pizza_ingredients", slot_value=i, action="SUM", q=int(quantity[0]))
+				# 		return[]
 			else:
-				dispatcher.utter_message(text=f"Perfect, I will place the order for {REORDERING_THRESHOLD} {ingredients} immediately")
+				dispatcher.utter_message(text=f"Perfect, I will place the order for {REORDERING_THRESHOLD} {ingredients} immediately. Is it correct?")
+				return[SlotSet("ingredient", ordered_ingredients)]
+
+				# for i in ordered_ingredients:
+				# 	if i in ALLOWED_PIZZA_TOPPINGS:
+				# 		update_by_slot(conn=conn, table="toppings", slot_name="pizza_toppings", slot_value=i, action="SUM", q=REORDERING_THRESHOLD)
+				# 	if i in INGREDIENTS:
+				# 		update_by_slot(conn=conn, table="ingredients", slot_name="pizza_ingredients", slot_value=i, action="SUM", q=REORDERING_THRESHOLD)
+				# 		return[]
+			return []
+
+class ActionCheckOrderIngredient(Action):
+
+	def name(self) -> Text:
+		return "action_check_order_ingredient"
+
+	def run(self, dispatcher: CollectingDispatcher,
+			tracker: Tracker,
+			domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+		
+		#Possibile implementazione con il database: creare una table per tutti gli ordini confermati (+ con il passare del tempo l'ordine viene segnato come completato)
+		conn = create_connection("pizzeria.db")
+
+		quantity = tracker.slots.get("ingredient_quantity")
+		ordered_ingredients = tracker.slots.get("ingredient")
+		
+		last_intent = tracker.latest_message['intent'].get('name')
+
+		count = 0  # Variabile di controllo per contare gli eventi validi
+		for event in reversed(tracker.events):
+			if event.get("event") == 'action':
+				if event.get("name") not in ['action_listen', None]:
+					count += 1
+					if count == 2:  # Verifica se è il secondo evento valido
+						second_last_action = event.get("name")
+						print(second_last_action)
+						break
+
+		if last_intent == "affirm":
+			dispatcher.utter_message(text=f"Order completed!")
+			if quantity == None:
 				for i in ordered_ingredients:
 					if i in ALLOWED_PIZZA_TOPPINGS:
 						update_by_slot(conn=conn, table="toppings", slot_name="pizza_toppings", slot_value=i, action="SUM", q=REORDERING_THRESHOLD)
 					if i in INGREDIENTS:
 						update_by_slot(conn=conn, table="ingredients", slot_name="pizza_ingredients", slot_value=i, action="SUM", q=REORDERING_THRESHOLD)
-						return[]
-		return []
+						return[SlotSet("ingredient", None), SlotSet("ingredient_quantity", None)]
+					
+			elif len(quantity) != 0:
+				for i in ordered_ingredients:
+					if i in ALLOWED_PIZZA_TOPPINGS:
+						update_by_slot(conn=conn, table="toppings", slot_name="pizza_toppings", slot_value=i, action="SUM", q=int(quantity[0]))
+					if i in INGREDIENTS:
+						update_by_slot(conn=conn, table="ingredients", slot_name="pizza_ingredients", slot_value=i, action="SUM", q=int(quantity[0]))
+						return[SlotSet("ingredient", None), SlotSet("ingredient_quantity", None)]
+			else:
+				for i in ordered_ingredients:
+					if i in ALLOWED_PIZZA_TOPPINGS:
+						update_by_slot(conn=conn, table="toppings", slot_name="pizza_toppings", slot_value=i, action="SUM", q=REORDERING_THRESHOLD)
+					if i in INGREDIENTS:
+						update_by_slot(conn=conn, table="ingredients", slot_name="pizza_ingredients", slot_value=i, action="SUM", q=REORDERING_THRESHOLD)
+						return[SlotSet("ingredient", None), SlotSet("ingredient_quantity", None)]
+		if last_intent == "deny":
+			if second_last_action == "action_order_ingredient":
+				dispatcher.utter_message(text=f"Get it! Order deleted.")
+
+			return[SlotSet("ingredient", None), SlotSet("ingredient_quantity", None)]
 
 class ActionSayIngredientBelowThreshold(Action):
 

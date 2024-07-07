@@ -1,0 +1,3 @@
+- rasa run actions
+- rasa run -m models --endpoints endpoints.yml -p 5005 --credentials credentials.yml
+- ngrok http 5005
