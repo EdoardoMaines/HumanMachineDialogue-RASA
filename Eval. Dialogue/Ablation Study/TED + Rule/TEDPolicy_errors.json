@@ -1,0 +1,416 @@
+[
+  {
+    "text": "i would love a large margherita with some ham",
+    "entities": [
+      {
+        "start": 15,
+        "end": 20,
+        "value": "large",
+        "entity": "pizza_size"
+      },
+      {
+        "start": 21,
+        "end": 31,
+        "value": "margherita",
+        "entity": "pizza_type"
+      },
+      {
+        "start": 42,
+        "end": 45,
+        "value": "ham",
+        "entity": "pizza_topping"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "can I have a large margherita",
+    "entities": [
+      {
+        "start": 13,
+        "end": 18,
+        "value": "large",
+        "entity": "pizza_size"
+      },
+      {
+        "start": 19,
+        "end": 29,
+        "value": "margherita",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "one margherita please",
+    "entities": [
+      {
+        "start": 4,
+        "end": 14,
+        "value": "margherita",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i'd like a baby",
+    "entities": [
+      {
+        "start": 11,
+        "end": 15,
+        "value": "baby",
+        "entity": "pizza_size"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "can i get one large marinara?",
+    "entities": [
+      {
+        "start": 14,
+        "end": 19,
+        "value": "large",
+        "entity": "pizza_size"
+      },
+      {
+        "start": 20,
+        "end": 28,
+        "value": "marinara",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i've made a mistake, i would like to order a margherita instead",
+    "entities": [
+      {
+        "start": 45,
+        "end": 55,
+        "value": "margherita",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "a medium salami please",
+    "entities": [
+      {
+        "start": 2,
+        "end": 8,
+        "value": "medium",
+        "entity": "pizza_size"
+      },
+      {
+        "start": 9,
+        "end": 15,
+        "value": "salami",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i prefer delivery",
+    "entities": [
+      {
+        "start": 9,
+        "end": 17,
+        "value": "delivery",
+        "entity": "modality"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "the address is da vinci square",
+    "entities": [
+      {
+        "start": 15,
+        "end": 30,
+        "value": "da vinci square",
+        "entity": "address"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "my address number is 100",
+    "entities": [
+      {
+        "start": 21,
+        "end": 24,
+        "value": "100",
+        "entity": "number_address"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "you can reach me at 1234567891",
+    "entities": [
+      {
+        "start": 20,
+        "end": 30,
+        "value": "1234567891",
+        "entity": "phone"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "ring the white second floor bell",
+    "entities": [
+      {
+        "start": 9,
+        "end": 14,
+        "value": "white",
+        "entity": "doorbell"
+      },
+      {
+        "start": 15,
+        "end": 27,
+        "value": "second floor",
+        "entity": "doorbell"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i would like to get one large margherita",
+    "entities": [
+      {
+        "start": 24,
+        "end": 29,
+        "value": "large",
+        "entity": "pizza_size"
+      },
+      {
+        "start": 30,
+        "end": 40,
+        "value": "margherita",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i've changed my mind, i would like to order a veggie instead",
+    "entities": [
+      {
+        "start": 46,
+        "end": 52,
+        "value": "veggie",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i'll take ham on my pizza, please",
+    "entities": [
+      {
+        "start": 10,
+        "end": 13,
+        "value": "ham",
+        "entity": "pizza_topping"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "yes one coke please",
+    "entities": [
+      {
+        "start": 8,
+        "end": 12,
+        "value": "coke",
+        "entity": "drink"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i'd like to remove the coke from my order",
+    "entities": [
+      {
+        "start": 23,
+        "end": 27,
+        "value": "coke",
+        "entity": "drink"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "for me better takeaway",
+    "entities": [
+      {
+        "start": 14,
+        "end": 22,
+        "value": "take-away",
+        "entity": "modality"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "is it possible to bring forward by 10 minutes?",
+    "entities": [
+      {
+        "start": 35,
+        "end": 45,
+        "value": "10 minutes",
+        "entity": "min_time"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i'd like a medium veggie",
+    "entities": [
+      {
+        "start": 11,
+        "end": 17,
+        "value": "medium",
+        "entity": "pizza_size"
+      },
+      {
+        "start": 18,
+        "end": 24,
+        "value": "veggie",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i'd like to get a marinara instead of the margherita",
+    "entities": [
+      {
+        "start": 18,
+        "end": 26,
+        "value": "marinara",
+        "entity": "pizza_type"
+      },
+      {
+        "start": 42,
+        "end": 52,
+        "value": "margherita",
+        "entity": "pizza_type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i'd like to add olives to my pizza",
+    "entities": [
+      {
+        "start": 16,
+        "end": 22,
+        "value": "olives",
+        "entity": "pizza_topping"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i'd like to order a still water",
+    "entities": [
+      {
+        "start": 20,
+        "end": 31,
+        "value": "still water",
+        "entity": "drink"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "i'd like to get a peach tea instead of the still water",
+    "entities": [
+      {
+        "start": 18,
+        "end": 27,
+        "value": "peach tea",
+        "entity": "drink"
+      },
+      {
+        "start": 43,
+        "end": 54,
+        "value": "still water",
+        "entity": "drink"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "test identity",
+    "entities": [
+      {
+        "start": 0,
+        "end": 13,
+        "value": "test identity",
+        "entity": "id"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "here is my password: test password",
+    "entities": [
+      {
+        "start": 21,
+        "end": 34,
+        "value": "test password",
+        "entity": "password"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "how many pieces of mozzarella are in stock?",
+    "entities": [
+      {
+        "start": 19,
+        "end": 29,
+        "value": "mozzarella",
+        "entity": "pizza_topping"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "let's order some mozzarella",
+    "entities": [
+      {
+        "start": 17,
+        "end": 27,
+        "value": "mozzarella",
+        "entity": "pizza_topping"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "let's order 10 pieces of pizza dough",
+    "entities": [
+      {
+        "start": 12,
+        "end": 21,
+        "value": "10 pieces",
+        "entity": "ingredient_quantity"
+      },
+      {
+        "start": 25,
+        "end": 36,
+        "value": "pizza dough",
+        "entity": "ingredient"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

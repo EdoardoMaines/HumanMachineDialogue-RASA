@@ -1,0 +1,322 @@
+version: "3.1"
+stories:
+- story: order a pizza using form (specify all slot) (/home/edoardo/Scrivania/HumanMachineDialogue-RASA/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - intent: inform_about_pizza
+    entities:
+    - pizza_size: large
+    - pizza_type: margherita
+    - pizza_topping: ham
+  - slot_was_set:
+    - pizza_type: margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_topping: ham
+  - slot_was_set:
+    - pizza_type: margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_topping: ham
+  - slot_was_set:
+    - ingredient: '[ham]'
+  - action: simple_pizza_form  # predicted: action_default_fallback
+  - active_loop: simple_pizza_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+- story: User interrupts asking info about menu, orders a pizza and changes it (/home/edoardo/Scrivania/HumanMachineDialogue-RASA/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - intent: buy_pizza
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - intent: ask_for_menu
+  - action: action_tell_menu
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - slot_was_set:
+    - pizza_type: marinara
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: marinara
+  - slot_was_set:
+    - pizza_size: large
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  - intent: change_pizza
+    entities:
+    - pizza_type: margherita
+  - slot_was_set:
+    - pizza_type: margherita
+  - action: action_change_pizza
+  - slot_was_set:
+    - pizza_type: margherita
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping  # predicted: action_default_fallback
+- story: User asks infos about available toppings (/home/edoardo/Scrivania/HumanMachineDialogue-RASA/tests/test_stories.yml)
+  steps:
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping  # predicted: action_default_fallback
+  - intent: ask_info_toppings
+  - action: action_info_toppings
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping  # predicted: action_default_fallback
+- story: User orders a pizza without topping and chooses delivery modality (/home/edoardo/Scrivania/HumanMachineDialogue-RASA/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - intent: inform_about_pizza
+    entities:
+    - pizza_size: medium
+    - pizza_type: salami
+  - slot_was_set:
+    - pizza_type: salami
+  - slot_was_set:
+    - pizza_size: medium
+  - slot_was_set:
+    - pizza_type: salami
+  - slot_was_set:
+    - pizza_size: medium
+  - action: simple_pizza_form  # predicted: action_default_fallback
+  - active_loop: simple_pizza_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  - intent: affirm
+  - action: utter_confirm
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping  # predicted: action_default_fallback
+  - intent: deny
+  - action: utter_confirm
+  - action: action_check_topping
+  - intent: affirm
+  - action: utter_confirm
+  - action: utter_other_service
+  - intent: deny
+  - action: utter_confirm
+  - action: action_recap_order
+  - intent: affirm
+  - action: utter_confirm
+  - action: action_tell_bill
+  - action: utter_ask_modality
+  - intent: inform_about_modality
+    entities:
+    - modality: delivery
+  - slot_was_set:
+    - modality: delivery
+  - slot_was_set:
+    - modality: delivery
+  - action: delivery_form  # predicted: action_default_fallback
+  - active_loop: delivery_form
+  - slot_was_set:
+    - address: da vinci square
+  - slot_was_set:
+    - address: da vinci square
+  - slot_was_set:
+    - number_address: '100'
+  - slot_was_set:
+    - number_address: '100'
+  - slot_was_set:
+    - phone: '1234567891'
+  - slot_was_set:
+    - doorbell:
+      - white
+      - second floor
+  - slot_was_set:
+    - doorbell:
+      - white
+      - second floor
+  - active_loop: null
+  - action: utter_submit
+  - action: action_recap_delivery
+  - intent: affirm
+  - action: utter_confirm
+  - action: action_calc_delivery_time
+  - action: utter_next_time
+  - intent: goodbye
+  - action: utter_goodbye
+- story: User orders a pizza, changes it (user driven), then orders a drink and removes it (/home/edoardo/Scrivania/HumanMachineDialogue-RASA/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - intent: buy_pizza
+  - action: simple_pizza_form
+  - active_loop: simple_pizza_form
+  - slot_was_set:
+    - pizza_type: margherita
+  - slot_was_set:
+    - pizza_size: large
+  - slot_was_set:
+    - pizza_type: margherita
+  - slot_was_set:
+    - pizza_size: large
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  - intent: change_pizza
+    entities:
+    - pizza_type: veggie
+  - slot_was_set:
+    - pizza_type: veggie
+  - action: action_change_pizza
+  - slot_was_set:
+    - pizza_type: veggie
+  - action: action_ask_topping
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping  # predicted: action_default_fallback
+  - intent: inform_about_topping
+    entities:
+    - pizza_topping: ham
+  - slot_was_set:
+    - pizza_topping: ham
+  - slot_was_set:
+    - pizza_topping: ham
+  - slot_was_set:
+    - ingredient: '[ham]'
+  - action: action_check_topping  # predicted: action_default_fallback
+  - intent: affirm
+  - action: utter_confirm
+  - action: utter_other_service
+  - intent: inform_about_drink
+    entities:
+    - drink: coke
+  - slot_was_set:
+    - drink: coke
+  - slot_was_set:
+    - drink: coke
+  - action: action_check_drink  # predicted: action_default_fallback
+  - intent: remove_from_order
+    entities:
+    - drink: coke
+  - slot_was_set:
+    - drink: coke
+  - action: action_remove_from_order
+  - slot_was_set:
+    - drink: null
+  - action: utter_ask_drink  # predicted: action_default_fallback
+  - intent: deny
+  - action: utter_confirm
+  - action: utter_other_service
+  - intent: deny
+  - action: utter_confirm
+  - action: action_recap_order
+  - intent: affirm
+  - action: utter_confirm
+  - action: action_tell_bill
+  - action: utter_ask_modality
+  - intent: inform_about_modality
+    entities:
+    - modality: take-away
+  - slot_was_set:
+    - modality: take-away
+  - slot_was_set:
+    - modality: take-away
+  - action: action_tell_pick_time  # predicted: action_default_fallback
+  - intent: ask_specific_time
+    entities:
+    - min_time: 10 minutes
+  - slot_was_set:
+    - modality: '10'
+  - action: action_check_pick_time  # predicted: action_default_fallback
+  - action: utter_next_time  # predicted: action_default_fallback
+  - intent: goodbye
+  - action: utter_goodbye
+- story: User orders a pizza, changes it (bot driven), then orders a drink and changes it too (bot driven) (/home/edoardo/Scrivania/HumanMachineDialogue-RASA/tests/test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_info_about_pizzeria
+  - action: utter_greet
+  - intent: inform_about_pizza
+    entities:
+    - pizza_size: medium
+    - pizza_type: veggie
+  - slot_was_set:
+    - pizza_type: veggie
+  - slot_was_set:
+    - pizza_size: medium
+  - slot_was_set:
+    - pizza_type: veggie
+  - slot_was_set:
+    - pizza_size: medium
+  - action: simple_pizza_form  # predicted: action_default_fallback
+  - active_loop: simple_pizza_form
+  - active_loop: null
+  - action: utter_submit
+  - action: action_pizza_slots
+  - intent: deny
+  - action: utter_confirm
+  - action: action_ask_type_change
+  - intent: change_pizza
+    entities:
+    - pizza_type: marinara
+    - pizza_type: margherita
+  - slot_was_set:
+    - pizza_type: margherita
+  - action: action_change_pizza
+  - slot_was_set:
+    - pizza_type: marinara
+  - action: action_ask_topping  # predicted: action_default_fallback
+  - slot_was_set:
+    - pizza_topping: null
+  - action: utter_ask_topping  # predicted: action_default_fallback
+  - intent: inform_about_topping
+    entities:
+    - pizza_topping: olives
+  - slot_was_set:
+    - pizza_topping: olives
+  - slot_was_set:
+    - pizza_topping: olives
+  - slot_was_set:
+    - ingredient: '[olives]'
+  - action: action_check_topping  # predicted: action_default_fallback
+  - intent: affirm
+  - action: utter_confirm
+  - action: utter_other_service
+  - intent: inform_about_drink
+    entities:
+    - drink: still water
+  - slot_was_set:
+    - drink: still water
+  - slot_was_set:
+    - drink: still water
+  - action: action_check_drink  # predicted: action_default_fallback
+  - intent: deny
+  - action: utter_confirm
+  - action: action_ask_type_change
+  - intent: change_drink
+    entities:
+    - drink: peach tea
+    - drink: still water
+  - slot_was_set:
+    - drink: still water
+  - action: action_change_drink  # predicted: action_default_fallback
+  - slot_was_set:
+    - drink: peach tea
+  - action: utter_other_service  # predicted: action_default_fallback
+  - intent: deny
+  - action: utter_confirm
+  - action: action_recap_order
+  - intent: affirm
+  - action: utter_confirm
+  - action: action_tell_bill
+  - action: utter_ask_modality
