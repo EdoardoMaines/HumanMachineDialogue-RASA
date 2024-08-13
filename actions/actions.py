@@ -501,7 +501,6 @@ class ActionCheckPickTime(Action):
 
 
 		exact_time = tracker.slots.get("complete_time")
-		print(exact_time)
 		if exact_time is not None:
 			exact_time = self.convert_to_words(exact_time)
 			exact_time = self.normalize_time(exact_time, word_to_num)
@@ -510,7 +509,6 @@ class ActionCheckPickTime(Action):
 
 		order_time = tracker.slots.get("order_time")
 		ready_time = tracker.slots.get("ready_time")
-		print(ready_time, "ciaoooooo")
 		if order_time != None and ready_time != None:
 			order_time = datetime.strptime(order_time, "%H:%M")
 			ready_time = datetime.strptime(ready_time, "%H:%M")
@@ -539,9 +537,6 @@ class ActionCheckPickTime(Action):
 			return [SlotSet("complete_time", exact_time)]
 
 		if asked_minutes != None:
-			print("!!!")
-			print(ready_time)
-			print(asked_minutes)
 			asked_time = ready_time - timedelta(minutes=int(asked_minutes))
 			if asked_time <= ready_time:
 				diff = ready_time - asked_time
