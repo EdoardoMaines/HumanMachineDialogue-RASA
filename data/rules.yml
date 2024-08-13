@@ -50,7 +50,7 @@ rules:
   - action: utter_ask_modality
   - intent: inform_about_modality
   wait_for_user_input: false
-#  - action: action_check_modality
+
  
 - rule: Submit Delivery Form
   condition:
@@ -95,13 +95,6 @@ rules:
   - action: action_deactivate_loop
   - action: action_reset_all_slots
   - action: utter_order
-  
-#- rule: user changes the delivery (second version)
-#  steps:
-#  - action: action_recap_delivery
-#  - intent: deny
-#  - action: utter_confirm
-#  - action: action_ask_type_change
 
 - rule: user confirms the pizza
   steps:
@@ -140,14 +133,6 @@ rules:
   - intent: deny
   - action: utter_confirm
   - action: action_ask_type_change
-  
-  
-#- rule: user changes pick time (second version)
-#  steps:
-#  - action: action_tell_pick_time
-#  - intent: deny
-#  - action: utter_confirm
-#  - action: action_ask_type_change
 
 - rule: user changes the pizza after form (user driven)
   condition:
@@ -193,10 +178,8 @@ rules:
   condition:
   - active_loop: simple_pizza_form
   steps:
-  #the case of an intent "bot_challenge"
   - intent: bot_challenge
   - action: utter_iamabot
-  #return to form
   - action: simple_pizza_form
   - active_loop: simple_pizza_form
 
@@ -517,7 +500,6 @@ rules:
   - action: utter_ask_drink
   - intent: inform_about_drink
   - action: action_check_drink
-  # wainting for intent (yes/no)
   
 - rule: User doesn't want a drink
   condition:
@@ -630,7 +612,6 @@ rules:
   - intent: remove_from_order
   - action: action_remove_from_order
   - action: utter_ask_drink
-  #wait_for_user_input: false
   
 - rule: User wants to remove the topping from the order
   condition:
@@ -641,7 +622,6 @@ rules:
   - intent: remove_from_order
   - action: action_remove_from_order
   - action: utter_ask_topping
-  #wait_for_user_input: false
 
 - rule: Bot asks for topping
   condition:
@@ -696,15 +676,17 @@ rules:
   steps:
   - action: action_tell_bill
   - action: utter_ask_modality
-  #- intent: inform_about_modality
-  #- action: action_check_modality
-  #wait_for_user_input: false
   
 - rule: Ask the user to rephrase whenever they send a message with low NLU confidence
   steps:
   - intent: nlu_fallback
   - action: utter_please_rephrase
   
+- rule: Give the possibility to user to rephrase the intent
+  steps:
+  - action: utter_please_rephrase
+  wait_for_user_input: true 
+ 
 - rule: out-of-scope
   steps:
   - intent: out_of_scope

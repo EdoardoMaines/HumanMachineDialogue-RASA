@@ -29,9 +29,7 @@ stories:
   - intent: inform_about_modality
   - slot_was_set:
     - modality: take-away
-  # il cliente sceglie "Take-away"
   - action: action_tell_pick_time
-  # domanda per confermare l'orario
   - checkpoint: user_chooses_takeaway
 
 - story: User chooses delivery
@@ -40,7 +38,6 @@ stories:
   - intent: inform_about_modality
   - slot_was_set:
     - modality: delivery
-  # il cliente sceglie "Delivery" -> delivery form
   - action: delivery_form
   - active_loop: delivery_form
   - slot_was_set:
@@ -54,33 +51,6 @@ stories:
   - action: utter_submit
   - checkpoint: user_chooses_delivery
 
-#- story: User orders a pizza via pizza form
-#  steps:
-#  - intent: greet
-#  - action: utter_info_about_pizzeria
-#  - action: utter_greet
-#  - intent: buy_pizza
-#  - action: simple_pizza_form
-#  - active_loop: simple_pizza_form
-#  - slot_was_set:
-#    - requested_slot: pizza_type
-#  - action: utter_ask_pizza_type
-#  - intent: inform_about_pizza
-#  - slot_was_set:
-#    - pizza_type
-  #- action: simple_pizza_form
-#  - slot_was_set:
-#    - requested_slot: pizza_size
-#  - action: utter_ask_pizza_size
-#  - intent: inform_about_pizza
-#  - slot_was_set:
-#    - pizza_size
-#  - slot_was_set:
-#    - requested_slot: null
-#  - active_loop: null
-#  - action: utter_submit
-#  - action: action_pizza_slots
-
 - story: User asks info about available pizzas and pizza's sizes
   steps:
   - action: simple_pizza_form
@@ -89,7 +59,6 @@ stories:
     - requested_slot: pizza_type
   - slot_was_set:
     - requested_slot: pizza_size
-  # ask info about pizzas
   - intent: ask_info_pizza
   - action: action_info_pizza
   - action: simple_pizza_form
@@ -98,7 +67,6 @@ stories:
     - requested_slot: pizza_type
   - slot_was_set:
     - requested_slot: pizza_size
-  # Ask info about pizza's sizes
   - intent: ask_info_pizza_size
   - action: action_info_pizza_size
   - active_loop: simple_pizza_form
@@ -179,28 +147,20 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
-  # topping non specificato nell'ordine (nel form) -- > ask for topping
   - action: utter_ask_topping
-  #- or:
   - intent: inform_about_topping
   - slot_was_set:
       - pizza_topping
-  #  - intent: deny
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
-  # il cliente ordina anche una bevanda
   - intent: inform_about_drink
   - slot_was_set:
     - drink
   - action: action_check_drink
-  # domanda per confermare il drink
   - intent: deny
   - action: utter_confirm
   - action: action_ask_type_change
@@ -211,22 +171,15 @@ stories:
   - action: utter_other_service
   - intent: deny
   - action: utter_confirm
-  # il cliente non vuole più effettuare nessun tipo di ordine
   - action: action_recap_order
-  # domanda per confermare l'ordine
   - intent: affirm
   - action: utter_confirm
   - action: action_tell_bill
   - action: utter_ask_modality
   - intent: inform_about_modality
-#    entities:
-#      - modality: "take-away"
-#  - action: action_check_modality
   - slot_was_set:
     - modality: take-away
-  # il cliente sceglie "Take-away"
   - action: action_tell_pick_time
-  # domanda per confermare l'orario
   - intent: affirm
   - action: utter_confirm
   - slot_was_set:
@@ -267,18 +220,13 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
   - action: utter_ask_topping
-  #- or:
   - intent: inform_about_topping
   - slot_was_set:
       - pizza_topping
-   # - intent: deny
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
@@ -319,53 +267,34 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
-  # topping non specificato nell'ordine (nel form) -- > ask for topping
   - action: utter_ask_topping
-  #- or:
   - intent: inform_about_topping
   - slot_was_set:
       - pizza_topping
-   # - intent: deny
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
-  # il cliente ordina anche una bevanda
   - intent: inform_about_drink
   - slot_was_set:
     - drink
   - action: action_check_drink
-  # domanda per confermare il drink
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
   - intent: deny
   - action: utter_confirm
-  # il cliente non vuole più effettuare nessun tipo di ordine
   - action: action_recap_order
-  # domanda per confermare l'ordine
   - intent: affirm
   - action: utter_confirm
   - action: action_tell_bill
   - action: utter_ask_modality
-#  - slot_was_set:
-#    - requested_slot: modality
   - intent: inform_about_modality
-#    entities:
-#      - modality: "take-away"
-#  - action: action_check_modality
-#  - slot_was_set:
-#    - requested_slot: modality
   - slot_was_set:
     - modality: take-away
-  # il cliente sceglie "Take-away"
   - action: action_tell_pick_time
-  # domanda per confermare l'orario
   - intent: affirm
   - action: utter_confirm
   - slot_was_set:
@@ -382,46 +311,30 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping
-  # topping specificato nell'ordine (nel form) -- > check topping
   - action: action_check_topping
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
-  # il cliente ordina anche una bevanda
   - intent: inform_about_drink
   - slot_was_set:
     - drink
   - action: action_check_drink
-  # domanda per confermare il drink
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
   - intent: deny
   - action: utter_confirm
-  # il cliente non vuole più effettuare nessun tipo di ordine
   - action: action_recap_order
-  # domanda per confermare l'ordine
   - intent: affirm
   - action: utter_confirm
   - action: action_tell_bill
   - action: utter_ask_modality
-#  - slot_was_set:
-#    - requested_slot: modality
   - intent: inform_about_modality
-#    entities:
-#      - modality: "take-away"
-#  - action: action_check_modality
-#  - slot_was_set:
-#    - requested_slot: modality
   - slot_was_set:
     - modality: take-away
-  # il cliente sceglie "Take-away"
   - action: action_tell_pick_time
-  # domanda per confermare l'orario
   - intent: affirm
   - action: utter_confirm
   - slot_was_set:
@@ -438,27 +351,19 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
-  # topping non specificato nell'ordine (nel form) -- > ask for topping
   - action: utter_ask_topping
-  #- or:
-  #  - intent: inform_about_topping
   - intent: deny
   - action: utter_confirm
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
-  # il cliente ordina anche una bevanda
   - intent: inform_about_drink
   - slot_was_set:
     - drink
   - action: action_check_drink
-  # domanda per confermare il drink
   - intent: deny
   - action: utter_confirm
   - action: action_ask_type_change
@@ -469,24 +374,14 @@ stories:
   - action: utter_other_service
   - intent: deny
   - action: utter_confirm
-  # il cliente non vuole più effettuare nessun tipo di ordine
   - action: action_recap_order
-  # domanda per confermare l'ordine
   - intent: affirm
   - action: utter_confirm
   - action: action_tell_bill
   - action: utter_ask_modality
-#  - slot_was_set:
-#    - requested_slot: modality
   - intent: inform_about_modality
-#    entities:
-#      - modality: "delivery"
-#  - action: action_check_modality
-#  - slot_was_set:
-#    - requested_slot: modality
   - slot_was_set:
     - modality: delivery
-  # il cliente sceglie "Delivery" -> delivery form
   - action: delivery_form
   - active_loop: delivery_form
   - slot_was_set:
@@ -499,7 +394,23 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: action_recap_delivery
-  # Domanda per confermare i dati per la consegna
+  - intent: deny
+  - action: utter_confirm
+  - action: action_ask_type_change
+  - intent: change_delivery
+  - action: action_change_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: address
+    - requested_slot: number_address
+    - requested_slot: phone
+    - requested_slot: doorbell
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit
+  - action: action_recap_delivery
   - intent: affirm
   - action: utter_confirm
   - action: action_calc_delivery_time
@@ -513,44 +424,29 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping
-  # topping specificato nell'ordine (nel form) -- > check topping
   - action: action_check_topping
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
-  # il cliente ordina anche una bevanda
   - intent: inform_about_drink
   - slot_was_set:
     - drink
   - action: action_check_drink
-  # domanda per confermare il drink
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
   - intent: deny
   - action: utter_confirm
-  # il cliente non vuole più effettuare nessun tipo di ordine
   - action: action_recap_order
-  # domanda per confermare l'ordine
   - intent: affirm
   - action: utter_confirm
   - action: action_tell_bill
   - action: utter_ask_modality
-#  - slot_was_set:
-#    - requested_slot: modality
   - intent: inform_about_modality
-#    entities:
-#      - modality: "delivery"
-#  - action: action_check_modality
-#  - slot_was_set:
-#    - requested_slot: modality
   - slot_was_set:
     - modality: delivery
-  # il cliente sceglie "Delivery" -> delivery form
   - action: delivery_form
   - active_loop: delivery_form
   - slot_was_set:
@@ -563,7 +459,6 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: action_recap_delivery
-  # Domanda per confermare i dati per la consegna
   - intent: affirm
   - action: utter_confirm
   - action: action_calc_delivery_time
@@ -577,42 +472,25 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
-  # topping non specificato nell'ordine (nel form) -- > ask for topping
   - action: utter_ask_topping
-  #- intent: deny
-  #- or:
-   # - intent: inform_about_topping
   - intent: deny
   - action: utter_confirm
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
   - intent: deny
   - action: utter_confirm
-  # il cliente non vuole più effettuare nessun tipo di ordine
   - action: action_recap_order
-  # domanda per confermare l'ordine
   - intent: affirm
   - action: utter_confirm
   - action: action_tell_bill
   - action: utter_ask_modality
-#  - slot_was_set:
-#    - requested_slot: modality
   - intent: inform_about_modality
-#    entities:
-#      - modality: "delivery"
-#  - action: action_check_modality
-#  - slot_was_set:
-#    - requested_slot: modality
   - slot_was_set:
     - modality: delivery
-  # il cliente sceglie "Delivery" -> delivery form
   - action: delivery_form
   - active_loop: delivery_form
   - slot_was_set:
@@ -625,23 +503,37 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: action_recap_delivery
-  # Domanda per confermare i dati per la consegna
+  - intent: deny
+  - action: utter_confirm
+  - action: action_ask_type_change
+  - intent: change_delivery
+  - action: action_change_delivery
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: address
+    - requested_slot: number_address
+    - requested_slot: phone
+    - requested_slot: doorbell
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit
+  - action: action_recap_delivery
   - intent: affirm
   - action: utter_confirm
   - action: action_calc_delivery_time
   - action: utter_next_time
   - intent: goodbye
-  - action: utter_goodbye  
-
+  - action: utter_goodbye
+  
 - story: User orders a drink
   steps:
   - action: utter_other_service
-  # il cliente ordina anche una bevanda
   - intent: inform_about_drink
   - slot_was_set:
     - drink
   - action: action_check_drink
-  # domanda per confermare il drink
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
@@ -650,14 +542,11 @@ stories:
   steps:
   - slot_was_set:
     - drink: null
-  # il cliente ha ordinato una bevanda inesistente
   - action: utter_ask_drink
-  # il cliente ordina di nuovo una bevanda
   - intent: inform_about_drink
   - slot_was_set:
     - drink
   - action: action_check_drink
-  # domanda per confermare la bevanda ordinata
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
@@ -667,22 +556,17 @@ stories:
   - action: utter_other_service
   - intent: deny
   - action: utter_confirm
-  # il cliente non vuole più effettuare nessun tipo di ordine
   - action: action_recap_order
-  # domanda per confermare l'ordine
   - intent: affirm
   - action: utter_confirm
   - action: action_tell_bill
   - action: utter_ask_modality
-#  - slot_was_set:
-#    - requested_slot: modality
 
 - story: User changes the pizza ordered after the final recap
   steps:
   - action: utter_other_service
   - intent: deny
   - action: utter_confirm
-  # il cliente non vuole più effettuare nessun tipo di ordine
   - action: action_recap_order
   - intent: deny
   - action: utter_confirm
@@ -690,11 +574,8 @@ stories:
   - intent: change_pizza
   - action: action_change_pizza
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
     - pizza_topping
-  # topping specificato nell'ordine (nel form) -- > check topping
   - action: action_check_topping
   - intent: affirm
   - action: utter_confirm
@@ -705,7 +586,6 @@ stories:
   - action: utter_other_service
   - intent: deny
   - action: utter_confirm
-  # il cliente non vuole più effettuare nessun tipo di ordine
   - action: action_recap_order
   - intent: deny
   - action: utter_confirm
@@ -721,7 +601,6 @@ stories:
   - action: utter_other_service
   - intent: deny
   - action: utter_confirm
-  # il cliente non vuole più effettuare nessun tipo di ordine
   - action: action_recap_order
   - intent: deny
   - action: utter_confirm
@@ -738,28 +617,19 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
     - pizza_topping: null
   - action: utter_ask_topping
   - intent: ask_info_toppings
   - action: action_info_toppings
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
-  # topping non specificato nell'ordine (nel form) -- > ask for topping
   - action: utter_ask_topping
-  #- intent: deny
-  #- or:
   - intent: inform_about_topping
   - slot_was_set:
       - pizza_topping
-   # - intent: deny
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
@@ -767,7 +637,6 @@ stories:
 - story: User asks infos about available drinks and orders a drink
   steps:
   - action: utter_other_service
-  # il cliente chiede info sulle bevande
   - intent: ask_for_drink
   - action: action_info_drinks
   - slot_was_set:
@@ -777,7 +646,6 @@ stories:
   - slot_was_set:
     - drink
   - action: action_check_drink
-  # domanda per confermare la bevanda ordinata
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
@@ -785,7 +653,6 @@ stories:
 - story: User asks infos about available drinks but doesn't orders a drink
   steps:
   - action: utter_other_service
-  # il cliente chiede info sulle bevande
   - intent: ask_for_drink
   - action: action_info_drinks
   - slot_was_set:
@@ -808,18 +675,13 @@ stories:
   - intent: change_pizza
   - action: action_change_pizza
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
   - action: utter_ask_topping
-  #- or:
   - intent: inform_about_topping
   - slot_was_set:
       - pizza_topping
-   # - intent: deny
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
@@ -833,17 +695,12 @@ stories:
   - intent: change_pizza
   - action: action_change_pizza
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
   - action: utter_ask_topping
-  #- or:
-   # - intent: inform_about_topping
   - intent: deny
   - action: utter_confirm
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: deny
   - action: utter_confirm
   - action: action_ask_type_change
@@ -857,19 +714,13 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
-  # topping non specificato nell'ordine (nel form) -- > ask for topping
   - action: utter_ask_topping
-  #- or:
   - intent: inform_about_topping
   - slot_was_set:
       - pizza_topping
-   # - intent: deny
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: change_topping
   - action: action_change_topping
   - action: utter_other_service
@@ -879,21 +730,13 @@ stories:
   - checkpoint: user_orders_pizza
   - intent: affirm
   - action: utter_confirm
-  #- slot_was_set:
-  #  - pizza_topping: null
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
-  # topping non specificato nell'ordine (nel form) -- > ask for topping
   - action: utter_ask_topping
-  #- or:
- #   - intent: inform_about_topping
   - intent: deny
   - action: utter_confirm
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: deny
   - action: utter_confirm
   - action: action_ask_type_change
@@ -907,13 +750,9 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping
-  # topping specificato nell'ordine (nel form) -- > check topping
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: change_topping
   - action: action_change_topping
   - action: utter_other_service
@@ -924,13 +763,9 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping
-  # topping specificato nell'ordine (nel form) -- > check topping
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: deny
   - action: utter_confirm
   - action: action_ask_type_change
@@ -943,30 +778,18 @@ stories:
   - checkpoint: user_orders_pizza
   - intent: affirm
   - action: utter_confirm
-  #- slot_was_set:
-  #  - pizza_topping: null
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
-  # topping non specificato nell'ordine (nel form) -- > ask for topping
   - action: utter_ask_topping
- # - or:
   - intent: inform_about_topping
   - slot_was_set:
       - pizza_topping
-  #  - intent: deny
   - action: action_check_topping
-  # cliente fornisce topping sbagliato, richiesta la domanda
-  #- action: utter_ask_topping
-  #- or:
   - intent: inform_about_topping
   - slot_was_set:
       - pizza_topping
- #   - intent: deny
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
@@ -974,12 +797,10 @@ stories:
 - story: User changes drink (user driven)
   steps:
   - action: utter_other_service
-  # il cliente ordina anche una bevanda
   - intent: inform_about_drink
   - slot_was_set:
     - drink
   - action: action_check_drink
-  # domanda per confermare il drink
   - intent: change_drink
   - action: action_change_drink
   - slot_was_set:
@@ -989,12 +810,10 @@ stories:
 - story: User changes drink (bot driven)
   steps:
   - action: utter_other_service
-  # il cliente ordina anche una bevanda
   - intent: inform_about_drink
   - slot_was_set:
       - drink
   - action: action_check_drink
-  # domanda per confermare il drink
   - intent: deny
   - action: utter_confirm
   - action: action_ask_type_change
@@ -1006,7 +825,6 @@ stories:
 
 - story: User changes drink but fails
   steps:
-  # cliente richiede un drink inesistente
   - slot_was_set:
     - drink: null
   - action: utter_ask_drink
@@ -1014,7 +832,6 @@ stories:
   - slot_was_set:
     - drink
   - action: action_check_drink
-  # domanda per confermare il drink
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
@@ -1022,13 +839,6 @@ stories:
 - story: User chooses take-away
   steps:
   - checkpoint: user_chooses_takeaway
-#  - slot_was_set:
-#    - requested_slot: modality
-#  - slot_was_set:
-#    - modality: "take-away"
-  # il cliente sceglie "Take-away"
-#  - action: action_tell_pick_time
-  # domanda per confermare l'orario
   - intent: affirm
   - action: utter_confirm
   - slot_was_set:
@@ -1042,29 +852,6 @@ stories:
 - story: User chooses delivery
   steps:
   - checkpoint: user_chooses_delivery
-#  - action: utter_ask_modality
-#  - slot_was_set:
-#    - requested_slot: modality
-#  - intent: inform_about_modality
-#    entities:
-#      - modality: "delivery"
-#  - action: action_check_modality
-#  - slot_was_set:
-#    - requested_slot: modality
-#  - slot_was_set:
-#    - modality: "delivery"
-  # il cliente sceglie "Delivery" -> delivery form
-#  - action: delivery_form
-#  - active_loop: delivery_form
-#  - slot_was_set:
-#    - requested_slot: address
-#    - requested_slot: number_address
-#    - requested_slot: phone
-#    - requested_slot: doorbell
-#  - slot_was_set:
-#    - requested_slot: null
-#  - active_loop: null
-#  - action: utter_submit
   - action: action_recap_delivery
   - intent: affirm
   - action: utter_confirm
@@ -1115,20 +902,6 @@ stories:
 - story: User changes pick-up time (user driven)
   steps:
   - checkpoint: user_chooses_takeaway
-#  - action: utter_ask_modality
-#  - slot_was_set:
-#    - requested_slot: modality
-#  - intent: inform_about_modality
-#    entities:
-#      - modality: "take-away"
-#  - action: action_check_modality
-#  - slot_was_set:
-#    - requested_slot: modality
-#  - slot_was_set:
-#    - modality: "take-away"
-  # il cliente sceglie "Take-away"
-#  - action: action_tell_pick_time
-  # domanda per confermare l'orario
   - intent: ask_specific_time
   - action: action_check_pick_time
   - action: utter_next_time
@@ -1138,20 +911,6 @@ stories:
 - story: User changes pick-up time (bot driven)
   steps:
   - checkpoint: user_chooses_takeaway
-#  - action: utter_ask_modality
-#  - slot_was_set:
-#    - requested_slot: modality
-#  - intent: inform_about_modality
-#    entities:
-#      - modality: "take-away"
-#  - action: action_check_modality
-#  - slot_was_set:
-#    - requested_slot: modality
-#  - slot_was_set:
-#    - modality: "take-away"
-  # il cliente sceglie "Take-away"
-#  - action: action_tell_pick_time
-  # domanda per confermare l'orario
   - intent: deny
   - action: utter_confirm
   - action: action_ask_type_change
@@ -1164,31 +923,7 @@ stories:
 - story: User changes delivery info
   steps:
   - checkpoint: user_chooses_delivery
-#  - action: utter_ask_modality
-#  - slot_was_set:
-#    - requested_slot: modality
-#  - intent: inform_about_modality
-#    entities:
-#      - modality: "delivery"
-#  - action: action_check_modality
-#  - slot_was_set:
-#    - requested_slot: modality
-#  - slot_was_set:
-#    - modality: "delivery"
-  # il cliente sceglie "Delivery" -> delivery form
-#  - action: delivery_form
-#  - active_loop: delivery_form
-#  - slot_was_set:
-#    - requested_slot: address
-#    - requested_slot: number_address
-#    - requested_slot: phone
-#    - requested_slot: doorbell
-#  - slot_was_set:
-#    - requested_slot: null
-#  - active_loop: null
-#  - action: utter_submit
   - action: action_recap_delivery
-  # Domanda per confermare i dati per la consegna
   - intent: change_delivery
   - action: action_change_delivery
   - action: delivery_form
@@ -1203,7 +938,6 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: action_recap_delivery
-  # Domanda per confermare i dati per la consegna
   - intent: affirm
   - action: utter_confirm
   - action: action_calc_delivery_time
@@ -1216,32 +950,22 @@ stories:
   - checkpoint: user_orders_pizza
   - intent: affirm
   - action: utter_confirm
-  #- slot_was_set:
-  #  - pizza_topping: null
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
-  # topping non specificato nell'ordine (nel form) -- > ask for topping
   - action: utter_ask_topping
-  #- or:
   - intent: inform_about_topping
   - slot_was_set:
       - pizza_topping
-  #- intent: deny
   - action: action_check_topping
   - intent: remove_from_order
   - action: action_remove_from_order
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
   - action: utter_ask_topping
   - intent: deny
   - action: utter_confirm
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
@@ -1252,23 +976,17 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping
-  # topping specificato nell'ordine (nel form) -- > check topping
   - action: action_check_topping
   - intent: remove_from_order
   - action: action_remove_from_order
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping: null
   - action: utter_ask_topping
   - intent: deny
   - action: utter_confirm
   - action: action_check_topping
-  # domanda per confermare l'aggiunta
   - intent: affirm
   - action: utter_confirm
   - action: utter_other_service
@@ -1295,11 +1013,8 @@ stories:
   - intent: affirm
   - action: utter_confirm
   - action: action_ask_topping
-#  - slot_was_set:
-#    - requested_slot: pizza_topping
   - slot_was_set:
       - pizza_topping
-  # topping specificato nell'ordine (nel form) -- > check topping
   - action: action_check_topping
   - intent: affirm
   - action: utter_confirm
@@ -1589,7 +1304,7 @@ stories:
   - action: action_order_ingredients_below_threshold
   - action: utter_ask_service
   
-- story: Employee asks ingredients below ordering threshold but doen't order them
+- story: Employee asks ingredients below ordering threshold but doesn't order them
   steps:
   - checkpoint: employee_login
   - action: utter_ask_service

@@ -85,30 +85,28 @@ nlu:
     - have a good one
     - till next time
     - peace out
-    - I'm out
-    - I gotta go
+    - i'm out
+    - i gotta go
     - have a great day
     - have a good day
     - have a good night
     - talk to you later
-    - I'm off
+    - i'm off
     - gotta run
     - catch you soon
-    - I'll be going now
+    - i'll be going now
     - until we meet again
     - later dude
-    - take it easy
     - see you in a bit
     - see you next time
     - so long, farewell
-    - have a good one
     - bye for now
     - I’ll catch you later
     - it was nice seeing you
     - nice talking to you
     - gotta head out
     - later gator
-    - I'm outta here
+    - i'm outta here
     - farewell my friend
     - until later
 - intent: affirm
@@ -149,19 +147,19 @@ nlu:
     - positively
     - without a doubt
     - no doubt
-    - I agree
-    - I think so
-    - I believe so
+    - i agree
+    - i think so
+    - i believe so
     - that's correct
     - it's true
     - yes indeed
     - yup
-    - I do
-    - I will
-    - I can
+    - i do
+    - i will
+    - i can
     - most certainly
     - precisely
-    - I affirm
+    - i affirm
     - sounds good to me
     - ok
     - okay sure
@@ -180,9 +178,9 @@ nlu:
     - no sir
     - no ma'am
     - not at all
-    - I disagree
-    - I don't agree
-    - I don't believe so
+    - i disagree
+    - i don't agree
+    - i don't believe so
     - definitely not
     - not a chance
     - out of the question
@@ -197,32 +195,59 @@ nlu:
     - nix
     - not for me
     - no, thank you
-    - I can't
-    - I won't
-    - I'm afraid not
+    - i can't
+    - i won't
+    - i'm afraid not
     - unlikely
     - that's not right
     - that doesn't work
     - that's incorrect
     - no, I'm good
-    - I'm not interested
+    - i'm not interested
     - sorry, but no
     - unfortunately not
-    - I'm not sure about that
-    - I don't want to
+    - i'm not sure about that
+    - i don't want to
     - that's not true
-    - I'm not in agreement
-    - I don't think that will work
+    - i'm not in agreement
+    - i don't think that will work
     - that's not what I want
-    - I'm going to pass
+    - i'm going to pass
     - that's not going to happen
+    - no that's all
+    - that's all
 - intent: bot_challenge
   examples: |
     - are you a bot?
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
-    - Sorry, are you a bot or a person?
+    - sorry, are you a bot or a person?
+    - is this a bot?
+    - are you a real person or a bot?
+    - am I chatting with a bot?
+    - are you a machine or a human?
+    - who am I talking to, a bot or a person?
+    - are you a real person or just a bot?
+    - is this conversation with a bot?
+    - are you a human or an automated system?
+    - is there a person on the other end?
+    - am I interacting with a bot right now?
+    - can you confirm if you're a bot?
+    - are you a human being or a bot?
+    - is this interaction with a bot?
+    - are you a virtual assistant or a person?
+    - are you real or programmed?
+    - am I speaking with a bot or a real person?
+    - is this an AI or a human?
+    - are you a chatbot or a human?
+    - am I talking to a real person or a bot?
+    - is there a human behind this conversation?
+    - can you tell me if you're a bot?
+    - is this communication with a bot or a person?
+    - am I communicating with a machine or a human?
+    - are you an actual person or an AI?
+    - is this interaction automated or human?
 - intent: buy_pizza
   examples: |
     - i'd like to buy a pizza
@@ -233,93 +258,93 @@ nlu:
     - i want to order a pizza
     - i'd like to order a pizza
     - can i order a pizza
-    - I want to buy a pizza
-    - I want to order a pizza
-    - I'd like to order a pizza
+    - i want to buy a pizza
+    - i want to order a pizza
+    - i'd like to order a pizza
     - can I get a pizza
-    - I need a pizza
-    - I would like a pizza
-    - I’d like to have a pizza
-    - I’m craving pizza
+    - i need a pizza
+    - i would like a pizza
+    - i’m craving pizza
     - could I buy a pizza
     - can I have a pizza
-    - I want pizza
-    - I’d like pizza
-    - I'd like to get a pizza
+    - i want pizza
+    - i’d like pizza
+    - i'd like to get a pizza
     - can you get me a pizza
-    - I need to order a pizza
+    - i need to order a pizza
     - may I buy a pizza
     - may I order a pizza
-    - I'd love a pizza
-    - I'd like to place an order for a pizza
-    - I'm looking to buy a pizza
-    - I'm looking to order a pizza
-    - I'd like to purchase a pizza
-    - I want to get a pizza
+    - i'd love a pizza
+    - i'd like to place an order for a pizza
+    - i'm looking to buy a pizza
+    - i'm looking to order a pizza
+    - i'd like to purchase a pizza
+    - i want to get a pizza
     - please get me a pizza
     - can you bring me a pizza
     - can you deliver a pizza to me
     - pizza please
     - order a pizza for me
     - can I purchase a pizza
-    - I'm hungry for pizza
+    - i'm hungry for pizza
     - how do I buy a pizza
-    - I’d like a pizza to go
-    - I’d like to place a pizza order
+    - i’d like a pizza to go
+    - i’d like to place a pizza order
     - can I place a pizza order
     - is it possible to buy a pizza
     - can I request a pizza
     - can you make me a pizza
 - intent: inform_about_pizza
   examples: |
+    - one [margherita](pizza_type)
+    - one [marinara](pizza_type)
+    - one [veggie](pizza_type)
+    - one [salami](pizza_type)
+    - one [baby](pizza_size) [margherita](pizza_type)
+    - one [small](pizza_size) [marinara](pizza_type)
+    - one [medium](pizza_size) [veggie](pizza_type)
+    - one [large](pizza_size) [salami](pizza_type)
+    - one [medium](pizza_size) [veggie](pizza_type) with extra [mozzarella](pizza_topping)
+    - one [large](pizza_size) [salami](pizza_type) with some [olives](pizza_topping)
     - i'd like a [large](pizza_size) pizza
-    - i want to order a [medium](pizza_size) [salami](pizza_type) pizza
+    - i want to order one [medium](pizza_size) [salami](pizza_type) pizza
     - i'd like a [baby](pizza_size) [salami](pizza_type)
-    - i'd like a [large](pizza_size) [margherita](pizza_type) with some [ham](pizza_topping)
-    - i want to order a [medium](pizza_size) [salami](pizza_type) with [ham](pizza_topping)
-    - a [baby](pizza_size) pizza
+    - i'd like a [large](pizza_size) [margherita](pizza_type) with some [mozzarella](pizza_topping)
+    - i want to order one [medium](pizza_size) [salami](pizza_type) with [olives](pizza_topping)
+    - i want to order a [large](pizza_size) [marinara](pizza_type) pizza
+    - can i get a [baby](pizza_size) [veggie](pizza_type) pizza?
+    - i'd like one [medium](pizza_size) [salami](pizza_type) pizza
+    - can i order a [baby](pizza_size) [margherita](pizza_type) pizza with extra [spicy salami](pizza_topping)?
+    - i want a [large](pizza_size) [marinara](pizza_type) pizza with [grilled vegetables](pizza_topping)
+    - could i get one [medium](pizza_size) [salami](pizza_type) pizza with extra [mozzarella](pizza_topping)?
+    - i want to order a [baby](pizza_size) [veggie](pizza_type) pizza
+    - i'd like a [medium](pizza_size) [marinara](pizza_type) pizza
+    - can i get one [large](pizza_size) [salami](pizza_type) pizza?
+    - i'd like a [baby](pizza_size) [margherita](pizza_type) pizza with extra [ham](pizza_topping)
+    - i want a [medium](pizza_size) [veggie](pizza_type) pizza with [mushrooms](pizza_topping)
+    - could i get one [large](pizza_size) [marinara](pizza_type) pizza with [olives](pizza_topping)?
+    - i'd like a [medium](pizza_size) [salami](pizza_type) pizza with [spicy salami](pizza_topping)
+    - can i order one [baby](pizza_size) [veggie](pizza_type) pizza with [grilled vegetables](pizza_topping)?
+    - i want to order a [large](pizza_size) [margherita](pizza_type) pizza with [mozzarella](pizza_topping)
+    - i'd like a [medium](pizza_size) [salami](pizza_type) pizza with [olives](pizza_topping)
+    - one [baby](pizza_size) pizza
     - a [baby](pizza_size)
-    - a [large](pizza_size)
+    - one [large](pizza_size)
     - a [large](pizza_size) pizza
     - [margherita](pizza_type)
     - [marinara](pizza_type) pizza
     - [medium](pizza_size)
-    - i want a [veggie] pizza
+    - i want one [veggie] pizza
     - give me a [large](pizza_size) [margherita](pizza_type)
     - [medium](pizza_size) pizza
     - [salami](pizza_type)
     - [veggie](pizza_type)
-    - [m](pizza_size)
-    - [l](pizza_size)
-    - [m](pizza_size) pizza
-    - [l](pizza_size) pizza
-    - i'd like to order a [large](pizza_size) [margherita](pizza_type)
+    - [medium](pizza_size)
+    - [large](pizza_size)
+    - [medium](pizza_size) pizza
+    - [large](pizza_size) pizza
     - can I have a [medium](pizza_size) [margherita](pizza_type)
-    - a [large](pizza_size) [salami](pizza_type) with [ham](pizza_topping)
-#    - i'd like a [large]{"entity": "pizza_size"} pizza
-#    - i want to order a [medium]{"entity": "pizza_size"} [salami]{"entity": "pizza_type"} pizza
-#    - i'd like a [baby]{"entity": "pizza_size"} [salami]{"entity": "pizza_type"}
-#    - i'd like a [large]{"entity": "pizza_size"} [margherita]{"entity": "pizza_type"} with some [ham]{"entity": "pizza_topping"}
-#    - i want to order a [medium]{"entity": "pizza_size"} [salami]{"entity": "pizza_type"} with [olives]{"entity": "pizza_topping"}
-#    - a [baby]{"entity": "pizza_size"} pizza
-#    - a [baby]{"entity": "pizza_size"}
-#    - a [large]{"entity": "pizza_size"}
-#    - a [large]{"entity": "pizza_size"} pizza
-#    - [margherita]{"entity": "pizza_type"}
-#    - [marinara]{"entity": "pizza_type"} pizza
-#    - [medium]{"entity": "pizza_size"}
-#    - i want a [veggie]{"entity": "pizza_type"} pizza
-#    - give me a [large](pizza_size) [margherita]{"entity": "pizza_type"}
-#    - [medium]{"entity": "pizza_size"} pizza
-#    - [salami]{"entity": "pizza_type"}
-#    - [veggie]{"entity": "pizza_type"}
-#    - [m]{"entity": "pizza_size"}
-#    - [l]{"entity": "pizza_size"}
-#    - [l]{"entity": "pizza_size"} pizza
-#    - i'd like to order a [large]{"entity": "pizza_size"} [margherita]{"entity": "pizza_type"}
-#    - can I have a [medium]{"entity": "pizza_size"} [margherita]{"entity": "pizza_type"}
-#    - a [large]{"entity": "pizza_size"} [marinara]{"entity": "pizza_type"} with [mushrooms]{"entity": "pizza_topping"}
-    
+    - one [large](pizza_size) [salami](pizza_type) with [ham](pizza_topping)
 - intent: change_pizza
   examples: |
     - i've changed my mind, i would like to order a [margherita](pizza_type) instead
@@ -340,36 +365,55 @@ nlu:
     - i'd like to get a [baby](pizza_size) [veggie](pizza_type) instead of the [medium](pizza_size) [salami](pizza_type)
     - i'd like to get a [large](pizza_size) [marinara](pizza_type) instead of the [large](pizza_size) [veggie](pizza_type)
     - i would like to replace the [margherita](pizza_type) with a [veggie](pizza_type)
-    - i would like to replace the [salami](pizza_type) with a [salami](pizza_type)
+    - i would like to replace the [salami](pizza_type) with a [marinara](pizza_type)
     - i would like to replace the [marinara](pizza_type) with a [margherita](pizza_type)
-    - i would like to replace the [large](pizza_size) [salami](pizza_type) with a [medium](pizza_size) [salami](pizza_type)
+    - i would like to replace the [large](pizza_size) [veggie](pizza_type) with a [medium](pizza_size) [salami](pizza_type)
     - i would like to replace the [baby](pizza_size) [marinara](pizza_type) with a [baby](pizza_size) [margherita](pizza_type)
     - how about swapping the [margherita](pizza_type) for a [veggie](pizza_type)
-    - can I switch the [salami](pizza_type) to a [salami](pizza_type)
+    - can I switch the [marinara](pizza_type) to a [salami](pizza_type)
     - could we change the [marinara](pizza_type) to a [margherita](pizza_type)
     - let's swap the [large](pizza_size) [salami](pizza_type) with a [medium](pizza_size) [salami](pizza_type)
     - let's change the [baby](pizza_size) [marinara](pizza_type) to a [baby](pizza_size) [margherita](pizza_type)
     - I want to replace the [margherita](pizza_type) with a [veggie](pizza_type)
-    - swap the [salami](pizza_type) with a [salami](pizza_type)
+    - swap the [salami](pizza_type) with a [marinara](pizza_type)
     - change the [marinara](pizza_type) to a [margherita](pizza_type)
     - replace the [large](pizza_size) [salami](pizza_type) with a [medium](pizza_size) [salami](pizza_type)
     - switch the [baby](pizza_size) [marinara](pizza_type) to a [baby](pizza_size) [margherita](pizza_type)
+    - how about swapping the [large](pizza_size) [veggie](pizza_type) for a [baby](pizza_size) [margherita](pizza_type)
+    - can I switch the [medium](pizza_size) [salami](pizza_type) to a [large](pizza_size) [marinara](pizza_type)
+    - could we change the [baby](pizza_size) [marinara](pizza_type) to a [medium](pizza_size) [veggie](pizza_type)
+    - let's swap the [large](pizza_size) [margherita](pizza_type) with a [baby](pizza_size) [salami](pizza_type)
+    - let's change the [medium](pizza_size) [veggie](pizza_type) to a [large](pizza_size) [margherita](pizza_type)
+    - I want to replace the [medium](pizza_size) [salami](pizza_type) with a [baby](pizza_size) [marinara](pizza_type)
+    - swap the [large](pizza_size) [salami](pizza_type) with a [baby](pizza_size) [veggie](pizza_type)
+    - change the [baby](pizza_size) [margherita](pizza_type) to a [medium](pizza_size) [salami](pizza_type)
+    - replace the [medium](pizza_size) [veggie](pizza_type) with a [large](pizza_size) [marinara](pizza_type)
+    - switch the [baby](pizza_size) [marinara](pizza_type) to a [medium](pizza_size) [salami](pizza_type)
+    - how about switching the [medium](pizza_size) [margherita](pizza_type) to a [large](pizza_size) [salami](pizza_type)
+    - can I change the [baby](pizza_size) [veggie](pizza_type) to a [medium](pizza_size) [margherita](pizza_type)
+    - could we swap the [large](pizza_size) [salami](pizza_type) with a [baby](pizza_size) [marinara](pizza_type)
+    - let's switch the [medium](pizza_size) [veggie](pizza_type) for a [large](pizza_size) [margherita](pizza_type)
+    - I'd like to replace the [baby](pizza_size) [salami](pizza_type) with a [medium](pizza_size) [veggie](pizza_type)
+    - could we change the [large](pizza_size) [marinara](pizza_type) to a [medium](pizza_size) [margherita](pizza_type)
+    - how about swapping the [baby](pizza_size) [margherita](pizza_type) with a [medium](pizza_size) [salami](pizza_type)
+    - can I change the [large](pizza_size) [salami](pizza_type) to a [baby](pizza_size) [marinara](pizza_type)
+    - let's switch the [medium](pizza_size) [veggie](pizza_type) to a [large](pizza_size) [margherita](pizza_type)
 - intent: inform_about_topping
   examples: |
     - i'd like to add [mushrooms](pizza_topping) to my pizza
-    - i'd like to add [mozzarella](pizza_topping) to my pizza
+    - i'd like to add  extra [mozzarella](pizza_topping) to my pizza
     - i'd like to add [ham](pizza_topping) to my pizza
     - i'd like to add [spicy salami](pizza_topping) to my pizza
     - i'd like to add [olives](pizza_topping) to my pizza
     - i'd like to add [grilled vegetables](pizza_topping) to my pizza
     - i'd like to add [vegetables](pizza_topping) to my pizza
-    - Yes. I'd like to add some [ham](pizza_topping)
-    - Yes. I'd like to add some [mushrooms](pizza_topping)
-    - Yes. I'd like to add some [mozzarella](pizza_topping)
-    - Yes. I'd like to add some [spicy salami](pizza_topping)
-    - Yes. I'd like to add some [olives](pizza_topping)
-    - Yes. I'd like to add some [grilled vegetables](pizza_topping)
-    - Yes. I'd like to add some [vegetables](pizza_topping)
+    - yes. I'd like to add some [ham](pizza_topping)
+    - yes. I'd like to add some [mushrooms](pizza_topping)
+    - yes. I'd like to add some [mozzarella](pizza_topping)
+    - yes. I'd like to add some [spicy salami](pizza_topping)
+    - yes. I'd like to add some [olives](pizza_topping)
+    - yes. I'd like to add some [grilled vegetables](pizza_topping)
+    - yes. I'd like to add some [vegetables](pizza_topping)
     - yeah. Some [olives](pizza_topping)
     - yeah. Some [ham](pizza_topping)
     - yeah. Some [spicy salami](pizza_topping)
@@ -398,6 +442,33 @@ nlu:
     - yes, some [mushrooms](pizza_topping)
     - yes, some [mozzarella](pizza_topping)
     - yes, some [vegetables](pizza_topping)
+    - i'd like to add [ham](pizza_topping) to my pizza
+    - add [ham](pizza_topping) to my pizza, please
+    - please include [spicy salami](pizza_topping) on my pizza
+    - yes, add [mozzarella](pizza_topping) to my pizza
+    - can you put [olives](pizza_topping) on my pizza?
+    - include [grilled vegetables](pizza_topping) on my pizza
+    - please add [vegetables](pizza_topping) to my pizza
+    - i'll take [ham](pizza_topping) on my pizza
+    - add [mushrooms](pizza_topping) to my pizza
+    - i want [spicy salami](pizza_topping) on my pizza
+    - yes, [mozzarella](pizza_topping) on my pizza
+    - [olives](pizza_topping) please.
+    - [grilled vegetables](pizza_topping) would be great
+    - [vegetables](pizza_topping) on my pizza, please
+    - add [mushrooms](pizza_topping) to my pizza, please
+    - please include [mozzarella](pizza_topping) on my pizza
+    - yes, can you put [olives](pizza_topping) on my pizza?
+    - include [grilled vegetables](pizza_topping) on my pizza, please
+    - add [vegetables](pizza_topping) to my pizza, please
+    - i'd like to add extra [mozzarella](pizza_topping) to my pizza, please
+    - add [spicy salami](pizza_topping) to my pizza, please
+    - can you put [olives](pizza_topping) on my pizza, please?
+    - i'd like [spicy salami](pizza_topping) on my pizza, please
+    - yes, [mozzarella](pizza_topping) on my pizza, please
+    - [olives](pizza_topping), please
+    - [grilled vegetables](pizza_topping), please
+    - [vegetables](pizza_topping) on my pizza, please
 - intent: change_topping
   examples: |
     - i've changed my mind, i would like to add some [ham](pizza_topping)
@@ -444,49 +515,126 @@ nlu:
     - I would like to change the topping to [mushrooms](pizza_topping)
     - switch from [ham](pizza_topping) to [spicy salami](pizza_topping)
     - replace [mozzarella](pizza_topping) with [mushrooms](pizza_topping)
+    - how about adding [mozzarella](pizza_topping) instead?
+    - let's try [olives](pizza_topping) instead of [spicy salami](pizza_topping)
+    - let's change it up with [grilled vegetables](pizza_topping) instead of [ham](pizza_topping)
+    - I've decided on [mozzarella](pizza_topping) instead of [mushrooms](pizza_topping)
+    - let's go with [spicy salami](pizza_topping) this time instead
+    - switch to [mozzarella](pizza_topping) from [grilled vegetables](pizza_topping)
+    - instead of [olives](pizza_topping), let's try [spicy salami](pizza_topping)
+    - I'll replace [mushrooms](pizza_topping) with [ham](pizza_topping)
+    - change [ham](pizza_topping) to [olives](pizza_topping), please
+    - I want to swap [mozzarella](pizza_topping) for [mushrooms](pizza_topping)
+    - instead of [spicy salami](pizza_topping), I'll switch to [grilled vegetables](pizza_topping)
+    - I'm changing to [mushrooms](pizza_topping) for my topping
+    - swap [ham](pizza_topping) for [spicy salami](pizza_topping)
+    - replace [mushrooms](pizza_topping) with [mozzarella](pizza_topping)
 - intent: inform_about_drink
   examples: |
-    - yes, i'd like a [coke](drink)
+    - one [coke](drink)
+    - one [fanta](drink)
+    - one [lemon tea](drink)
+    - one [peach tea](drink)
+    - one [still water](drink)
+    - one [sparkling water](drink)
+    - yes, one [coke](drink) please
+    - yes, one [fanta](drink) please
+    - yes, one [lemon tea](drink) please
+    - yes, i'd like one [coke](drink)
     - yeah, a [coke](drink)
     - one [still water](drink)
     - one [sparkling water](drink)
-    - yeah, a [peach iced tea](drink)
-    - one [lemon iced tea](drink)
-    - i'd like a [coke](drink)
+    - yeah, a [peach tea](drink)
+    - one [lemon tea](drink)
+    - i'd like a [fanta](drink)
     - i'd like to order a [still water](drink)
     - i'd love a [coke](drink)
-    - I'll have a [sparkling water](drink), please
-    - Can you get me a [lemon iced tea](drink), please?
-    - How about a [peach iced tea](drink)?
+    - i'll have a [sparkling water](drink), please
+    - can you get me a [lemon tea](drink), please?
+    - how about a [peach tea](drink)?
     - let's go with a [still water](drink), please
     - give me a [coke](drink), please
     - a [sparkling water](drink) sounds good
-    - i'd like to order a [lemon iced tea](drink)
-    - i'll take a [peach iced tea](drink)
+    - i'd like to order one [lemon tea](drink)
+    - i'll take a [peach tea](drink)
+    - yes, i'd like a [fanta](drink)
+    - yeah, a [still water](drink) please
+    - one [sparkling water](drink), please
+    - yeah, one [lemon tea](drink) would be great
+    - one [peach tea](drink) please
+    - i'd like a [coke](drink) please
+    - i'd like to order one [fanta](drink)
+    - i'd love a [peach tea](drink) please
+    - i'll have a [sparkling water](drink) please
+    - can you get me one [lemon tea](drink) please?
+    - how about a [still water](drink)?
+    - let's go with a [fanta](drink) please
+    - give me one [fanta](drink) please
+    - i'd like to order a [lemon tea](drink) please
+    - i'll take one [peach tea](drink) please
+    - yes, a [sparkling water](drink) please
+    - yeah, one [fanta](drink)
+    - one [peach tea](drink), please
+    - i'd like a [still water](drink)
+    - i'd love a [fanta](drink)
+    - i'll have a [coke](drink) please
+    - can you get me a [sparkling water](drink) please?
+    - let's go with a [lemon tea](drink) please
+    - give me one [still water](drink) please
+    - a [fanta](drink) sounds good
+    - i'd like to order a [coke](drink) please
+    - i'll take a [lemon tea](drink) please
+    - yeah, a [peach tea](drink) please
 - intent: change_drink
   examples: |
     - i've changed my mind, i would like to order a [coke](drink) instead
     - i've changed my mind, i would like to order a [still water](drink) instead
-    - i've changed my mind, i would like to order a [lemon iced tea](drink) instead
+    - i've changed my mind, i would like to order a [lemon tea](drink) instead
     - i'd like to change my order and get a [coke](drink) instead
-    - i'd like to change my order and get a [peach iced tea](drink) instead
+    - i'd like to change my order and get a [peach tea](drink) instead
     - i'd like to change my order and get a [sparkling water](drink) instead
-    - i'd like to get a [coke](drink) instead of the [lemon iced tea](drink)
+    - i'd like to get a [coke](drink) instead of the [lemon tea](drink)
     - i'd like to get a [fanta](drink) instead of the [still water](drink)
-    - i'd like to get a [peach iced tea](drink) instead of the [sparkling water](drink)
+    - i'd like to get a [peach tea](drink) instead of the [sparkling water](drink)
     - i'd like to get a [coke](drink) instead
     - i'd like to get a [fanta](drink) instead
-    - i'd like to get a [peach iced tea](drink) instead
-    - i would like to replace the [fanta](drink) with a [peach iced tea](drink)
+    - i'd like to get a [peach tea](drink) instead
+    - i would like to replace the [fanta](drink) with a [peach tea](drink)
     - i would like to replace the [coke](drink) with a [coke](drink)
     - i would like to replace the [still water](drink) with a [sparkling water](drink)
     - let's change it up, I want a [coke](drink) instead
-    - instead of [lemon iced tea](drink), I'd like a [peach iced tea](drink)
+    - instead of [lemon tea](drink), I'd like a [peach tea](drink)
     - swap [still water](drink) for [sparkling water](drink), please
     - switch from [coke](drink) to [fanta](drink), please
-    - I've decided on [lemon iced tea](drink) instead of [sparkling water](drink)
-    - change my order to [peach iced tea](drink), please
+    - I've decided on [lemon tea](drink) instead of [sparkling water](drink)
+    - change my order to [peach tea](drink), please
     - can you make it [coke](drink) instead?
+    - i've changed my mind, i would like to order a [sparkling water](drink) instead
+    - i've changed my mind, i would like to order a [fanta](drink) instead
+    - i'd like to change my order and get a [lemon tea](drink) instead
+    - i'd like to get a [sparkling water](drink) instead of the [coke](drink)
+    - i'd like to get a [still water](drink) instead of the [lemon tea](drink)
+    - i'd like to get a [lemon tea](drink) instead
+    - i'd like to get a [still water](drink) instead
+    - i would like to replace the [fanta](drink) with a [sparkling water](drink)
+    - i would like to replace the [coke](drink) with a [peach tea](drink)
+    - i would like to replace the [still water](drink) with a [fanta](drink)
+    - let's change it up, i want a [peach tea](drink) instead
+    - instead of [sparkling water](drink), i'd like a [coke](drink)
+    - swap [still water](drink) for [lemon tea](drink), please
+    - switch from [fanta](drink) to [sparkling water](drink), please
+    - i've decided on [coke](drink) instead of [peach tea](drink)
+    - change my order to [lemon tea](drink), please
+    - can you make it [sparkling water](drink) instead?
+    - i'd like to get a [lemon tea](drink) instead of the [still water](drink)
+    - i would like to replace the [coke](drink) with a [sparkling water](drink)
+    - i would like to replace the [fanta](drink) with a [lemon tea](drink)
+    - let's change it up, i want a [sparkling water](drink) instead
+    - instead of [lemon tea](drink), i'd like a [coke](drink)
+    - swap [sparkling water](drink) for [fanta](drink), please
+    - switch from [peach tea](drink) to [lemon tea](drink), please
+    - i've decided on [still water](drink) instead of [coke](drink)
+    - can you make it [lemon tea](drink) instead?
 - intent: ask_for_drink
   examples: |
     - do you serve any drinks?
@@ -500,6 +648,43 @@ nlu:
     - could you please inform me about the drinks available?
     - could you let me know what drinks are on the menu?
     - do you have a selection of drinks?
+    - are drinks available here?
+    - are there any drinks I can order?
+    - can you show me the drink options?
+    - could you provide details on the drinks offered?
+    - what beverages do you serve?
+    - can you describe your drink selection?
+    - do you offer any drinks to choose from?
+    - could you list the available beverages?
+    - may I see your drink choices?
+    - what are the drink choices here?
+    - what drinks do you have available?
+    - can you provide a list of drinks?
+    - what beverages can I order?
+    - tell me about your drink selection
+    - do you have any drink options?
+    - what kinds of beverages are offered?
+    - could you show me the drink list?
+    - what are the drink options here?
+    - can you tell me what drinks are available?
+    - what drinks do you offer?
+    - are there any drink choices?
+    - do you have a menu for drinks?
+    - what types of drinks do you serve?
+    - could you let me know your drink options?
+    - what beverages can I choose from?
+    - show me your drink offerings
+    - what kind of beverages do you have?
+    - can you provide details about your drinks?
+    - do you serve any soft drinks or alcohol?
+    - can you list the types of drinks available?
+    - what drink varieties are on your menu?
+    - what are your drink selections?
+    - do you have any beverages to choose from?
+    - could you describe the drink menu?
+    - what are the available drinks?
+    - could you tell me what kinds of drinks are offered?
+    - do you have a selection of beverages?
 - intent: ask_for_pizza_price
   examples: |
     - how much does it cost?
@@ -525,7 +710,40 @@ nlu:
     - could you inform me about the cost of a [large](pizza_size) [salami](pizza_type)?
     - what is the price of a [medium](pizza_size) [marinara](pizza_type)?
     - can you tell me the cost of a [baby](pizza_size) [veggie](pizza_type)?
-    - I'd like to know the price of a [large](pizza_size) [margherita](pizza_type)
+    - i'd like to know the price of a [large](pizza_size) [margherita](pizza_type)
+    - how much does a [medium](pizza_size) [margherita](pizza_type) cost?
+    - what is the cost of a [small](pizza_size) [marinara](pizza_type)?
+    - can you provide the price for a [large](pizza_size) [veggie](pizza_type)?
+    - what's the cost of a [salami](pizza_type)?
+    - how much is a [medium](pizza_size) [margherita](pizza_type)?
+    - how much is a [margherita](pizza_type)?
+    - what’s the cost of a [margherita](pizza_type)?
+    - may I know the price of a [margherita](pizza_type)?
+    - how much does a [marinara](pizza_type) cost?
+    - what’s the cost of a [marinara](pizza_type)?
+    - how much is a [marinara](pizza_type)?
+    - could you tell me the price of a [salami](pizza_type)?
+    - how much for a [salami](pizza_type)?
+    - may I know the cost of a [salami](pizza_type)?
+    - what is the price of a [veggie](pizza_type)?
+    - how much does a [veggie](pizza_type) cost?
+    - what’s the cost of a [veggie](pizza_type)?
+    - could you inform me about the cost of a [margherita](pizza_type)?
+    - what’s the price of a [margherita](pizza_type)?
+    - how much for a [marinara](pizza_type)?
+    - can you tell me the cost of a [salami](pizza_type)?
+    - what’s the cost of a [veggie](pizza_type)?
+    - may I know the price of a [marinara](pizza_type)?
+    - how much is a [veggie](pizza_type)?
+    - could you provide the price of a [salami](pizza_type)?
+    - what is the cost of a [margherita](pizza_type)?
+    - how much does a [salami](pizza_type) cost?
+    - what is the price of a [marinara](pizza_type)?
+    - how much is a [margherita](pizza_type)?
+    - can you give me the price of a [veggie](pizza_type)?
+    - what’s the cost of a [salami](pizza_type)?
+    - may I know how much a [marinara](pizza_type) costs?
+    - how much is the [veggie](pizza_type)?
 - intent: ask_for_menu
   examples: |
     - what is your menu?
@@ -543,6 +761,34 @@ nlu:
     - can you provide information about your menu?
     - please tell me about your offerings
     - what options do you have on your menu?
+    - can I see your menu?
+    - what does your menu include?
+    - please show me your menu
+    - what items are on your menu?
+    - could you provide the menu details?
+    - may I view your menu?
+    - what’s available on your menu?
+    - show me the list of menu items
+    - could you display your menu for me?
+    - tell me about your menu options
+    - what are the offerings on your menu?
+    - can you provide a menu list?
+    - what can I find on your menu?
+    - give me a look at your menu
+    - can you show me the menu items?
+    - please let me see your menu
+    - what do you have on the menu?
+    - can you show the full menu?
+    - what’s on the menu today?
+    - please provide your menu
+    - could you share your menu with me?
+    - what menu options are available?
+    - show me what’s on the menu
+    - could you give me an overview of your menu?
+    - what are the menu choices?
+    - i’d like to check your menu
+    - can you tell me what’s on your menu?
+    - what menu items do you offer?
 - intent: ask_info_pizza
   examples: |
     - what types of pizza do you offer?
@@ -557,6 +803,33 @@ nlu:
     - what different pizzas can I choose from?
     - i don't know your pizzas
     - i dont' know the available pizzas
+    - what kinds of pizzas are available?
+    - can you list the types of pizza you offer?
+    - tell me about the pizzas on your menu
+    - what are the different types of pizza you serve?
+    - what pizza varieties can I choose from?
+    - could you provide details about your pizzas?
+    - what options do you have for pizza?
+    - what flavors of pizza are available?
+    - what pizza dishes do you have?
+    - what pizza options are on the menu?
+    - can you describe the pizza choices available?
+    - what kinds of pizza do you serve?
+    - what are the pizza flavors offered?
+    - what pizza types do you have on your menu?
+    - tell me about the different pizzas you offer
+    - what pizza varieties do you have?
+    - what are the available pizza options?
+    - can you show me the pizza choices?
+    - what types of pizza can I order?
+    - what pizza selections are there?
+    - what pizza choices are available to me?
+    - what are the pizza varieties on your menu?
+    - what types of pizza are served?
+    - what pizzas do you offer on the menu?
+    - what different pizzas can I order?
+    - what kinds of pizza do you have?
+    - can you provide a list of your pizzas?
 - intent: ask_info_pizza_size
   examples: |
     - what size can I order the pizza?
@@ -570,6 +843,32 @@ nlu:
     - what sizes can I choose for the pizza?
     - what are the pizza size choices?
     - what size selections do you have for your pizza?
+    - what pizza sizes are available?
+    - can you list the pizza sizes?
+    - what sizes can I get for the pizza?
+    - what are the different pizza sizes you offer?
+    - what sizes can I choose from for pizza?
+    - tell me the available pizza sizes
+    - what sizes do you have for pizzas?
+    - could you inform me about the pizza sizes?
+    - what are the options for pizza sizes?
+    - what size choices are there for pizza?
+    - what are the pizza size options?
+    - do you offer different sizes for pizza?
+    - in what sizes can I get a pizza?
+    - can you provide details on the pizza sizes?
+    - what size pizzas do you serve?
+    - what size varieties are there for pizza?
+    - what are the available sizes for pizza?
+    - could you tell me the sizes your pizzas come in?
+    - what are the choices for pizza sizes?
+    - can you inform me about the sizes for pizza?
+    - what sizes are your pizzas available in?
+    - which sizes can I order for pizza?
+    - what size options are there for your pizzas?
+    - what are the different sizes of pizzas available?
+    - what sizes can I order a pizza in?
+    - can you tell me about the pizza size options?
 - intent: ask_info_toppings
   examples: |
     - what toppings do you have?
@@ -589,6 +888,34 @@ nlu:
     - could you list the pizza toppings?
     - which toppings do you recommend?
     - please provide details about the pizza toppings
+    - what are the available toppings?
+    - can you tell me which toppings are offered?
+    - what options do I have for toppings?
+    - what toppings can I select?
+    - tell me about your toppings
+    - what are the topping choices?
+    - could you tell me the available toppings?
+    - which toppings do you have on the menu?
+    - what toppings can I add?
+    - do you have a list of toppings?
+    - what toppings can I get on my pizza?
+    - what topping options are there?
+    - can you provide information on the toppings?
+    - what toppings can I choose for my pizza?
+    - tell me the toppings you offer
+    - which toppings are available for selection?
+    - what are the topping selections?
+    - please list the toppings you have
+    - what toppings can be added to the pizza?
+    - which toppings can I pick from?
+    - what topping choices do you offer?
+    - could you provide a list of toppings?
+    - what toppings are available to choose from?
+    - what toppings can I add to my order?
+    - please tell me about the toppings available
+    - what are the different toppings you offer?
+    - what kind of pizza toppings can I choose?
+    - do you have information on the available toppings?
 - intent: ask_for_bill
   examples: |
     - may i know the bill?
@@ -605,12 +932,42 @@ nlu:
     - please provide the bill information
     - can you give me the total cost?
     - what is the total cost of my order?
-    - I'd like to know the amount I need to pay
+    - i'd like to know the amount I need to pay
     - how much should I pay?
     - please tell me the total bill
     - what's the bill amount?
     - can you give me the bill details?
     - how much do I owe?
+    - what is the final bill?
+    - could you show me the bill?
+    - how much is the bill?
+    - can you tell me the bill amount?
+    - please tell me the total cost
+    - how much do I need to pay?
+    - can I see the final bill?
+    - what do I owe?
+    - what's the total bill?
+    - how much is my bill?
+    - could you provide the bill details?
+    - please give me the bill amount
+    - how much is due for my order?
+    - let me know the total cost
+    - what's the amount for the bill?
+    - can you inform me of the total bill?
+    - how much is the amount I have to pay?
+    - what's the bill for my order?
+    - tell me the bill amount
+    - can you tell me the total cost?
+    - how much will I be charged?
+    - what's the amount due?
+    - provide the final bill details
+    - how much is everything going to cost?
+    - what's the total I need to pay?
+    - could you let me know the bill?
+    - what's the overall bill?
+    - can you show me the total amount due?
+    - I'd like to see the bill amount
+    - what's the final cost?
 - intent: stop
   examples: |
     - i've changed my mind, stop the process
@@ -631,6 +988,33 @@ nlu:
     - don't go on with the form
     - break off the current process
     - cancel this form entry
+    - please stop the current process
+    - i want to cancel this operation
+    - stop the form process immediately
+    - i need to halt this procedure
+    - terminate the current form
+    - please stop what you're doing
+    - i want to end this process
+    - don't continue with this form
+    - cancel the ongoing form entry
+    - i don't want to go on with this
+    - please stop the current action
+    - i changed my mind, stop this now
+    - halt the form filling process
+    - discontinue the current task
+    - stop the procedure
+    - i'd like to stop the form process
+    - break off the current action
+    - i want to interrupt this form
+    - stop this form immediately
+    - please stop the operation now
+    - i don't want to proceed with this
+    - put an end to this process
+    - cease the form completion
+    - cancel the current procedure
+    - halt this form right away
+    - please terminate this process
+    - i want to stop this immediately
 - intent: stock_data
   examples: |
     - i would like to see the warehouse data
@@ -649,16 +1033,104 @@ nlu:
     - check stock availability
     - tell me about the stock levels
     - provide the stock information
+    - can you show me the stock status?
+    - what is the current inventory?
+    - i need to check the stock data
+    - please display the warehouse stock
+    - what are the current stock levels?
+    - let me see the stock data
+    - show me the inventory details
+    - can you provide the current stock levels?
+    - i'd like to check the warehouse stock
+    - what is the status of the stock?
+    - can you give me the inventory data?
+    - i want to see the stock report
+    - display the current stock
+    - how much stock do we have?
+    - show me the available stock
+    - give me an overview of the stock levels
+    - can you provide an update on the inventory?
+    - what is the current stock availability?
+    - i want to see the inventory levels
+    - please show me the stock information
+    - can you tell me the current stock levels?
+    - give me a summary of the warehouse stock
+    - what's the stock status?
+    - update me on the warehouse inventory
+    - can you display the stock details?
+    - i need the current stock information
 - intent: inform_about_id
   examples: |
-    - [edoardo.maines@studenti.unitn.it](id)
-    - [test_id](id)
-    - here is my id: [edoardo.maines@gmail.it](id)
-    - here is my id: [test_id](id)
+    - [edward](id)
+    - [test identity](id)
+    - here is my id: [edward](id)
+    - here is my id: [test identity](id)
+    - my id is [edward](id)
+    - my id is [test identity](id)
+    - [edward](id) is my id
+    - [test identity](id) is my id
+    - my identifier is [edward](id)
+    - I am using the ID [test identity](id)
+    - my ID number is [edward](id)
+    - the ID I have is [test identity](id)
+    - here is the ID [edward](id)
+    - my unique ID is [test identity](id)
+    - the ID is [edward](id)
+    - this is my ID: [test identity](id)
+    - [edward](id) is my ID
+    - the identifier I’m using is [test identity](id)
+    - my ID code is [edward](id)
+    - the ID code is [test identity](id)
+    - I would like to provide [edward](id) as my ID
+    - here is my ID number: [test identity](id)
+    - [test identity](id) is the ID I’m using
+    - my personal ID is [edward](id)
+    - the ID I am referring to is [test identity](id)
+    - my ID: [edward](id)
+    - [test identity](id) is the ID I have
+    - this ID is [edward](id)
+    - the ID I want to share is [test identity](id)
+    - my identification number is [edward](id)
+    - [test identity](id) is my identification ID
+    - here’s my ID: [edward](id)
+    - my ID is [test identity](id)
 - intent: inform_about_password
   examples: |
-    - [ciao_99](password)
-    - here is my password: [ciao_99](password)
+    - [test password](password)
+    - here is my password: [test password](password)
+    - my password is [testpassword](password)
+    - this is my password: [test password](password)
+    - the password is [testpassword](password)
+    - [edward password](password)
+    - here is my password: [edward password](password)
+    - my password is [edwardpassword](password)
+    - this is my password: [edward password](password)
+    - the password is [edwardpassword](password)
+    - my password is [testpassword](password)
+    - here is my password: [testpassword](password)
+    - the password I use is [testpassword](password)
+    - [testpassword](password) is my password
+    - this is my password: [testpassword](password)
+    - my secret password is [edwardpassword](password)
+    - here’s my password: [edwardpassword](password)
+    - the password is [edwardpassword](password)
+    - [edwardpassword](password) is my password
+    - my password: [edwardpassword](password)
+    - this password is [testpassword](password)
+    - [test password](password) is what I use
+    - here’s the password: [testpassword](password)
+    - my password is [test password](password)
+    - the password I use is [edwardpassword](password)
+    - [edwardpassword](password) is the password I use
+    - this is my password: [test password](password)
+    - my password is [edwardpassword](password)
+    - the password I have is [testpassword](password)
+    - [testpassword](password) is my password
+    - my current password is [edward password](password)
+    - the password I use is [edward password](password)
+    - [edward password](password) is my password
+    - here is my password: [edward password](password)
+    - my password: [testpassword](password)
 - intent: ask_stock_topping
   examples: |
     - how many pieces of [ham](pizza_topping) are left?
@@ -675,6 +1147,48 @@ nlu:
     - give me an update on [ham](pizza_topping) stock
     - how many of [ham](pizza_topping) do you have?
     - i want to know about [tomato sauce](ingredient) stock
+    - how many pieces of [mozzarella](pizza_topping) are left?
+    - how much [pizza dough](ingredient) is available?
+    - show me the stock for [tomato sauce](ingredient)
+    - what's the inventory for [olives](pizza_topping)?
+    - can you tell me about [spicy salami](pizza_topping) stock?
+    - check [vegetables](pizza_topping) availability
+    - tell me about [grilled vegetables](pizza_topping) inventory
+    - how many of [spicy salami](pizza_topping) do you have?
+    - i want to know about [mozzarella](pizza_topping) stock
+    - how much [pizza dough](ingredient) do you have in stock?
+    - can you check the availability of [olives](pizza_topping)?
+    - what's the current inventory for [spicy salami](pizza_topping)?
+    - please show me the stock of [vegetables](pizza_topping)
+    - could you inform me about the availability of [grilled vegetables](pizza_topping)?
+    - provide an update on the stock of [ham](pizza_topping)
+    - how many [spicy salami](pizza_topping) are in stock?
+    - could you give me information about the stock of [mozzarella](pizza_topping)?
+    - how many pieces of [spicy salami](pizza_topping) are left?
+    - how many pieces of [vegetables](pizza_topping) are in stock?
+    - how many pieces of [grilled vegetables](pizza_topping) are in stock?
+    - how much [pizza dough](ingredient) is in stock?
+    - show me the stock for [spicy salami](pizza_topping)
+    - what's the inventory for [mozzarella](pizza_topping)?
+    - can you tell me about [vegetables](pizza_topping) stock?
+    - check [pizza dough](ingredient) availability
+    - give me an update on [spicy salami](pizza_topping) stock
+    - how many of [spicy salami](pizza_topping) do you have?
+    - how many pieces of [vegetables](pizza_topping) are left?
+    - how much [mozzarella](pizza_topping) is available?
+    - show me the stock for [pizza dough](ingredient)
+    - what's the inventory for [ham](pizza_topping)?
+    - can you tell me about [tomato sauce](ingredient) stock?
+    - check [olives](pizza_topping) availability
+    - tell me about [mushrooms](pizza_topping) inventory
+    - how many of [olives](pizza_topping) do you have?
+    - can you check the availability of [mushrooms](pizza_topping)?
+    - what's the current inventory for [grilled vegetables](pizza_topping)?
+    - please show me the stock of [ham](pizza_topping)
+    - could you inform me about the availability of [mozzarella](pizza_topping)?
+    - provide an update on the stock of [spicy salami](pizza_topping)
+    - how many pieces of [mushrooms](pizza_topping) are in stock?
+    - could you give me information about the stock of [grilled vegetables](pizza_topping)?
 - intent: order_ingredient
   examples: |
     - let's order [10 pieces](ingredient_quantity) of [pizza dough](ingredient)
@@ -686,6 +1200,30 @@ nlu:
     - order some [mozzarella](pizza_topping)
     - let's get [15 pieces](ingredient_quantity) of [ham](pizza_topping)
     - i want to order [20 pieces](ingredient_quantity)
+    - let's order [5 pieces](ingredient_quantity) of [mozzarella](pizza_topping)
+    - let's order some [grilled vegetables](pizza_topping)
+    - i need new pieces of [spicy salami](pizza_topping)
+    - i need new pieces of [pizza dough](ingredient)
+    - i need [10 pieces](ingredient_quantity) of [spicy salami](pizza_topping)
+    - order [8 pieces](ingredient_quantity) of [pizza dough](ingredient)
+    - order some [ham](pizza_topping)
+    - let's get [15 pieces](ingredient_quantity) of [mozzarella](pizza_topping)
+    - i want to order [20 pieces](ingredient_quantity) of [grilled vegetables](pizza_topping)
+    - let's order [5 pieces](ingredient_quantity) of [tomato sauce](ingredient)
+    - let's order some [olives](pizza_topping)
+    - i need new pieces of [ham](pizza_topping)
+    - i want to order [20 pieces](ingredient_quantity) of [mozzarella](pizza_topping)
+    - let's order [12 pieces](ingredient_quantity) of [pizza dough](ingredient)
+    - i need [10 pieces](ingredient_quantity) of [olives](pizza_topping)
+    - order [6 pieces](ingredient_quantity) of [tomato sauce](ingredient)
+    - let's get [18 pieces](ingredient_quantity) of [ham](pizza_topping)
+    - i want to order [24 pieces](ingredient_quantity) of [pizza dough](ingredient)
+    - let's order [7 pieces](ingredient_quantity) of [mozzarella](pizza_topping)
+    - i need [9 pieces](ingredient_quantity) of [olives](pizza_topping)
+    - order [4 pieces](ingredient_quantity) of [mozzarella](pizza_topping)
+    - order some [pizza dough](ingredient)
+    - let's get [14 pieces](ingredient_quantity) of [ham](pizza_topping)
+    - i want to order [16 pieces](ingredient_quantity) of [olives](pizza_topping)
 - intent: ask_ingredients_to_order
   examples: |
     - which ingredients need an order?
@@ -698,6 +1236,26 @@ nlu:
     - list ingredients for ordering
     - identify ingredients for reorder
     - which items are low in stock and need ordering?
+    - what ingredients are running low?
+    - do we need to reorder any ingredients?
+    - tell me the ingredients that need restocking
+    - are any ingredients below the required level?
+    - which items need to be restocked?
+    - can you list the ingredients that are below the stock limit?
+    - what are the ingredients that need to be reordered?
+    - which ingredients are almost out of stock?
+    - is there anything we need to order?
+    - which ingredients should be ordered immediately?
+    - are there any ingredients that are almost finished?
+    - can you identify the ingredients that need to be restocked?
+    - what ingredients do we need to order now?
+    - are any ingredients running out?
+    - which items are below the minimum stock level?
+    - list the ingredients that are low in stock
+    - show the ingredients that need reordering
+    - which ingredients do we need to buy?
+    - which ingredients should be on the reorder list?
+    - what ingredients are due for reorder?
 - intent: delete_order
   examples: |
     - i'd like to cancel my current order
@@ -719,6 +1277,33 @@ nlu:
     - i need to retract my order
     - cancel the transaction
     - stop processing my order
+    - i want to delete the order I placed
+    - please cancel my order right away
+    - remove the order I made
+    - cancel my current order please
+    - i need to cancel my recent order
+    - can you delete my existing order?
+    - i want to void my order
+    - please stop my current order
+    - cancel my order now
+    - please delete the order I just made
+    - i don't need my order anymore
+    - can you revoke my order?
+    - remove my recent order from the system
+    - cancel the order I have placed
+    - i'd like to stop my current order
+    - i want to cancel my recent purchase
+    - can you remove my order?
+    - please retract my order
+    - i'd like to cancel my last order
+    - delete my order as soon as possible
+    - void the order I placed
+    - please stop processing my recent order
+    - i changed my mind, please cancel my order
+    - can you get rid of my order?
+    - i want to stop my current transaction
+    - please delete the current order from your system
+    - i no longer want to proceed with my order
 - intent: remove_from_order
   examples: |
     - i'd like to remove the [ham](pizza_topping) from the pizza
@@ -736,6 +1321,29 @@ nlu:
     - i don't want [ham](pizza_topping) on my pizza anymore
     - can you remove [olives](pizza_topping) from my order
     - i changed my mind, remove [coke](drink)
+    - i'd like to remove the [mozzarella](pizza_topping) from the pizza
+    - i'd like to remove the [still water](drink) from my order
+    - i want to remove the [lemon tea](drink)
+    - i don't want the [spicy salami](pizza_topping) on my pizza anymore
+    - please remove [grilled vegetables](pizza_topping) from my order
+    - take off [fanta](drink) from my order
+    - remove [olives](pizza_topping) from my pizza
+    - i'd like to take off [peach tea](drink)
+    - can you remove [mozzarella](pizza_topping) from my order
+    - i want to remove the [olives](pizza_topping) from my order
+    - i'd like to remove the [mozzarella](pizza_topping)
+    - i want to remove the [fanta](drink) from my order
+    - i'd like to remove the [still water](drink)
+    - i don't want the [lemon tea](drink) anymore
+    - please remove [coke](drink) from my order
+    - i'd like to remove the [peach tea](drink)
+    - remove [mozzarella](pizza_topping) from my pizza
+    - i'd like to remove the [spicy salami](pizza_topping)
+    - i don't want the [ham](pizza_topping) on my pizza anymore
+    - take off [still water](drink) from my order
+    - i don't want [mozzarella](pizza_topping) on my pizza anymore
+    - can you remove [ham](pizza_topping) from my order
+    - i changed my mind, remove [lemon tea](drink)
 - intent: inform_about_modality
   examples: |
     - [takeaway](modality)
@@ -743,178 +1351,255 @@ nlu:
     - [delivery](modality)
     - [delivery](modality) please
     - i prefer [delivery](modality)
-    - I prefer [delivery](modality)
     - better [delivery](modality)
     - [delivery](modality) thanks
-    - use the [delivery](modality) service
-    - I will go for [delivery](modality)
-    - I think I will go for home [delivery](modality)
+    - i'd like to use the [delivery](modality) service
+    - i will go for [delivery](modality)
+    - i think I will go for home [delivery](modality)
     - home [delivery](modality) please
     - home [delivery](modality) thanks
     - [take-away](modality) please
     - i prefer [takeaway](modality)
-    - I prefer [take away](modality)
+    - i prefer [take away](modality)
     - better [take-away](modality)
     - [takeaway](modality) thanks
-    - I think I will go for [take-away](modality)
-    - I'll go for [take away](modality)
+    - i think I will go for [take-away](modality)
+    - i'll go for [take away](modality)
     - could I have it [delivery](modality)?
-    - I'd like it [delivery](modality)
-    - I'd like it [take-away](modality)
-    - I'd prefer it [takeaway](modality)
+    - i'd like it [delivery](modality)
+    - i'd like it [take-away](modality)
+    - i'd prefer it [takeaway](modality)
     - please, [delivery](modality)
     - please, [take away](modality)
     - it will be [delivery](modality)
     - it will be [take-away](modality)
     - what about [delivery](modality)
     - what about [take-away](modality)
-    - I'm going with [delivery](modality)
-    - I'm going with [take-away](modality)
+    - i'm going with [delivery](modality)
+    - i'm going with [take-away](modality)
     - do you do [delivery](modality)
     - do you do [take-away](modality)
     - could I get it as [delivery](modality)?
     - could I get it as [take away](modality)
     - can you do [delivery](modality)?
     - can you do [take-away](modality)
-    - I'll do it with [delivery](modality)
-    - I'll do it with [take away](modality)
-    - I think [delivery](modality) is best
-    - I think [take away](modality) is best
-    - for me, [delivery](modality)
-    - for me, [take-away](modality)
+    - i'll do it with [delivery](modality)
+    - i'll do it with [take away](modality)
+    - i think [delivery](modality) is best
+    - i think [take away](modality) is best
+    - for me [delivery](modality)
+    - for me [take-away](modality)
 - intent: inform_about_address
   examples: |
-    - [5](number_address) [Battisti Street](address)
-    - [Da Vinci Square](address)
-    - [120 B](number_address) [Perini Street](address)
-    - I live at [7 C](number_address) [Via Verdi](address)
-    - It's [10](number_address) [Via Roma](address)
-    - You can find me at [25](number_address) [Via Manzoni](address)
-    - My address is [15](number_address) [Piazza Duomo](address)
-    - The address is [3 A](number_address), [Via Garibaldi](address)
-    - I'm at [1 A](number_address) [Piazza Dante](address)
-    - It's [3](number_address) [Corso Vittorio Emanuele](address)
-    - [5](number_address) [Battisti Street](address)
-    - [Da Vinci Square](address)
-    - [112](number_address) [Perini Street](address)
-    - I live at [7 B](number_address) [Via Verdi](address)
-    - It's [10](number_address) [Via Roma](address)
-    - You can find me at [25 E](number_address) [Via Manzoni](address)
-    - My address is [15](number_address) [Piazza Duomo](address)
-    - The address is [13](number_address), [Via Garibaldi](address)
-    - I'm at [1 D](number_address) [Piazza Dante](address)
-    - It's [31](number_address) [Corso Vittorio Emanuele](address)
+    - [battisti street](address)
+    - [da vinci square](address)
+    - [perini street](address)
+    - [verdi street](address)
+    - [roma street](address)
+    - [manzoni street](address)
+    - [duomo square](address)
+    - [garibaldi street](address)
+    - [dante square](address)
+    - i live at [verdi street](address)
+    - it's [roma street](address)
+    - you can find me at [manzoni street](address)
+    - my address is [duomo square](address)
+    - the address is [garibaldi street](address)
+    - i'm at [dante square](address)
+    - my address is [perini street](address)
+    - i live at [battisti street](address)
+    - you can find me at [da vinci square](address)
+    - the address is [manzoni street](address)
+    - i'm at [duomo square](address)
+    - my address is [battisti street](address)
+    - i live at [manzoni street](address)
+    - it's [perini street](address)
+    - you can find me at [verdi street](address)
+    - my address is [duomo square](address)
+    - i'm at [roma street](address)
+    - the address is [davinci square](address)
+    - i live at [garibaldi street](address)
+    - you can find me at [battisti street](address)
+    - it's [verdi street](address)
+    - my address is [roma street](address)
+    - i'm at [manzoni street](address)
+    - [5](number_address) [battisti street](address)
+    - [120](number_address) [perini street](address)
+    - i live at number [7](number_address) [verdi street](address)
+    - it's [10](number_address) [roma street](address)
+    - you can find me at number [25](number_address) [manzoni street](address)
+    - my address is [15](number_address) [duomo square](address)
+    - the address is [3](number_address) [garibaldi street](address)
+    - i'm at number [1](number_address) [duomo square](address)
+    - it's [3](number_address) [perini street](address)
+    - [112](number_address) [perini street](address)
+    - i live at number [7](number_address) [verdi street](address)
+    - you can find me at number [25](number_address) [manzoni street](address)
+    - the address is [13](number_address) [garibaldi street](address)
+    - i'm at number [1](number_address) [duomo square](address)
+    - it's [31](number_address) [verdi street](address)
 - intent: inform_about_nr_address
   examples: |
     - [99](number_address)
     - [49](number_address)
-    - [35A](number_address)
-    - [23](number_address)
-    - [100B](number_address)
-    - [3A](number_address)
-    - [75C](number_address)
-    - [12D](number_address)
-    - [88E](number_address)
-    - [10](number_address)
-    - [50A](number_address)
-    - [15B](number_address)
-    - [77](number_address)
-    - [25C](number_address)
-    - [42D](number_address)
-    - [5E](number_address)
-    - [60](number_address)
-    - [16A](number_address)
-    - [30B](number_address)
-    - [8](number_address)
-    - [55C](number_address)
-    - [21D](number_address)
-    - [7E](number_address)
-    - [33](number_address)
-    - [45A](number_address)
-    - [18B](number_address)
-    - [6](number_address)
-    - [90C](number_address)
-    - [28D](number_address)
-    - [9E](number_address)
     - [35](number_address)
+    - [23](number_address)
     - [100](number_address)
-    - [3](number_address)
+    - [3A](number_address)
     - [75](number_address)
     - [12](number_address)
     - [88](number_address)
+    - [10](number_address)
     - [50](number_address)
     - [15](number_address)
+    - [77](number_address)
     - [25](number_address)
     - [42](number_address)
     - [5](number_address)
+    - [60](number_address)
     - [16](number_address)
     - [30](number_address)
+    - [8](number_address)
     - [55](number_address)
     - [21](number_address)
     - [7](number_address)
-    - [45](number_address)
-    - [18](number_address)
-    - [90](number_address)
-    - [28](number_address)
-    - [9](number_address)
+    - my address number is [99](number_address)
+    - the number of my address is [49](number_address)
+    - it's [35](number_address) for my address
+    - you can find me at number [23](number_address)
+    - my current address number is [100](number_address)
+    - my address number is [3](number_address)
+    - the number of my address is [75](number_address)
+    - it's [12](number_address) for my address
+    - you can find me at number [88](number_address)
+    - my current address number is [10](number_address)
+    - my address number is [50](number_address)
+    - the number of my address is [15](number_address)
+    - it's [77](number_address) for my address
+    - you can find me at number [25](number_address)
+    - my current address number is [42](number_address)
+    - my address number is [5](number_address)
+    - the number of my address is [60](number_address)
+    - it's [16](number_address) for my address
+    - you can find me at number [30](number_address)
+    - my current address number is [8](number_address)
+    - my address number is [55](number_address)
+    - the number of my address is [21](number_address)
+    - it's [7](number_address) for my address
+    - you can find me at number [33](number_address)
+    - my current address number is [45](number_address)
+    - my address number is [18](number_address)
+    - the number of my address is [6](number_address)
+    - it's [90](number_address) for my address
+    - you can find me at number [28](number_address)
+    - my current address number is [9](number_address)
+    - my address number is [35](number_address)
+    - the number of my address is [100](number_address)
+    - it's [3](number_address) for my address
+    - you can find me at number [75](number_address)
+    - my current address number is [12](number_address)
+    - my address number is [88](number_address)
+    - the number of my address is [50](number_address)
+    - it's [15](number_address) for my address
+    - you can find me at number [25](number_address)
+    - my current address number is [42](number_address)
 - intent: inform_about_doorbell
   examples: |
-    - [Black](doorbell)
+    - [black](doorbell)
     - [first floor](doorbell)
-    - [Maines, second floor](doorbell)
-    - [White](doorbell)
+    - [white](doorbell) [second floor](doorbell)
+    - [white](doorbell)
     - [second floor](doorbell)
-    - [Rossi, first floor](doorbell)
-    - [first floor, Rossi](doorbell)
-    - [third floor, Smith](doorbell)
-    - [Smith, third floor](doorbell)
-    - [Johnson, ground floor](doorbell)
-    - [ground floor, Johnson](doorbell)
-    - [Miller, top floor](doorbell)
-    - [top floor, Miller](doorbell)
-    - [Brown, basement](doorbell)
-    - [basement, Brown](doorbell)
-    - [Garcia, penthouse](doorbell)
-    - [penthouse, Garcia](doorbell)
-    - [Taylor, second floor](doorbell)
-    - [second floor, Taylor](doorbell)
-    - [Wong, fourth floor](doorbell)
-    - [fourth floor, Wong](doorbell)
-    - [Lee, fifth floor](doorbell)
-    - [fifth floor, Lee](doorbell)
-    - [Hernandez, third floor](doorbell)
-    - [third floor, Hernandez](doorbell)
-    - [Nguyen, ground floor](doorbell)
-    - [ground floor, Nguyen](doorbell)
+    - [top floor](doorbell)
+    - [ground floor](doorbell)
+    - [third floor](doorbell)
+    - [rossi](doorbell) [first floor](doorbell)
+    - [first floor](doorbell) [rossi](doorbell)
+    - [third floor](doorbell) [smith](doorbell)
+    - [smith](doorbell) [third floor](doorbell)
+    - [johnson](doorbell) [ground floor](doorbell)
+    - [ground floor](doorbell) [johnson](doorbell)
+    - [miller](doorbell) [top floor](doorbell)
+    - [top floor](doorbell) [miller](doorbell)
+    - [brown](doorbell) [ground floor](doorbell)
+    - [ground floor](doorbell) [brown](doorbell)
+    - [garcia](doorbell) [ground floor](doorbell)
+    - please ring the [black](doorbell) bell
+    - ring the [first floor](doorbell) bell when you arrive
+    - my doorbell is labeled [garcia](doorbell)
+    - please use the [white](doorbell) bell upon arrival
+    - ring the [second floor](doorbell) bell
+    - the doorbell is labeled [rossi](doorbell) [second floor](doorbell)
+    - use the [third floor](doorbell) [smith](doorbell) bell when you arrive
+    - please ring [johnson](doorbell)
+    - ring the [miller](doorbell) bell upon arrival
+    - my doorbell is labeled [brown](doorbell) [second floor](doorbell)
+    - the [garcia](doorbell) [ground floor](doorbell) bell should be used upon arrival
+    - please use the [second floor](doorbell) [taylor](doorbell) bell when you arrive
+    - ring the [garcia](doorbell) [fourth floor](doorbell) bell
+    - ring [brown](doorbell) [third floor](doorbell) bell when you arrive
+    - the doorbell labeled [white](doorbell) is mine
+    - ring [black](doorbell) bell when you get here
+    - use the [first floor](doorbell) bell
+    - my doorbell is the [top floor](doorbell) [white](doorbell)
+    - please ring [first floor](doorbell) [rossi](doorbell) bell upon arrival
+    - ring the [third floor](doorbell) [smith](doorbell) bell when you arrive
+    - my doorbell is labeled [ground floor](doorbell) [johnson](doorbell)
+    - ring the [top floor](doorbell) [miller](doorbell) bell when you get here
+    - please use [brown](doorbell) bell
+    - ring the [garcia](doorbell) [ground floor](doorbell) bell
+    - the [second floor](doorbell) [taylor](doorbell) bell is my doorbell
+    - ring [fourth floor](doorbell) [garcia](doorbell) bell when you get here
+    - the [garcia](doorbell) bell should be used upon arrival
+    - please use [ground floor](doorbell) [smith](doorbell) bell
+    - ring [ground floor](doorbell) [rossi](doorbell) bell
 - intent: inform_about_phone
   examples: |
-    - [+391234567891](phone)
-    - [+390000000000](phone)
-    - [+391705927381](phone)
-    - [+393028212489](phone)
-    - [+391234567890](phone)
-    - [+390000000001](phone)
-    - [+391705927382](phone)
-    - [+393028212490](phone)
-    - [+391234567892](phone)
-    - [+390000000002](phone)
-    - [+391705927383](phone)
-    - [+393028212491](phone)
-    - [+391234567893](phone)
-    - [+390000000003](phone)
-    - [+391705927384](phone)
-    - [+393028212492](phone)
-    - [+391234567894](phone)
-    - [+390000000004](phone)
-    - [+391705927385](phone)
-    - [+393028212493](phone)
-    - [+391234567895](phone)
-    - [+390000000005](phone)
-    - [+391705927386](phone)
-    - [+393028212494](phone)
+    - [1234567891](phone)
+    - [0000000000](phone)
+    - [1705927381](phone)
+    - [3028212489](phone)
+    - [1234567890](phone)
+    - [0000000001](phone)
+    - [1705927382](phone)
+    - [3028212490](phone)
+    - [1234567892](phone)
+    - [0000000002](phone)
+    - [1705927383](phone)
+    - [3028212491](phone)
+    - [1234567893](phone)
+    - [0000000003](phone)
+    - [1705927384](phone)
+    - [3028212492](phone)
+    - [1234567894](phone)
+    - [0000000004](phone)
+    - [1705927385](phone)
+    - [3028212493](phone)
+    - [1234567895](phone)
+    - [0000000005](phone)
+    - [1705927386](phone)
+    - [3028212494](phone)
+    - here's my phone number: [1234567891](phone)
+    - my contact number is [0000000000](phone)
+    - you can reach me at [1705927381](phone)
+    - my phone number is [3028212489](phone)
+    - contact me at [1234567890](phone)
+    - my number is [0000000001](phone)
+    - reach me at [1705927382](phone)
+    - you can contact me at [3028212490](phone)
+    - here's my phone number: [1234567892](phone)
+    - my contact number is [0000000002](phone)
+    - i can be reached at [1234567891](phone)
+    - my number is [0000000000](phone)
+    - contact me at [1705927381](phone)
+    - here's my contact number: [3028212489](phone)
+    - i can be reached at [1234567890](phone)
+    - you can reach me at [1705927382](phone)
+    - my contact number is [3028212490](phone)
+    - contact me at [0000000002](phone)
 - intent: change_delivery
   examples: |
-    - i'd like to modify the delivery information
+    - i'd like to modify the provided information
     - i was wrong! i'd like to change the information provided
     - i made a mistake in providing the address. i'd like to change it
     - i made a mistake in providing the number of the address. i'd like to change it
@@ -922,9 +1607,9 @@ nlu:
     - i made a mistake in providing my doorbell. i'd like to change it
     - i need to update my delivery details
     - sorry, i need to change my delivery information
-    - i need to correct my delivery address
-    - i need to update my address for delivery
-    - i need to change my phone number for delivery
+    - i need to correct my address
+    - i need to update my address
+    - i need to change my phone number
     - i need to update my doorbell information
     - i need to change my doorbell details
     - i need to modify my delivery instructions
@@ -942,32 +1627,169 @@ nlu:
     - i'd like to change my delivery instructions
 - intent: ask_specific_time
   examples: |
-    - it would be possible to bring forward the pick-up time to [20:30](complete_time)?
-    - if i arrive by [21:45](complete_time), will the order be ready?
-    - if i arrive in [10 minutes](min_time), would i find the order ready?
+    - it would be possible to bring forward the pick-up time to [8 30 pm](complete_time)?
+    - if i arrive by [9 45 pm](complete_time), will the order be ready?
+    - if i get there at [8 pm](complete_time) is it ok?
+    - if i get there at [3 pm](complete_time) is it ok?
+    - if i get there at [4 pm](complete_time) is it ok?
+    - if i get there at [5 pm](complete_time) is it ok?
+    - if i get there at [6 pm](complete_time) is it ok?
+    - if i get there at [7 pm](complete_time) is it ok?
+    - if i get there at [12 pm](complete_time) is it ok?
+    - if i get there at [9 am](complete_time) is it ok?
+    - if i get there at [11 am](complete_time) is it ok?
+    - if i get there at [8 1 pm](complete_time) is it ok?
+    - if i get there at [3 2 pm](complete_time) is it ok?
+    - if i get there at [4 3 pm](complete_time) is it ok?
+    - if i get there at [5 4 pm](complete_time) is it ok?
+    - if i get there at [6 5 pm](complete_time) is it ok?
+    - if i get there at [7 6 pm](complete_time) is it ok?
+    - if i get there at [12 7 pm](complete_time) is it ok?
+    - if i get there at [9 8 am](complete_time) is it ok?
+    - if i get there at [11 9 am](complete_time) is it ok?
+    - if i get there [5 minutes] earlier is it okay?
+    - if i get there [8 minutes] sooner is it ok?
+    - if i get there [11 minutes] earlier?
+    - if i arrive in [10 minutes](min_time) would i find the order ready?
     - is it possible to bring forward by [7 minutes](min_time)?
-    - could you prepare the order for [12:00](complete_time)?
-    - can I come at [18:00](complete_time) to pick up my order?
-    - will my order be ready by [17:30](complete_time)?
-    - can I collect my order at [7:00](complete_time)?
-    - is it okay if I arrive by [19:15](complete_time)?
-    - could you have the order ready by [14:30](complete_time)?
-    - will the order be ready at [9:45](complete_time)?
-    - can I pick up my order at [11:30](complete_time)?
-    - is it possible to prepare my order for [16:45](complete_time)?
-    - will the order be ready for collection by [13:20](complete_time)?
-    - can you make sure the order is ready by [15:00](complete_time)?
-    - could you have the order prepared by [8:30](complete_time)?
-    - if I arrive in [15 minutes](min_time), will the order be ready?
+    - could you prepare the order for [12 pm](complete_time)?
+    - can I come at [6 10 pm](complete_time) to pick up my order?
+    - will my order be ready by [5 53 pm](complete_time)?
+    - can I collect my order at [7 pm](complete_time)?
+    - is it okay if I arrive by [7 15 pm](complete_time)?
+    - could you have the order ready by [4 pm](complete_time)?
+    - will the order be ready at [quarter to 10 am](complete_time)?
+    - can I pick up my order at [11 30 am](complete_time)?
+    - is it possible to prepare my order for [quarter to 5 am](complete_time)?
+    - will the order be ready for collection by [1 20 pm](complete_time)?
+    - can you make sure the order is ready by [3 pm](complete_time)?
+    - could you have the order prepared by [half past 8 am](complete_time)?
+    - if I arrive there [15 minutes](min_time) earlier will the order be ready?
     - can we move it up by [5 minutes](min_time)?
-    - will the order be ready if I get there in [12 minutes](min_time)?
-    - can I arrive in [8 minutes](min_time) and find everything ready?
+    - will the order be ready if I get there [12 minutes](min_time) earlier?
+    - can I arrive [8 minutes](min_time) earlier and find everything ready?
     - is it possible to reduce the preparation time by [6 minutes](min_time)?
-    - if I get there in [20 minutes](min_time), will the order be ready?
-    - can the preparation time be shortened by [10 minutes](min_time)?
+    - if I get there [20 minutes](min_time) sooner, will the order be ready?
+    - can the preparation time be anticipated by [10 minutes](min_time)?
     - is it feasible to advance the order by [7 minutes](min_time)?
-    - will the order be ready if I come in [11 minutes](min_time)?
-    - can we expedite the order by [4 minutes](min_time)?
+    - will the order be ready if I come [11 minutes](min_time) in advance?
+    - can we expedite the order by [6 minutes](min_time)?
+    - can you bring forward the pick-up time to [half past 8 pm](complete_time)?
+    - what if I arrive by [quarter to 10 pm](complete_time)? Will the order be ready?
+    - how about [10 minutes](min_time) sooner? Will the order be ready?
+    - can you move it up by [7 minutes](min_time)?
+    - could you please have the order ready by [noon](complete_time)?
+    - is [8 pm](complete_time) okay for picking up my order?
+    - can you ensure my order is ready by [half past 5 pm](complete_time)?
+    - can I pick up my order at [7 32 pm](complete_time)?
+    - will everything be ready if I arrive by [quarter past 2 pm](complete_time)?
+    - can you aim to have the order prepared by [2 am](complete_time)?
+    - will the order be ready by [quarter to 10 am](complete_time)?
+    - can I collect my order by [half past 11 am](complete_time)?
+    - could you prepare my order for [4 45 pm](complete_time)?
+    - will my order be available for collection by [1 22 pm](complete_time)?
+    - can you ensure the order is ready by [3 pm](complete_time)?
+    - could you have the order ready by [half past 8 am](complete_time)?
+    - what if I arrive [15 minutes](min_time) earlier? Will the order be ready?
+    - will the order be ready [12 minutes](min_time) in advance?
+    - can I expect everything to be ready [8 minutes](min_time) earlier?
+    - can we reduce the preparation time by [6 minutes](min_time)?
+    - if I arrive [25 minutes](min_time) sooner, will the order be ready?
+    - can you shorten the preparation time by [10 minutes](min_time)?
+    - is it possible to advance the order by [7 minutes](min_time)?
+    - will the order be ready [11 minutes](min_time) earlier?
+    - could you move the pick-up time to [8 pm](complete_time)?
+    - what happens if I arrive by [quarter to 9 am](complete_time)? Will the order be ready?
+    - how about if I arrive [10 minutes](min_time) in advance? Will the order be ready?
+    - can I pick up the order [10 minutes](min_time) earlier? Will it be ready?
+    - is it feasible to move it up by [7 minutes](min_time)?
+    - would you be able to prepare the order by [noon](complete_time)?
+    - is [6 pm](complete_time) convenient for picking up my order?
+    - can you guarantee that my order will be ready by [half past 3 pm](complete_time)?
+    - can I pick up my order at [7 am](complete_time)?
+    - will everything be prepared if I arrive by [2 15 pm](complete_time)?
+    - can you ensure the order is ready by [half past 2 pm](complete_time)?
+    - can I collect my order at [half past 11 pm](complete_time)?
+    - could you have my order ready by [4 45 pm](complete_time)?
+    - will the order be available for collection by [2 20 pm](complete_time)?
+    - can you make sure the order is ready by [3 pm](complete_time)?
+    - could you aim to have the order prepared by [half past 8 pm](complete_time)?
+    
+    
+#    - it would be possible to bring forward the pick-up time to [half past eight pm](complete_time)?
+#    - if i arrive by [nine forty five pm](complete_time), will the order be ready?
+#    - if i get there at [eight one pm](complete_time) is it ok?
+#    - if i get there at [three two pm](complete_time) is it ok?
+#    - if i get there at [four three pm](complete_time) is it ok?
+#    - if i get there at [five four pm](complete_time) is it ok?
+#    - if i get there at [six five pm](complete_time) is it ok?
+#    - if i get there at [seven six pm](complete_time) is it ok?
+#    - if i get there at [twelve seven pm](complete_time) is it ok?
+#    - if i get there at [nine eight am](complete_time) is it ok?
+#    - if i get there at [eleven nine am](complete_time) is it ok?
+#    - if i arrive in [ten minutes](min_time), would i find the order ready?
+#    - is it possible to bring forward by [seven minutes](min_time)?
+#    - could you prepare the order for [twelve pm](complete_time)?
+#    - can I come at [six ten pm](complete_time) to pick up my order?
+#    - will my order be ready by [half past five pm](complete_time)?
+#    - can I collect my order at [seven pm](complete_time)?
+#    - is it okay if I arrive by [seven fifteen pm](complete_time)?
+#    - could you have the order ready by [half past four](complete_time)?
+#    - will the order be ready at [quarter to ten am](complete_time)?
+#    - can I pick up my order at [eleven thirty am](complete_time)?
+#    - is it possible to prepare my order for [quarter to five am](complete_time)?
+#    - will the order be ready for collection by [one twenty pm](complete_time)?
+#    - can you make sure the order is ready by [three o'clock pm](complete_time)?
+#    - could you have the order prepared by [half past eight am](complete_time)?
+#    - if I arrive in [fifteen minutes](min_time), will the order be ready?
+#    - can we move it up by [five minutes](min_time)?
+#    - will the order be ready if I get there in [twelve minutes](min_time)?
+#    - can I arrive in [eight minutes](min_time) and find everything ready?
+#    - is it possible to reduce the preparation time by [six minutes](min_time)?
+#    - if I get there in [twenty minutes](min_time), will the order be ready?
+#    - can the preparation time be shortened by [ten minutes](min_time)?
+#    - is it feasible to advance the order by [seven minutes](min_time)?
+#    - will the order be ready if I come in [eleven minutes](min_time)?
+#    - can we expedite the order by [six minutes](min_time)?
+#    - can you bring forward the pick-up time to [half past eight pm](complete_time)?
+#    - what if I arrive by [quarter to ten pm](complete_time)? Will the order be ready?
+#    - how about in [ten minutes](min_time)? Will the order be ready?
+#    - can you move it up by [seven minutes](min_time)?
+#    - could you please have the order ready by [noon](complete_time)?
+#    - is [eight o'clock](complete_time) okay for picking up my order?
+#    - can you ensure my order is ready by [half past five pm](complete_time)?
+#    - can I pick up my order at [seven o'clock pm](complete_time)?
+#    - will everything be ready if I arrive by [quarter past two pm](complete_time)?
+#    - can you aim to have the order prepared by [half past two am](complete_time)?
+#    - will the order be ready by [quarter to ten am](complete_time)?
+#    - can I collect my order by [half past eleven am](complete_time)?
+#    - could you prepare my order for [quarter to five pm](complete_time)?
+#    - will my order be available for collection by [one twenty two](complete_time)?
+#    - can you ensure the order is ready by [three pm](complete_time)?
+#    - could you have the order ready by [half past eight am](complete_time)?
+#    - what if I arrive in [fifteen minutes](min_time)? Will the order be ready?
+#    - will the order be ready in [twelve minutes](min_time)?
+#    - can I expect everything to be ready in [eight minutes](min_time)?
+#    - can we reduce the preparation time by [six minutes](min_time)?
+#    - if I arrive in [twenty five minutes](min_time), will the order be ready?
+#    - can you shorten the preparation time by [ten minutes](min_time)?
+#    - is it possible to advance the order by [seven minutes](min_time)?
+#    - will the order be ready in [eleven minutes](min_time)?
+#    - could you move the pick-up time to [half past eight pm](complete_time)?
+#    - what happens if I arrive by [quarter to nine am](complete_time)? Will the order be ready?
+#    - how about if I arrive in [ten minutes](min_time)? Will the order be ready?
+#    - is it feasible to move it up by [seven minutes](min_time)?
+#    - would you be able to prepare the order by [noon](complete_time)?
+#    - is [six o'clock pm](complete_time) convenient for picking up my order?
+#    - can you guarantee that my order will be ready by [half past three pm](complete_time)?
+#    - can I pick up my order at [seven am](complete_time)?
+#    - will everything be prepared if I arrive by [quarter past two pm](complete_time)?
+#    - can you ensure the order is ready by [half past two pm](complete_time)?
+#    - can I collect my order at [half past eleven pm](complete_time)?
+#    - could you have my order ready by [quarter to five pm](complete_time)?
+#    - will the order be available for collection by [two twenty pm](complete_time)?
+#    - can you make sure the order is ready by [three pm](complete_time)?
+#    - could you aim to have the order prepared by [half past eight pm](complete_time)?
 - intent: out_of_scope
   examples: |
     - what is 2 + 2?
@@ -990,7 +1812,6 @@ nlu:
     - can you sing a song?
     - what's your favorite movie?
     - do you like pizza?
-    - who won the world cup in 2018?
     - can you translate this sentence for me?
     - what's the capital of australia?
     - how old is the earth?
@@ -1021,6 +1842,112 @@ nlu:
     - what's the price of gold today?
     - how do i change a tire?
     - what's the most popular sport in the world?
+    - aRE YOU SINGLE
+    - again?
+    - alexa, order 5 tons of natrium chloride
+    - and make chicken noises into the phone
+    - are the newsletter worth the subscription?
+    - are u facebook
+    - are u, facebook?
+    - are you single?
+    - are you dev?
+    - are you russian?
+    - are you sick
+    - are you vegan
+    - better than you
+    - but I just told you that :(
+    - but if rasa is open source why do you have a sales team
+    - buy one please
+    - buy groceries
+    - call me father
+    - can we keep chatting?
+    - can you book dinner
+    - can you cheer me up
+    - can you cook dinner
+    - can you give me a cup of coffee
+    - can you help me with the docs?
+    - can you help me with your docs
+    - can you help me with your docs?
+    - can you learn from our conversation?
+    - can you speak about politic ?
+    - can you understand ?
+    - cannot see
+    - chgfhgh
+    - chinese ok?
+    - colder
+    - common, just try
+    - connect to alexa
+    - cr
+    - custom service
+    - did i break you
+    - do you believe in god?
+    - do you have a phone number?
+    - do you have your photo?
+    - do you know me
+    - do you know ras
+    - do you like football
+    - do you like movies
+    - do you sell vacuum robots?
+    - do you want to marry me?
+    - docs
+    - doctor
+    - everything
+    - example of a chatbot
+    - genocide
+    - get me a club mate
+    - give me a girl friend
+    - give me food
+    - go back
+    - google?
+    - great, I'd like to buy a house
+    - hang on let me find it
+    - i can't deal with _your_ request
+    - i do not care how are you
+    - i hope you will be better
+    - i immediately need help with implementing the coolest bot you can imagine
+    - i m looking for job
+    - i told you already
+    - i wanna party
+    - i want a non dripping ice cream
+    - i want caffe
+    - i want food
+    - i want good flycam
+    - i want more of you in my life!
+    - contextual
+    - talk to me about voulette
+    - voulette voulette
+    - Do you have a demo?
+    - Cars
+    - please voulette
+    - Out of scope question.
+    - i need money
+    - no, i need cash, money! Do you have it ?
+    - the beatles
+    - Hi i want to go palghar
+    - I want to go palghar
+    - your contry name
+    - you girl
+    - gsaf
+    - expert of rasa
+    - i want play ball
+    - flight catch up
+    - how do you like your coffee
+    - Can you get analytics on who I'm chatting with when I use Rasa
+    - coronavirus
+    - have you heard of corona?
+    - where do i type in commandy
+    - where to type in commands
+    - kiss me
+    - you have to
+    - what type of bot?
+    - sfasd
+    - asdkjasdhjkasd
+    - j  bhbhj
+    - eshdtjfjfyk
+    - drhdtjfjfyj
+    - sudo reboot
+    - asdfgasd
+    
 - synonym: take-away
   examples: |
     - take away
@@ -1054,7 +1981,13 @@ nlu:
 - synonym: margherita
   examples: |
     - Margherita
-    - marg
+    - margerita
+    - margarina
+    - margarita
+    - mergarita
+    - margharita
+    - margherit
+    - margheritta
 - synonym: veggie
   examples: |
     - Veggie
@@ -1062,8 +1995,16 @@ nlu:
     - Vegetarian
     - Vegg
     - vegg
+    - veggy
+- synonym: salami
+  examples: |
+    - salame
+    - salmone
+    - salmon
+    - salmoni
 - synonym: coke
   examples: |
+    - cok
     - Coke
     - Coca Cola
     - coca cola
@@ -1074,17 +2015,33 @@ nlu:
     - Mushrooms
     - mushroom
     - Mushroom
-- synonym: peach iced tea
+- synonym: peach tea
   examples: |
-    - Peach Iced Tea
-    - peach ice tea
-    - Peach Ice Tea
     - Peach Tea
     - peach tea
-- synonym: lemon iced tea
+    - Peach tea
+- synonym: lemon tea
   examples: |
-    - Lemon Iced Tea
-    - lemon ice tea
-    - Lemon Ice Tea
     - Lemon Tea
-    - lemon tea
+    - Lemon tea
+    - lemon Tea
+- synonym: test id
+  examples: |
+    - testid
+    - Testid
+    - Test id
+    - Test Id
+- synonym: test password
+  examples: |
+    - testpassword
+    - Testpassword
+    - Test password
+    - Test Password
+- synonym: AM
+  examples: |
+    - am
+    - Am
+- synonym: PM
+  examples: |
+    - pm
+    - Pm
