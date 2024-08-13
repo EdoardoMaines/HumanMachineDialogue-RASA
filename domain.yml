@@ -12,7 +12,6 @@ intents:
 - ask_info_pizza_size
 - ask_info_toppings
 - ask_ingredients_to_order
-- out_of_scope
 - ask_specific_time:
     use_entities:
     - complete_time
@@ -60,19 +59,21 @@ intents:
     - ingredient_quantity
     - pizza_topping
     - ingredient
+- out_of_scope
 - remove_from_order
 - stock_data
 - stop
 entities:
-- id
-- password
 - pizza_type
 - pizza_size
-- pizza_topping
+- id
+- password
 - ingredient
-- ingredient_quantity
-- modality
 - drink
+- pizza_topping
+- ingredient_quantity
+- ingredient_under_threshold
+- modality
 - address
 - number_address
 - phone
@@ -109,12 +110,14 @@ slots:
     type: list
     mappings:
     - type: custom
-      action: action_order_ingredient
   ingredient_quantity:
     type: list
     mappings:
     - type: custom
-      action: action_order_ingredient
+  ingredient_under_threshold:
+    type: list
+    mappings:
+    - type: custom
   drink:
     type: text
     influence_conversation: true
@@ -123,7 +126,6 @@ slots:
       entity: drink
       intent:
       - inform_about_drink
-    
   id:
     type: any
     mappings:
@@ -153,10 +155,11 @@ slots:
       entity: modality
       intent:
       - inform_about_modality
+      not_intent:
+      - change_delivery
     values:
-      - delivery
-      - take-away
-    
+    - delivery
+    - take-away
   address:
     type: any
     mappings:
@@ -172,6 +175,8 @@ slots:
       intent:
       - inform_about_address
       - inform_about_nr_address
+      not_intent:
+      - ask_specific_time
   phone:
     type: any
     mappings:
@@ -196,12 +201,10 @@ slots:
     type: text
     mappings:
     - type: custom
-      #action: action_tell_pick_time
   ready_time:
     type: text
     mappings:
     - type: custom
-      #action: action_tell_pick_time
   complete_time:
     type: any
     mappings:
@@ -212,29 +215,13 @@ slots:
   min_time:
     type: list
     mappings:
-    #- type: from_entity
-    #  entity: min_time
-    #  intent:
-    #  - ask_specific_time
-    #  not_intent:
-    #  - inform_about_password
-    #  - inform_about_nr_address
-    #  - inform_about_phone
     - type: custom
-      #action: action_check_pick_time
   is_logged:
     type: bool
     initial_value: false
     influence_conversation: true
     mappings:
     - type: custom
-#  bill_said:
-#    type: bool
-#    initial_value: false
-#    influence_conversation: true
-#    mappings:
-#    - type: custom
-
 forms:
   simple_pizza_form:
     required_slots:
@@ -263,31 +250,29 @@ responses:
   - text: See you next time!
   - text: See you soon!
   utter_goodbye:
-  - text: Bye
+  - text: Bye!
   utter_confirm:
   - text: Ok perfect.
-  - text: Okay.
-  - text: Ok, get it!
+  - text: Got it!
+  - text: Ok, got it!
   - text: Perfect.
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
   utter_submit:
-  - text: The information has been saved!
+  - text: All the information has been saved correctly!
   utter_order:
   - text: Would you like to order?
   - text: Is there any pizza you're interested in?
   utter_ask_stop:
   - text: Are you sure you want to stop the form?
-  utter_stop_form:
-  - text: Ok, perfect. Them I delete your order. What else can I do for you?
   utter_ask_pizza_size:
   - text: What size would you like your pizza to be?
   utter_ask_pizza_type:
-  - text: What kind of pizza would you like to order?
-  - text: What kind of pizza would you like to buy?
+  - text: What kind of pizza would you like to order? Only one pizza accepted!
+  - text: What kind of pizza would you like to buy? Only one pizza accepted!
   utter_ask_topping:
-  - text: Do you want to add some toppings to your pizza? Which one? (MAX 1)
-  - text: Do you want some toppings? Which one? (Max 1)
+  - text: Do you want to add one topping to your pizza? Which one?
+  - text: Do you want one topping on your pizza? Which one?
   utter_ask_drink:
   - text: Would you like something to drink?
   - text: Do you want any drink?
@@ -298,12 +283,9 @@ responses:
   utter_ask_ingredients:
   - text: What ingredients would you like to order?
   utter_ask_service:
-  - text: What do you need?
+  - text: What can I do for you?
   - text: What can I get for you?
   - text: What are you looking for?
-  utter_ask_type_change:
-  - text: Ok no problem! What would you like to change?
-  - text: I'm sorry, what change would you like to make?
   utter_ask_id:
   - text: Login required! Can I have your ID?
   - text: Login required! Can you enter your ID?
@@ -324,7 +306,7 @@ responses:
   - text: Can I assist you with anything else?
   - text: Do you require anything else?
   utter_ask_modality:
-  - text: Perfect. Which collection method do you prefer? Take-away or delivery?
+  - text: Which collection method do you prefer? Take-away or delivery?
   utter_ask_address:
   - text: Okay. I need your address.
   - text: Ok. Can you provide your address?
@@ -332,8 +314,8 @@ responses:
   - text: Perfect. I need also the street number.
   - text: Nice. Can you provide also your street number?
   utter_ask_phone:
-  - text: Sorry for all these requests. I need your phone number. (remember to add the prefix '+39')
-  - text: Perfect! Can you provide your phone number? (remember to add the prefix '+39')
+  - text: Sorry for all these requests. I need your phone number.
+  - text: Perfect! Can you provide your phone number?
   utter_ask_doorbell:
   - text: Last thing! I need some information like your doorbell name or floor, just in case. Thanks.
   - text: Last thing! Can you provide your doorbell name or floor? Just in case. Thanks.
@@ -342,7 +324,6 @@ responses:
   utter_out_of_scope:
   - text: Sorry, I can't handle that request. I'm a pizza ordering bot, can you ask me something about that?
 actions:
-- action_reset_all_slots
 - action_ask_topping
 - action_ask_type_change
 - action_calc_delivery_time
@@ -356,9 +337,9 @@ actions:
 - action_check_pick_time
 - action_check_topping
 - action_delete_order
+- action_info_drinks
 - action_info_pizza
 - action_info_pizza_size
-- action_info_drinks
 - action_info_toppings
 - action_login_slots
 - action_order_ingredient
@@ -367,29 +348,29 @@ actions:
 - action_recap_delivery
 - action_recap_order
 - action_remove_from_order
+- action_reset_all_slots
 - action_say_ingredient_below_threshold
 - action_tell_bill
 - action_tell_menu
 - action_tell_pick_time
 - action_tell_price
 - query_topping_quantity
-- utter_ask_pizza_type
-- utter_ask_pizza_size
 - utter_ask_address
-- utter_ask_stop
 - utter_ask_doorbell
 - utter_ask_drink
+- utter_ask_id
 - utter_ask_ingredients
 - utter_ask_modality
 - utter_ask_number_address
 - utter_ask_order
-- utter_ask_phone
-- utter_ask_service
-- utter_ask_id
 - utter_ask_password
+- utter_ask_phone
+- utter_ask_pizza_size
+- utter_ask_pizza_type
+- utter_ask_service
 - utter_ask_stock_information
+- utter_ask_stop
 - utter_ask_topping
-- utter_ask_type_change
 - utter_confirm
 - utter_confirm_order
 - utter_goodbye
@@ -397,9 +378,9 @@ actions:
 - utter_iamabot
 - utter_info_about_pizzeria
 - utter_other_service
-- utter_submit
 - utter_out_of_scope
 - utter_please_rephrase
+- utter_submit
 - validate_delivery_form
 - validate_login_form
 - validate_simple_pizza_form

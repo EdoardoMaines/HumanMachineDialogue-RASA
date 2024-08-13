@@ -1,0 +1,72 @@
+
+recipe: default.v1
+
+language: en
+
+
+# NLU PIPELINE
+
+pipeline:
+   - name: SpacyNLP
+     model: en_core_web_md
+   - name: SpacyTokenizer
+   - name: SpacyFeaturizer
+   - name: RegexFeaturizer
+   - name: LexicalSyntacticFeaturizer
+   - name: CountVectorsFeaturizer
+   - name: CountVectorsFeaturizer
+     analyzer: "char_wb"
+     min_ngram: 1
+     max_ngram: 4
+   - name: "CRFEntityExtractor"
+     "BILOU_flag": true
+     "features": [
+       ["low", "title", "upper"],
+       [
+         "bias",
+         "low",
+         "prefix5",
+         "prefix2",
+         "suffix5",
+         "suffix3",
+         "suffix2",
+         "upper",
+         "title",
+         "digit",
+         "pattern",
+         "text_dense_features"
+      ],
+      ["low", "title", "upper"],
+     ]
+     "max_iterations": 50
+     "L1_c": 0.1
+     "L2_c": 0.1
+     "featurizers": []
+     "split_entities_by_comma":
+        address: false
+        email: false
+   - name: "spelling_corrector.CustomNLUComponent"
+   - name: DIETClassifier
+     entity_recognition: false
+     epochs: 100
+     constrain_similarities: true
+   - name: FallbackClassifier
+     threshold: 0.5
+   - name: ResponseSelector
+     epochs: 100
+     constrain_similarities: true
+
+# POLICIES
+
+policies:
+   - name: TEDPolicy
+     max_history: 8
+     epochs: 100
+     constrain_similarities: true
+   - name: AugmentedMemoizationPolicy
+     max_history: 4
+   - name: RulePolicy
+     # let's handle low confidence actions
+     core_fallback_threshold: 0.4
+     core_fallback_action_name: "action_default_fallback"
+     enable_fallback_prediction: true
